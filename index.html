@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmosphere OS - Focus, Relax & Vibe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="rotate-warning" class="glass-panel">
+        <div class="phone-icon">📱</div>
+        <h2>Rotate Device<br>to Enter the Atmosphere</h2>
+        <p>Best experienced in landscape mode</p>
+    
+        <button id="btn-close-warning" class="glass-btn" style="margin-top: 30px; border-color: rgba(255, 68, 68, 0.5); color: #ff4444; font-size: 14px; padding: 10px 20px;">
+            Continue in Portrait
+        </button>
+    </div>
+
+    <div class="app-container">
+        
+        <nav class="sidebar glass-panel">
+            <div class="brand">
+                <h2 class="neon-title">ATMOSPHERE</h2>
+            </div>
+            
+            <hr class="divider">
+
+            <div class="menu-group">
+                <button class="accordion-btn">&#x23F2; &nbsp; FEATURES<span class="arrow">▼</span></button>
+                <div class="accordion-content">
+                    <ul id="features-list">
+                        <li class="active tab-link" onclick="openTab(event, 'clock-view')">&#x21A0; &nbsp; Home</li>
+                        <li class="tab-link" onclick="openTab(event, 'stopwatch-view')">&#x21A0; &nbsp; Stopwatch</li>
+                        <li class="tab-link" onclick="openTab(event, 'timer-view')">&#x21A0; &nbsp; Timer</li>
+                        <li class="tab-link" onclick="openTab(event, 'alarm-view')">&#x21A0; &nbsp; Alarm Clock</li>
+                        <li class="tab-link" onclick="openTab(event, 'world-clock-view')">&#x21A0; &nbsp; World Clock</li>
+                        <li class="tab-link" onclick="openTab(event, 'birth-chart-view')">&#x21A0; &nbsp; Birth Chart</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="menu-group">
+                <button class="accordion-btn">
+                    <span style="margin-left: 10px;">&#x20E2; &nbsp;&nbsp; VISUAL THEMES</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="accordion-content">
+                    <ul id="themes-list" style="list-style: none; padding: 0; margin: 10px 0 0 0; display: flex; flex-direction: column; gap: 8px;">
+                        <li onclick="changeTheme('cowboy-era')">&#x21A0; &nbsp; Cowboy Era</li>
+                        <li onclick="changeTheme('cyber-world')">&#x21A0; &nbsp; Cyber World</li>
+                        <li onclick="changeTheme('dark-fantasy')">&#x21A0; &nbsp; Dark Fantasy</li>
+                        <li onclick="changeTheme('light-fantasy')">&#x21A0; &nbsp; Light Fantasy</li>
+                        <li onclick="changeTheme('jazz-romance')">&#x21A0; &nbsp; Jazz & Romance</li>
+                        <li onclick="changeTheme('rock-n-roll')">&#x21A0; &nbsp; Rock n' Roll</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="menu-group" style="margin-top: 10px;">
+                <button class="accordion-btn"> &#x266A; &nbsp; AUDIOS <span class="arrow">▼</span></button>
+                
+                <div class="accordion-content" style="padding-left: 10px; border-left: 2px solid rgba(255,255,255,0.1); margin-left: 5px;">
+                    
+                    <button class="accordion-btn" style="font-size: 14px; color: #d9d7d7;">&#x2601; &nbsp; SOUNDS <span class="arrow">▼</span></button>
+                    <div class="accordion-content">
+                        <ul style="list-style: none; padding: 0; margin: 5px 0 10px 0; display: flex; flex-direction: column; gap: 5px;">
+                            <li id="btn-winter-wind" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('winter-wind')">&#x21A0; &nbsp; Winter Wind</li>
+                            <li id="btn-rain" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('rain')">&#x21A0; &nbsp; Rain</li>
+                            <li id="btn-birds" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('birds')">&#x21A0; &nbsp; Birds</li>
+                            <li id="btn-birds-rain" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('birds-rain')">&#x21A0; &nbsp; Birds in the Rain</li>
+                            <li id="btn-waves-seagulls" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('waves-seagulls')">&#x21A0; &nbsp; Waves & Seagulls</li>
+                            <li id="btn-fire" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('fire')">&#x21A0; &nbsp; Fireplace</li>
+                            <li id="btn-cafe-noise" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('cafe-noise')">&#x21A0; &nbsp; Cafe Ambience</li>
+                            <li id="btn-train" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('train')">&#x21A0; &nbsp; Train Journey</li>
+                            <li id="btn-koto-japanese-zither" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('koto-japanese-zither')">&#x21A0; &nbsp; Koto (Japanese Zither)</li>
+                        </ul>
+
+                        <div class="sidebar-player glass-panel" style="margin-top: 10px;">
+                            <div class="player-controls">
+                                <button id="btn-sounds-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
+                            </div>
+    
+                            <div class="credit-divider"></div>
+    
+                            <div class="track-info-mini">
+                                <span id="sound-credit" class="credit-text" style="color: #00ff88; text-shadow: none;">Play / Pause Active Audio</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="accordion-btn" style="font-size: 14px; color: #d9d7d7;">&#x266F; &nbsp; MUSIC THEMES <span class="arrow">▼</span></button>
+                    <div class="accordion-content">
+                        <ul id="music-themes-list" style="margin-bottom: 15px; list-style: none; padding: 0; gap: 5px; display: flex; flex-direction: column;">
+                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('cowboy-era')">&#x21A0; &nbsp; Cowboy Era</li>
+                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('cyber-world')">&#x21A0; &nbsp; Cyber World</li>
+                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('dark-fantasy')">&#x21A0; &nbsp; Dark Fantasy</li>
+                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('light-fantasy')">&#x21A0; &nbsp; Light Fantasy</li>
+                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('jazz-romance')">&#x21A0; &nbsp; Jazz & Romance</li>
+                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('rock-n-roll')">&#x21A0; &nbsp; Rock n' Roll</li>
+                        </ul>
+
+                        <div class="sidebar-player glass-panel">
+                            <div class="player-controls">
+                                <button id="btn-prev" class="control-btn">&#9668;&#9668;</button>
+                                <button id="btn-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
+                                <button id="btn-next" class="control-btn">&#9658;&#9658;</button>
+                            </div>
+    
+                            <div class="credit-divider"></div>
+    
+                            <div class="track-info-mini">
+                                <span id="track-credit" class="credit-text">Awaiting audio...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divider" style="margin-top: 25px;">
+            <div style="background: rgba(255, 68, 68, 0.1); border: 1px solid rgba(255, 68, 68, 0.3); padding: 12px; border-radius: 8px; text-align: center;">
+                <p style="font-size: 12px; color: #ffcccc; margin: 0; line-height: 1.4;">
+                    <strong>Quick Note:</strong> High-fidelity audio in use. Wi-Fi connection is recommended to save your mobile data.
+                </p>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <button id="btn-fullscreen" class="glass-btn" style="position: absolute; top: 20px; right: 20px; z-index: 100;">⛶ Fullscreen</button>
+
+            <div id="clock-view" class="view-box tab-content glass-panel" style="display: block;">
+                <h1 id="time-display">00:00:00</h1>
+                <h3 id="date-display">Date</h3>
+            </div>
+
+
+            <div id="stopwatch-view" class="view-box tab-content glass-panel" style="display: none;">
+                <h2>Stopwatch</h2>
+                <h1 id="sw-display">00:00:00</h1>
+    
+                <div class="stopwatch-controls">
+                    <button id="btn-start" class="glass-btn">Start</button>
+                    <button id="btn-stop" class="glass-btn">Stop</button>
+                    <button id="btn-lap" class="glass-btn">Lap</button>
+                    <button id="btn-reset" class="glass-btn">Reset</button>
+                </div>
+                <div id="laps-container"></div>
+            </div>
+
+
+            <div id="timer-view" class="view-box tab-content glass-panel" style="display: none;">
+                <h2>Timer</h2>
+                <h1 id="timer-display">00:00:00</h1>
+
+                <div class="timer-input-group" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <div class="input-wrapper" style="display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; height: 35px; overflow: hidden;">
+                        <button class="spin-btn" onclick="document.getElementById('timer-input-hour').stepDown()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
+                        <input type="number" id="timer-input-hour" placeholder="Hr" min="0" max="99" style="width: 35px; height: 100%; text-align: center; background: transparent; border: none; color: white; outline: none; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
+                        <button class="spin-btn" onclick="document.getElementById('timer-input-hour').stepUp()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
+                    </div>
+
+                    <span style="font-size: 20px; font-weight: bold; color: rgba(255,255,255,0.5);">:</span>
+
+                    <div class="input-wrapper" style="display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; height: 35px; overflow: hidden;">
+                        <button class="spin-btn" onclick="document.getElementById('timer-input-min').stepDown()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
+                        <input type="number" id="timer-input-min" placeholder="Min" min="0" max="59" style="width: 35px; height: 100%; text-align: center; background: transparent; border: none; color: white; outline: none; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
+                        <button class="spin-btn" onclick="document.getElementById('timer-input-min').stepUp()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
+                    </div>
+
+                    <span style="font-size: 20px; font-weight: bold; color: rgba(255,255,255,0.5);">:</span>
+
+                    <div class="input-wrapper" style="display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; height: 35px; overflow: hidden;">
+                        <button class="spin-btn" onclick="document.getElementById('timer-input-sec').stepDown()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
+                        <input type="number" id="timer-input-sec" placeholder="Sec" min="0" max="59" style="width: 35px; height: 100%; text-align: center; background: transparent; border: none; color: white; outline: none; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
+                        <button class="spin-btn" onclick="document.getElementById('timer-input-sec').stepUp()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
+                    </div>
+                </div>
+
+                <div class="stopwatch-controls">
+                    <button id="btn-timer-start" class="glass-btn">Start</button>
+                    <button id="btn-timer-pause" class="glass-btn">Pause / Stop</button> <button id="btn-timer-reset" class="glass-btn">Reset</button>
+                </div>
+
+                <div id="timer-credit-box" style="display: none; margin-top: 20px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%;">
+                    <span class="credit-text" style="color: rgba(255, 255, 255, 0.5); font-size: 11px;">Sound by: Nickpanekaiassets from Pixabay</span>
+                </div>
+            </div>
+
+
+            <div id="alarm-view" class="view-box tab-content glass-panel" style="display: none;">
+                <h2>Alarm Clock</h2>
+    
+                <div class="input-wrapper" style="margin: 0 auto 15px auto; width: max-content; padding: 0 15px;">
+                    <input type="time" id="alarm-time-input" class="time-date-input">
+                </div>
+    
+                <button id="btn-set-alarm" class="glass-btn">Set</button>
+                <button id="btn-cancel-alarm" class="glass-btn" style="display: none;">Cancel</button>
+
+                <h3 id="alarm-status" style="margin-top: 15px; color: #b3b3b3;">No Alarm Set</h3>
+
+                <div id="alarm-controls" style="display: none; margin-top: 15px;">
+                    <button id="btn-snooze" class="glass-btn" style="background: rgba(136, 255, 0);">Snooze (5 min)</button>
+                    <button id="btn-dismiss" class="glass-btn" style="background: rgba(255, 0, 0);">Dismiss</button>
+                </div>
+
+                <div id="alarm-credit-box" style="display: none; margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <span class="credit-text" style="color: rgba(255, 255, 255, 0.5); font-size: 11px;">Sound by: Nickpanekaiassets from Pixabay</span>
+                </div>
+            </div>
+
+
+            <div id="world-clock-view" class="view-box tab-content glass-panel" style="display: none;">
+                <h2>World Clock</h2>
+                <p>Local: <span id="wc-local"></span></p>
+                <p>Istanbul: <span id="wc-istanbul"></span></p>
+                <p>New York: <span id="wc-newyork"></span></p>
+                <p>London: <span id="wc-london"></span></p>
+                <p>Tokyo: <span id="wc-tokyo"></span></p>
+            </div>
+
+
+            <div id="birth-chart-view" class="view-box tab-content glass-panel" style="display: none;">
+                <h2>Birth Chart</h2>
+    
+                <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
+                    <div class="input-wrapper" style="padding: 0 15px;">
+                        <input type="date" id="birth-date" class="time-date-input">
+                    </div>
+                    <div class="input-wrapper" style="padding: 0 15px;">
+                        <input type="time" id="birth-time" class="time-date-input">
+                    </div>
+                </div>
+    
+                <button id="btn-calculate-zodiac" class="glass-btn">Calculate</button>
+    
+                <div id="zodiac-result" style="display: none; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 5px; text-align: left; font-size: 14px;">
+                    <p>☀️ Sun Sign: <span id="res-sun" style="color: #00ff88;"></span></p>
+                    <p>🌿 Element: <span id="res-element" style="color: #00ff88;"></span></p>
+                    <p>🐉 Chinese Zodiac: <span id="res-chinese" style="color: #00ff88;"></span></p>
+                    <p>🔢 Life Path Number: <span id="res-lifepath" style="color: #00ff88;"></span></p>
+                    <p>🌕 Moon Phase: <span id="res-moon-phase" style="color: #00ff88;"></span></p>
+                </div>
+            </div>
+        </main>
+
+        <aside class="right-panel glass-panel">
+            <div class="support-panel-container">
+                <div class="support-content">
+                    <h3>Support Me!</h3>
+                    <p>This project is designed for 100% focus and zero ads. You can support the server costs by buying me a coffee.</p>
+
+                    <a href="https://buymeacoffee.com/ietkose" target="_blank" class="cyber-coffee-btn">
+                        <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee">
+                        <span>Buy Me a Coffee</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <audio id="bg-player"></audio>
+    <audio id="audio-winter-wind" src="assets/audios/sounds/winter-wind.mp3" loop></audio>
+    <audio id="audio-rain" src="assets/audios/sounds/rain.mp3" loop></audio>
+    <audio id="audio-birds" src="assets/audios/sounds/birds.mp3" loop></audio>
+    <audio id="audio-birds-rain" src="assets/audios/sounds/birds-rain.mp3" loop></audio>
+    <audio id="audio-waves-seagulls" src="assets/audios/sounds/waves-seagulls.mp3" loop></audio>
+    <audio id="audio-fire" src="assets/audios/sounds/fire.mp3" loop></audio>
+    <audio id="audio-cafe-noise" src="assets/audios/sounds/cafe-noise.mp3" loop></audio>
+    <audio id="audio-train" src="assets/audios/sounds/train.mp3" loop></audio>
+    <audio id="audio-koto-japanese-zither" src="assets/audios/sounds/koto-japanese-zither.mp3" loop></audio>
+
+    <audio id="audio-alarm" src="assets/audios/alarm/alarm-ringtone.mp3" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
