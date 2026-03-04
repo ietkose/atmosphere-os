@@ -454,64 +454,6 @@ input[type="number"] {
     #btn-fullscreen { display: none !important; }
 }
 
-/* ==========================================
-    EKRAN DÖNDÜRME UYARISI (ORIENTATION)
-========================================== */
-
-/* 1. Uyarının Varsayılan Hali */
-#rotate-warning {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95); /* Arkasını simsiyah yapar */
-    z-index: 99999; /* Her şeyin en üstünde durur */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-}
-
-#rotate-warning h2 {
-    color: #00ff88;
-    margin: 20px 0 10px 0;
-    font-size: 1.8rem;
-    text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-}
-
-#rotate-warning p {
-    color: #b3b3b3;
-    font-size: 1rem;
-}
-
-/* Telefon İkonuna animasyon (Sağa sola yatar) */
-.phone-icon {
-    font-size: 60px;
-    animation: rotatePhone 2s infinite ease-in-out;
-}
-
-@keyframes rotatePhone {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(-90deg); } /* Yan çevrilme hareketi */
-    100% { transform: rotate(0deg); }
-}
-
-/* ==========================================
-   TELEFON DİK TUTULDUĞUNDA ÇALIŞACAK KOD
-========================================== */
-
-@media (max-width: 768px) and (orientation: portrait) {
-    #rotate-warning {
-        display: flex !important; /* Telefon dikse uyarıyı göster */
-    }
-
-    .app-container {
-        display: none !important; /* Arka plandaki siteyi gizle ki tıklanmasın */
-    }
-}
-
-
 /* --- DESTEK PANOSU --- */
 /* --- ANA SAĞ PANO (Arka Plan Manzarası ve Ortalama) --- */
 .right-panel {
@@ -592,5 +534,181 @@ input[type="number"] {
     transform: translateY(-3px) scale(1.05); 
     background-color: #ff003c; 
     box-shadow: 0 0 25px rgba(0, 255, 102, 0.8); 
+}
+
+/* ==========================================
+    EKRAN DÖNDÜRME UYARISI (ORIENTATION)
+========================================== */
+
+/* 1. Uyarının Varsayılan Hali */
+#rotate-warning {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95); /* Arkasını simsiyah yapar */
+    z-index: 99999; /* Her şeyin en üstünde durur */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+#rotate-warning h2 {
+    color: #00ff88;
+    margin: 20px 0 10px 0;
+    font-size: 1.8rem;
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+#rotate-warning p {
+    color: #b3b3b3;
+    font-size: 1rem;
+}
+
+/* Telefon İkonuna animasyon (Sağa sola yatar) */
+.phone-icon {
+    font-size: 60px;
+    animation: rotatePhone 2s infinite ease-in-out;
+}
+
+@keyframes rotatePhone {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-90deg); } /* Yan çevrilme hareketi */
+    100% { transform: rotate(0deg); }
+}
+
+/* ==========================================
+   TELEFON DİK TUTULDUĞUNDA ÇALIŞACAK KOD
+========================================== */
+
+@media (max-width: 768px) and (orientation: portrait) {
+    #rotate-warning {
+        display: flex !important; /* Telefon dikse uyarıyı göster */
+    }
+
+    .app-container {
+        display: none !important; /* Arka plandaki siteyi gizle ki tıklanmasın */
+    }
+}
+
+/* ==========================================
+   2 SAYFALI MOBİL YATAY (LANDSCAPE) DÜZENİ
+========================================== */
+@media (max-width: 950px) and (orientation: landscape) {
+    
+    /* Ekranı 2 sayfalık boyuta (200dvh) çıkarıyoruz ki aşağı kaydırılabilsin */
+    body {
+        height: 200dvh !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+
+    /* --- SAYFA 1 DÜZENİ (NORMAL GÖRÜNÜM) --- */
+    .app-container {
+        height: 100dvh !important;
+        border-bottom: 2px solid #00ff88; /* 1. sayfanın bittiğini gösteren o meşhur çizgi */
+        position: relative;
+    }
+
+    /* Alt Çizginin Üstündeki "Aşağı Kaydır" Ok İşareti */
+    .app-container::after {
+        content: '⬇ Scroll down for Fullscreen ⬇';
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #00ff88;
+        font-size: 12px;
+        animation: bounce 1.5s infinite;
+        text-shadow: 0 0 5px rgba(0, 255, 136, 0.8);
+    }
+
+    /* Sağ ve Sol Panoları EŞİT, YUKARI YAPIŞIK ve NANO yapıyoruz */
+    .sidebar, .right-panel {
+        width: 140px !important;
+        min-width: 140px !important;
+        height: calc(100dvh - 10px) !important;
+        position: absolute !important;
+        top: 0 !important;
+        padding: 5px !important;
+    }
+    
+    .sidebar { left: 0 !important; }
+    .right-panel { right: 0 !important; }
+
+    /* Nano Metinler (Sığması için küçücük yapıyoruz) */
+    .sidebar *, .right-panel * {
+        font-size: 10px !important;
+        margin: 2px 0 !important;
+        padding: 1px !important;
+    }
+    .support-content p { display: none !important; } /* Uzun reklam yazısı gizli */
+    .cyber-coffee-btn { font-size: 9px !important; padding: 2px !important; }
+
+    /* ORTA KUTU (Sabit Boyut, Genişlemez!) */
+    .main-content {
+        margin-left: 145px !important;
+        margin-right: 145px !important;
+        height: 100%;
+        display: flex;
+        align-items: flex-start; /* Yukarıya yaslı dursun */
+        justify-content: center;
+        padding-top: 5px !important;
+    }
+
+    .view-box {
+        width: 250px !important; 
+        height: 150px !important; /* Özellik seçilse bile boyutu ASLA değişmez */
+        min-height: 150px !important;
+        max-height: 150px !important;
+        overflow-y: auto !important; /* İçeriği taşarsa kendi içinde kayar */
+    }
+    
+    .view-box h1 { font-size: 1.6rem !important; margin: 0 !important; }
+    .view-box p { font-size: 0.8rem !important; }
+    #btn-fullscreen { display: none !important; } /* O çalışmayan tuşu tamamen sildik */
+
+    /* --- SAYFA 2 DÜZENİ (KULLANICI AŞAĞI KAYDIRINCA SAYDAM FULLSCREEN) --- */
+    body.scroll-fullscreen-active .app-container {
+        position: fixed; /* Ekranı kilitler */
+        top: 0; left: 0; width: 100%; height: 100dvh !important;
+        border-bottom: none;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 9999;
+    }
+    
+    /* Yan panelleri ve oku yok et */
+    body.scroll-fullscreen-active .sidebar, 
+    body.scroll-fullscreen-active .right-panel,
+    body.scroll-fullscreen-active .app-container::after {
+        display: none !important; 
+    }
+
+    body.scroll-fullscreen-active .main-content {
+        margin: 0 !important;
+        align-items: center !important; /* Tam ortaya al */
+    }
+
+    /* Senin sevdiğin o saydam tam ekran kutusu */
+    body.scroll-fullscreen-active .view-box {
+        width: 90% !important;
+        max-height: 90dvh !important;
+        background: transparent !important; /* Saydamlaştı */
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    body.scroll-fullscreen-active .view-box h1 { 
+        font-size: 4rem !important; 
+        text-shadow: 0 0 20px #00ff88; 
+    }
+}
+
+/* Ok işareti animasyonu */
+@keyframes bounce {
+    0%, 100% { bottom: 5px; }
+    50% { bottom: 12px; }
 }
 
