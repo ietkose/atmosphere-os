@@ -48,14 +48,14 @@ class UIManager {
         });
     }
 
-    // Sinematik Tam Ekran
-   initFullscreen() {
+   // Sinematik Tam Ekran
+    initFullscreen() {
         const fsBtn = document.getElementById('btn-fullscreen');
         if (!fsBtn) return;
 
         fsBtn.addEventListener('click', () => {
             if (!document.fullscreenElement) {
-                // PC için Tam Ekrana Geçiş (Tüm tarayıcılar destekli)
+                // PC için Tam Ekrana Geçiş
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
                 } else if (document.documentElement.webkitRequestFullscreen) { /* Safari PC */
@@ -63,7 +63,6 @@ class UIManager {
                 } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
                     document.documentElement.msRequestFullscreen();
                 }
-                fsBtn.innerText = "⛶ Minimize";
             } else {
                 // PC için Tam Ekrandan Çıkış
                 if (document.exitFullscreen) {
@@ -73,9 +72,23 @@ class UIManager {
                 } else if (document.msExitFullscreen) { /* IE11 */
                     document.msExitFullscreen();
                 }
-                fsBtn.innerText = "⛶ Fullscreen";
             }
         });
+
+        // Tarayıcı tam ekrana geçince CSS'e haber veriyoruz
+        const toggleFullscreenClasses = () => {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                document.body.classList.add('fullscreen-mode'); // CSS'teki gizleme kodlarını tetikler
+                fsBtn.innerText = "⛶ Minimize";
+            } else {
+                document.body.classList.remove('fullscreen-mode'); // Normale döndürür
+                fsBtn.innerText = "⛶ Fullscreen";
+            }
+        };
+
+        // ESC tuşuna basıldığında da ekranın bozulmaması için sensörler
+        document.addEventListener('fullscreenchange', toggleFullscreenClasses);
+        document.addEventListener('webkitfullscreenchange', toggleFullscreenClasses);
     }
 
     initNavigation() {
@@ -854,18 +867,6 @@ window.openTab = (evt, tabName) => UIManager.openTab(evt, tabName);
 window.changeTheme = (themeName) => { if(theme) theme.changeVisualTheme(themeName); };
 window.toggleAmbience = (soundId) => { if(audioManager) audioManager.toggleAmbience(soundId); };
 
-
-// ==========================================
-// EKRAN DÖNDÜRME UYARISINI KAPATMA SİHRİ
-// ==========================================
-document.getElementById('btn-close-warning')?.addEventListener('click', () => {
-    // 1. Uyarı ekranını tamamen yok et
-    document.getElementById('rotate-warning').style.setProperty('display', 'none', 'important');
-    
-    // 2. Gizlenen ana iskeleti (grid) tekrar görünür yap
-    document.querySelector('.app-container').style.setProperty('display', 'grid', 'important');
-});
-
 // ==========================================
 // SİBER GÜVENLİK KALKANLARI (ANTI-COPY & ANTI-INSPECT)
 // ==========================================
@@ -891,14 +892,3 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// MOBİL YATAY EKRAN İÇİN "AŞAĞI KAYDIRINCA TAM EKRAN" SENSÖRÜ
-window.addEventListener('scroll', () => {
-    // Sadece yatay (landscape) modda ve ekran 950px altındaysa çalışsın
-    if (window.matchMedia("(max-width: 950px) and (orientation: landscape)").matches) {
-        if (window.scrollY > 30) { // Kullanıcı o çizgiden aşağı kaydırdığı an...
-            document.body.classList.add('scroll-fullscreen-active');
-        } else { // Geri yukarı kaydırırsa 1. sayfaya dön
-            document.body.classList.remove('scroll-fullscreen-active');
-        }
-    }
-});
