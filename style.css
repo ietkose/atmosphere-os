@@ -380,15 +380,86 @@ input[type="number"] {
     #btn-fullscreen { display: none !important; }
 }
 
+/* ==========================================
+   MOBİL DİKEY (PORTRAIT) 
+========================================== */
+@media (max-width: 768px) and (orientation: portrait) {
+    .app-container {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto auto auto !important; 
+        align-content: center !important; 
+        padding-bottom: 70px !important; 
+        height: 100vh;
+        overflow-y: auto; overflow-x: hidden;
+    }
+
+    /* 1. Üst Kutu (Menü) */
+    .sidebar {
+        grid-column: 1 / 2; grid-row: 1 / 2;
+        width: 90% !important; max-width: 400px !important; 
+        height: 200px !important; 
+        margin: 0 auto !important; 
+        padding: 15px;
+        transform: translateY(-55px) !important; 
+        z-index: 10;
+    }
+
+    /* 2. Orta Kutu (Saat/Sayaç) */
+    .main-content {
+        grid-column: 1 / 2; grid-row: 2 / 3;
+        width: 90% !important; max-width: 400px !important;
+        height: 210px !important; 
+        margin: 0 auto !important; padding: 0 !important;
+        display: flex; justify-content: center; align-items: center;
+        transform: translateY(-35px) !important; 
+    }
+    
+    .view-box {
+        width: 100% !important; height: 100% !important; margin: 0 !important; padding: 15px 10px !important;
+        overflow-y: auto !important; 
+    }
+    .view-box::-webkit-scrollbar { display: none; } 
+
+    /* 3. Metin Ayarları */
+    #mobile-vibe-hint {
+        grid-column: 1 / 2; grid-row: 3 / 4;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center;
+        transform: translateY(-10px) !important;
+        animation: fadeInOut 3s infinite ease-in-out;
+    }
+    #mobile-vibe-hint p { font-size: 11px; color: #b3b3b3; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
+    #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
+    .pulse-icon { font-size: 18px; animation: pulse 2s infinite; }
+
+    /* Alt Reklam Panosu */
+    .right-panel {
+        position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important;
+        height: auto !important; 
+        min-height: 70px !important; padding: 5px 10px 25px 10px !important; background: rgba(5, 5, 5, 0.95) !important; 
+        border-top: 2px solid rgba(0, 255, 102, 0.3) !important; flex-direction: row !important;
+        justify-content: center !important; z-index: 9999 !important;
+    }
+    
+    .support-panel-container { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; width: auto !important; }
+    .support-content { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: center !important; gap: 15px !important; }
+    .support-content h3 { font-size: 1rem !important; margin: 0 !important; }
+    .support-content p { display: none !important; }
+    .cyber-coffee-btn { padding: 6px 12px !important; font-size: 11px !important; margin: 0 !important; border-radius: 20px !important; }
+    
+    #btn-fullscreen { display: none !important; }
+}
+
 @keyframes fadeInOut { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
 
 /* ==========================================
-   📱 MOBİL YATAY (LANDSCAPE) - PC FULLSCREEN KLONU!
+    MOBİL YATAY (LANDSCAPE)
 ========================================== */
 @media (max-width: 950px) and (orientation: landscape) {
-    /* 1. Gereksiz her şeyi yok et! (PC'deki gibi) */
+    /* 1. Gereksiz her şeyi yok et */
     .sidebar, .right-panel, #mobile-vibe-hint, #btn-fullscreen {
         display: none !important; 
     }
@@ -408,13 +479,13 @@ input[type="number"] {
         height: 100vh !important;
         width: 100vw !important;
         display: flex !important;
-        align-items: flex-end !important; /* PC'deki gibi aşağı it */
-        justify-content: center !important; /* Mobilde ortalamak daha şık durur */
-        padding-bottom: 25px !important; /* En alttan biraz boşluk */
-        transform: none !important; /* Dikeydeki kaydırmaları sıfırla */
+        align-items: flex-end !important;
+        justify-content: center !important; 
+        padding-bottom: 25px !important; 
+        transform: none !important; 
     }
 
-    /* 4. Saat Kutusu (Cam Efekti ve Şerit Görünüm) */
+    /* 4. Saat Kutusu */
     .view-box {
         background: rgba(0, 0, 0, 0.4) !important;
         border: 1px solid rgba(0, 255, 136, 0.2) !important;
@@ -423,17 +494,20 @@ input[type="number"] {
         border-radius: 20px !important;
         padding: 10px 25px !important;
         
-        display: flex !important;
-        flex-direction: row !important; /* Saat ve tarihi yan yana diz */
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 15px !important;
-        
         width: auto !important;
         height: auto !important;
         min-height: auto !important;
         max-height: auto !important;
         overflow: hidden !important;
+    }
+
+    /* Yalnızca JS'nin açtığı aktif sekmeyi flex yap ki diğerleri hortlamasın */
+    .view-box[style*="block"] {
+        display: flex !important;
+        flex-direction: row !important; 
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 15px !important;
     }
 
     /* 5. Yazı Boyutları (Neon Efekti) */
@@ -442,18 +516,18 @@ input[type="number"] {
         text-shadow: 0 0 15px rgba(0, 255, 136, 0.8) !important; 
         margin: 0 !important;
     }
-    .view-box h3, .view-box p { 
+    .view-box h3, .view-box p, .view-box h2 { 
         font-size: 1rem !important; 
         opacity: 0.8 !important;
         margin: 0 !important;
     }
 
-    /* Gereksiz butonları ve inputları gizle (sadece saat/tarih kalsın) */
-    .timer-controls, .timer-input-group, .stopwatch-controls, #btn-set-alarm {
+    /* Kronometre/Timer içindeki gereksiz tuş ve kutuları gizle */
+    .timer-controls, .timer-input-group, .stopwatch-controls, #btn-set-alarm, #btn-calculate-zodiac, .input-wrapper, #alarm-status, #zodiac-result, #laps-container {
         display: none !important;
     }
 }
 
-/* Fiyakalı metin masaüstünde asla görünmesin */
+/* Dikeydeki metin masaüstünde görünmesin */
 @media (min-width: 769px) { #mobile-vibe-hint { display: none !important; } }
 
