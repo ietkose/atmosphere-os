@@ -315,7 +315,6 @@ input[type="number"] {
    MOBİL DİKEY (PORTRAIT)
 ========================================== */
 @media (max-width: 768px) and (orientation: portrait) {
-    /* Safari çubuğu sorunu için DVH kullanımı */
     body, html { height: 100dvh !important; overflow: hidden !important; }
     
     .app-container {
@@ -323,9 +322,9 @@ input[type="number"] {
         flex-direction: column !important;
         justify-content: center !important; 
         align-items: center !important; 
-        gap: 25px !important; 
+        gap: 15px !important; /* Kutular arası boşluk */
         padding-bottom: 80px !important; 
-        height: 100dvh !important; /* vh yerine dvh (Dinamik) */
+        height: 100dvh !important; 
         overflow-y: auto; overflow-x: hidden;
     }
 
@@ -333,8 +332,10 @@ input[type="number"] {
     .sidebar {
         position: static !important;
         width: 90% !important; max-width: 380px !important; 
-        height: 220px !important; min-height: 220px !important; max-height: 220px !important; 
-        margin: 0 !important; padding: 15px; z-index: 10; border-radius: 20px !important; transform: none !important;
+        height: 237px !important; min-height: 237px !important; max-height: 237px !important; 
+        flex: none !important; 
+        margin: 0 !important; padding: 15px; z-index: 10; border-radius: 20px !important; 
+        transform: translateY(-20px) !important; /* 20px yukarı çekme */
     }
 
     /* 2. Orta Kutu (Saat/Sayaç) */
@@ -342,8 +343,10 @@ input[type="number"] {
         position: static !important;
         width: 90% !important; max-width: 380px !important;
         height: 220px !important; min-height: 220px !important; max-height: 220px !important; 
+        flex: none !important; 
         margin: 0 !important; padding: 0 !important;
-        display: flex; justify-content: center; align-items: center; transform: none !important;
+        display: flex; justify-content: center; align-items: center; 
+        transform: translateY(-20px) !important; 
     }
     
     .view-box {
@@ -356,6 +359,7 @@ input[type="number"] {
     #mobile-vibe-hint {
         position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center;
         text-align: center; margin: 0 !important; animation: fadeInOut 3s infinite ease-in-out;
+        transform: translateY(-20px) !important;
     }
     #mobile-vibe-hint p { font-size: 11px; color: #b3b3b3; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
     #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
@@ -392,27 +396,22 @@ input[type="number"] {
 
     /* 2. Arka planı serbest bırak */
     body, html {
-        height: 100dvh !important; /* Ekran menülerine göre kendini boyutlandırır */
-        width: 100vw !important;
-        overflow: hidden !important;
-        background-size: cover !important; 
-        background-position: center center !important; 
+        height: 100dvh !important; width: 100vw !important; overflow: hidden !important;
+        background-size: cover !important; background-position: center center !important; 
     }
     
     .app-container {
-        background: transparent !important;
-        display: flex !important;
-        height: 100dvh !important; /* Dinamik yükseklik */
-        width: 100vw !important;
+        background: transparent !important; display: flex !important;
+        height: 100dvh !important; width: 100vw !important;
     }
 
     /* 3. Saati alt-ortaya hizala */
     .main-content {
         margin: 0 !important; padding: 0 !important;
-        height: 100dvh !important; width: 100vw !important; /* Dinamik yükseklik */
+        height: 100dvh !important; width: 100vw !important; 
         display: flex !important; align-items: flex-end !important;
         justify-content: center !important; 
-        padding-bottom: 25px !important; 
+        padding-bottom: 40px !important; 
         transform: none !important; 
     }
 
@@ -425,8 +424,9 @@ input[type="number"] {
         border-radius: 20px !important;
         padding: 10px 25px !important;
         
-        width: auto !important; 
-        min-width: 300px !important; /* Saniye değiştikçe titremeyi engeller */
+        width: 350px !important; 
+        min-width: 350px !important; 
+        max-width: 350px !important; 
         height: auto !important;
         min-height: auto !important; max-height: auto !important;
         overflow: hidden !important;
@@ -437,7 +437,7 @@ input[type="number"] {
         justify-content: center !important; gap: 15px !important;
     }
 
-    /* World Clock Düzenlemesi */
+    /* World clock Düzenlemesi */
     #world-clock-view.view-box[style*="block"] { flex-wrap: wrap !important; align-content: center !important; }
     #world-clock-view p { margin: 5px 15px !important; font-size: 0.95rem !important; text-align: center !important; }
     #world-clock-view h2 { display: none !important; }
@@ -455,6 +455,5 @@ input[type="number"] {
     }
 }
 
-/* Metin masaüstünde görünmesin */
 @media (min-width: 769px) { #mobile-vibe-hint { display: none !important; } }
 
