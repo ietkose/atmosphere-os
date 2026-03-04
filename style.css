@@ -594,11 +594,21 @@ input[type="number"] {
 }
 
 /* ==========================================
-   2 SAYFALI MOBİL YATAY (LANDSCAPE) DÜZENİ
+   2 SAYFALI MOBİL YATAY (LANDSCAPE) DÜZENİ (NANO SÜRÜM)
 ========================================== */
 @media (max-width: 950px) and (orientation: landscape) {
     
-    /* Ekranı 2 sayfalık boyuta (200dvh) çıkarıyoruz ki aşağı kaydırılabilsin */
+    #intro-screen {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 99999 !important; 
+    }
+
     body {
         height: 200dvh !important;
         overflow-y: auto !important;
@@ -608,74 +618,89 @@ input[type="number"] {
     /* --- SAYFA 1 DÜZENİ (NORMAL GÖRÜNÜM) --- */
     .app-container {
         height: 100dvh !important;
-        border-bottom: 2px solid #00ff88; /* 1. sayfanın bittiğini gösteren o meşhur çizgi */
+        border-bottom: 2px solid #00ff88; /* 1. sayfa bitiş çizgisi */
         position: relative;
+        overflow: hidden !important; 
     }
 
     /* Alt Çizginin Üstündeki "Aşağı Kaydır" Ok İşareti */
     .app-container::after {
         content: '⬇ Scroll down for Fullscreen ⬇';
         position: absolute;
-        bottom: 5px;
+        bottom: 15px; 
         left: 50%;
         transform: translateX(-50%);
         color: #00ff88;
-        font-size: 12px;
+        font-size: 11px;
         animation: bounce 1.5s infinite;
         text-shadow: 0 0 5px rgba(0, 255, 136, 0.8);
+        z-index: 10;
     }
 
-    /* Sağ ve Sol Panoları EŞİT, YUKARI YAPIŞIK ve NANO yapıyoruz */
+    /* Panoları Kısalt, Sığdır ve Kaydırılabilir Yap */
     .sidebar, .right-panel {
         width: 140px !important;
         min-width: 140px !important;
-        height: calc(100dvh - 10px) !important;
+        height: calc(100dvh - 25px) !important; 
         position: absolute !important;
         top: 0 !important;
         padding: 5px !important;
+        overflow-y: auto !important; 
     }
     
     .sidebar { left: 0 !important; }
     .right-panel { right: 0 !important; }
 
-    /* Nano Metinler (Sığması için küçücük yapıyoruz) */
+    /* Panolardaki Tüm Metinleri NANO Yap */
     .sidebar *, .right-panel * {
-        font-size: 10px !important;
-        margin: 2px 0 !important;
+        font-size: 9px !important;
+        margin: 1px 0 !important;
         padding: 1px !important;
+        line-height: 1.1 !important;
     }
     .support-content p { display: none !important; } /* Uzun reklam yazısı gizli */
-    .cyber-coffee-btn { font-size: 9px !important; padding: 2px !important; }
+    .cyber-coffee-btn { font-size: 9px !important; padding: 4px !important; }
 
-    /* ORTA KUTU (Sabit Boyut, Genişlemez!) */
+    /* Orta Kutuyu Dikey ve Yatayda Ortala */
     .main-content {
         margin-left: 145px !important;
         margin-right: 145px !important;
-        height: 100%;
+        height: calc(100dvh - 25px) !important; /* Ok işaretine yer kalsın */
         display: flex;
-        align-items: flex-start; /* Yukarıya yaslı dursun */
-        justify-content: center;
-        padding-top: 5px !important;
+        align-items: center !important; 
+        justify-content: center !important; 
+        padding: 0 !important;
     }
 
+    /* Kutu İçeriğini NANO Hale Getir */
     .view-box {
-        width: 250px !important; 
-        height: 150px !important; /* Özellik seçilse bile boyutu ASLA değişmez */
-        min-height: 150px !important;
-        max-height: 150px !important;
-        overflow-y: auto !important; /* İçeriği taşarsa kendi içinde kayar */
+        width: 260px !important; 
+        height: 160px !important; 
+        min-height: 160px !important;
+        max-height: 160px !important;
+        overflow-y: auto !important; /* Taşarsa kaydır */
+        padding: 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
     
-    .view-box h1 { font-size: 1.6rem !important; margin: 0 !important; }
-    .view-box p { font-size: 0.8rem !important; }
-    #btn-fullscreen { display: none !important; } /* O çalışmayan tuşu tamamen sildik */
+    /* Kutu içindeki tüm metinler ve butonlar küçük olacak */
+    .view-box h1, .timer-display { font-size: 1.4rem !important; margin: 5px 0 !important; }
+    .view-box p { font-size: 0.7rem !important; margin: 5px 0 !important; }
+    .view-box button, .timer-controls button { font-size: 0.7rem !important; padding: 4px 8px !important; margin: 2px !important; }
+    .timer-input-group input, .timer-input-group span { font-size: 0.8rem !important; padding: 2px !important; }
+    .timer-input-group label { font-size: 0.6rem !important; }
 
-    /* --- SAYFA 2 DÜZENİ (KULLANICI AŞAĞI KAYDIRINCA SAYDAM FULLSCREEN) --- */
+    #btn-fullscreen { display: none !important; } 
+
+    /* --- SAYFA 2 DÜZENİ (KULLANICI AŞAĞI KAYDIRINCA) --- */
     body.scroll-fullscreen-active .app-container {
         position: fixed; /* Ekranı kilitler */
         top: 0; left: 0; width: 100%; height: 100dvh !important;
         border-bottom: none;
-        background: rgba(0, 0, 0, 0.95);
+        background: transparent !important; 
         z-index: 9999;
     }
     
@@ -688,27 +713,45 @@ input[type="number"] {
 
     body.scroll-fullscreen-active .main-content {
         margin: 0 !important;
-        align-items: center !important; /* Tam ortaya al */
+        height: 100dvh !important;
+        align-items: flex-end !important; /* Saati aşağıya yapıştır */
+        justify-content: center !important;
+        padding-bottom: 20px !important;
     }
 
-    /* Senin sevdiğin o saydam tam ekran kutusu */
+    /* PC Tarzı Alt Bilgi Çubuğu Saat */
     body.scroll-fullscreen-active .view-box {
         width: 90% !important;
-        max-height: 90dvh !important;
-        background: transparent !important; /* Saydamlaştı */
-        border: none !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: auto !important;
+        background: rgba(0, 0, 0, 0.5) !important; /* Yarı saydam siyah şerit */
+        border: 1px solid rgba(0, 255, 136, 0.3) !important;
         box-shadow: none !important;
+        backdrop-filter: blur(5px) !important;
+        border-radius: 15px !important;
+        padding: 10px !important;
+        flex-direction: row !important; /* Yan yana dizilsinler */
+        justify-content: space-around !important;
     }
     
-    body.scroll-fullscreen-active .view-box h1 { 
-        font-size: 4rem !important; 
-        text-shadow: 0 0 20px #00ff88; 
+    /* 2. Sayfadaki saat metni daha küçük ve şık */
+    body.scroll-fullscreen-active .view-box h1, 
+    body.scroll-fullscreen-active .timer-display { 
+        font-size: 1.5rem !important; 
+        text-shadow: 0 0 10px #00ff88; 
+        margin: 0 !important;
+    }
+    body.scroll-fullscreen-active .view-box p,
+    body.scroll-fullscreen-active .timer-controls,
+    body.scroll-fullscreen-active .timer-input-group {
+        display: none !important; /* Sadece saati göster, diğerlerini gizle */
     }
 }
 
 /* Ok işareti animasyonu */
 @keyframes bounce {
-    0%, 100% { bottom: 5px; }
-    50% { bottom: 12px; }
+    0%, 100% { bottom: 15px; }
+    50% { bottom: 22px; }
 }
 
