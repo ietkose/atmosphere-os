@@ -49,31 +49,30 @@ class UIManager {
     }
 
     // Sinematik Tam Ekran
-    initFullscreen() {
+   initFullscreen() {
         const fsBtn = document.getElementById('btn-fullscreen');
         if (!fsBtn) return;
 
         fsBtn.addEventListener('click', () => {
             if (!document.fullscreenElement) {
-                // Tam ekrana gir
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.error("Fullscreen Error:", err);
-                });
-            } else {
-                // Tam ekrandan çık
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
+                // PC için Tam Ekrana Geçiş (Tüm tarayıcılar destekli)
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { /* Safari PC */
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
+                    document.documentElement.msRequestFullscreen();
                 }
-            }
-        });
-
-        // Tarayıcı tam ekrana geçtiğinde/çıktığında arayüzü güncelle
-        document.addEventListener('fullscreenchange', () => {
-            if (document.fullscreenElement) {
-                document.body.classList.add('fullscreen-mode');
                 fsBtn.innerText = "⛶ Minimize";
             } else {
-                document.body.classList.remove('fullscreen-mode');
+                // PC için Tam Ekrandan Çıkış
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari PC */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
                 fsBtn.innerText = "⛶ Fullscreen";
             }
         });
@@ -892,3 +891,14 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// MOBİL YATAY EKRAN İÇİN "AŞAĞI KAYDIRINCA TAM EKRAN" SENSÖRÜ
+window.addEventListener('scroll', () => {
+    // Sadece yatay (landscape) modda ve ekran 950px altındaysa çalışsın
+    if (window.matchMedia("(max-width: 950px) and (orientation: landscape)").matches) {
+        if (window.scrollY > 30) { // Kullanıcı o çizgiden aşağı kaydırdığı an...
+            document.body.classList.add('scroll-fullscreen-active');
+        } else { // Geri yukarı kaydırırsa 1. sayfaya dön
+            document.body.classList.remove('scroll-fullscreen-active');
+        }
+    }
+});
