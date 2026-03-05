@@ -312,53 +312,60 @@ input[type="number"] {
 }
 
 /* ==========================================
-   MOBİL DİKEY (PORTRAIT)
+    MOBİL DİKEY (PORTRAIT)
 ========================================== */
 @media (max-width: 768px) and (orientation: portrait) {
     body, html { height: 100dvh !important; overflow: hidden !important; }
     
+    /* 1. Üst Kutu */
     .app-container {
         display: flex !important; flex-direction: column !important; justify-content: center !important; 
         align-items: center !important; gap: 15px !important; padding-bottom: 80px !important; 
         height: 100dvh !important; overflow-y: auto; overflow-x: hidden;
     }
 
-    /* İlk Kutu */
     .sidebar {
         position: static !important; width: 90% !important; max-width: 380px !important; 
-        height: 237px !important; min-height: 237px !important; max-height: 237px !important; 
+        height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         flex: 0 0 237px !important; 
         margin: 0 !important; padding: 15px; z-index: 10; border-radius: 20px !important; 
-        transform: translateY(-25px) !important; box-sizing: border-box !important;
+        transform: translateY(-30px) !important; box-sizing: border-box !important;
     }
 
     /* 2. Orta Kutu */
     .main-content {
         position: static !important; width: 90% !important; max-width: 380px !important;
-        height: 190px !important; min-height: 190px !important; max-height: 190px !important; 
+        height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         flex: 0 0 190px !important; 
         margin: 0 !important; padding: 0 !important;
         display: flex; justify-content: center; align-items: center; 
-        transform: translateY(-25px) !important; box-sizing: border-box !important;
+        transform: translateY(-30px) !important; box-sizing: border-box !important;
     }
     
     .view-box {
         width: 100% !important; 
-        height: 190px !important; min-height: 190px !important; max-height: 190px !important; 
+        height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         margin: 0 !important; padding: 15px 10px !important;
         overflow-y: auto !important; border-radius: 20px !important;
         box-sizing: border-box !important; 
-        
-        /* İçindeki saat ve yazıları merkeze kilitle */
-        display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important;
     }
+
+    /* Sadece JS'nin aktif ettiği kutuyu esnek yap */
+    .view-box[style*="block"] {
+        display: flex !important; 
+        flex-direction: column !important; 
+        justify-content: center !important; 
+        align-items: center !important;
+    }
+
+
     .view-box::-webkit-scrollbar { display: none; } 
 
     /* 3. Metin */
     #mobile-vibe-hint {
         position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center;
         text-align: center; margin: 0 !important; animation: fadeInOut 3s infinite ease-in-out;
-        transform: translateY(-25px) !important;
+        transform: translateY(-20px) !important;
     }
     #mobile-vibe-hint p { font-size: 11px; color: #b3b3b3; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
     #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
@@ -385,7 +392,7 @@ input[type="number"] {
 
 
 /* ==========================================
-    MOBİL YATAY (LANDSCAPE)
+   MOBİL YATAY (LANDSCAPE)
 ========================================== */
 @media (max-width: 950px) and (orientation: landscape) {
     .sidebar, .right-panel, #mobile-vibe-hint, #btn-fullscreen { display: none !important; }
@@ -417,9 +424,9 @@ input[type="number"] {
         height: auto !important; min-height: auto !important; max-height: auto !important;
         
         position: absolute !important;
-        bottom: 40px !important; /* Alttan 50px yukarı it*/
-        left: 50% !important; /* Soldan %50 it */
-        transform: translateX(-50%) !important; /* Tam ortaya milimetrik hizala */
+        bottom: 30px !important; /* Kutuyu 30px yukarı kaldır */
+        left: 50% !important; 
+        transform: translateX(-50%) !important; 
         
         overflow: hidden !important; box-sizing: border-box !important;
     }
@@ -433,11 +440,16 @@ input[type="number"] {
     #world-clock-view p { margin: 5px 15px !important; font-size: 0.95rem !important; text-align: center !important; }
     #world-clock-view h2 { display: none !important; }
 
+    /* Yazı Boyutları */
     .view-box h1, .timer-display { 
-        font-size: 2.5rem !important; text-shadow: 0 0 15px rgba(0, 255, 136, 0.8) !important; margin: 0 !important;
+        font-size: 1.8rem !important; 
+        text-shadow: 0 0 15px rgba(0, 255, 136, 0.8) !important; margin: 0 !important;
         font-variant-numeric: tabular-nums !important; 
     }
-    .view-box h3, .view-box p { font-size: 1rem !important; opacity: 0.8 !important; margin: 0 !important; }
+    .view-box h3, .view-box p { 
+        font-size: 0.85rem !important; 
+        opacity: 0.8 !important; margin: 0 !important; 
+    }
 
     .timer-controls, .timer-input-group, .stopwatch-controls, #btn-set-alarm, #btn-calculate-zodiac, .input-wrapper, #alarm-status, #zodiac-result, #laps-container {
         display: none !important;
