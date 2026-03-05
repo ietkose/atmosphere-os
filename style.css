@@ -227,35 +227,92 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     .view-box h2 { font-size: 1.5rem !important; margin: 5px 0 10px 0 !important; display: block !important; visibility: visible !important; color: white !important;} 
     .view-box h3, .view-box p { font-size: 0.95rem !important; }
 
+    /* ==========================================
+       1. TIMER KUTULARI VE NEONLARI
+    ========================================== */
     #timer-input-hour, #timer-input-min, #timer-input-sec {
         width: 40px !important; height: 35px !important; font-size: 18px !important;
         padding: 0 !important; margin: 0 !important; text-align: center !important;
         background: transparent !important; border: none !important; color: white !important;
     }
-    .timer-input-group { transform: scale(0.9); margin-bottom: 5px !important; } 
-
-    #alarm-view .input-wrapper, 
-    #birth-chart-view .input-wrapper { 
-        display: flex !important; width: max-content !important; min-width: 140px !important; 
-        margin: 0 auto 15px auto !important; height: 45px !important;
+    
+    .timer-input-group { 
+        transform: scale(0.9); 
+        margin-bottom: 5px !important; 
+    } 
+    
+    .timer-input-group .input-wrapper:focus-within {
+        border-color: #00ff88 !important; 
+        box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 25px rgba(0, 255, 136, 0.4) !important;
+        background: rgba(0, 0, 0, 0.6) !important;
     }
 
-    #alarm-time-input, #birth-date, #birth-time { 
-        display: block !important; height: 100% !important;
-        width: 130px !important; 
+    /* ==========================================
+       2. ALARM KUTUSU, INPUTU VE BUTONU
+    ========================================== */
+    #alarm-view .input-wrapper {
+        width: 100px !important; 
+        min-width: 100px !important; 
+        flex-shrink: 0 !important;
+    } 
+    
+    #alarm-view .input-wrapper:focus-within {
+        border-color: #00ff88 !important; 
+        box-shadow: 0 0 10px rgba(0, 255, 136, 0.8) !important;
+    }
+
+    #alarm-time-input {
+        width: 100% !important; 
+        flex-shrink: 0 !important;
+    }
+    
+    #btn-set-alarm { 
+        display: inline-block !important; 
+        visibility: visible !important; 
+        opacity: 1 !important; 
+        margin-top: 10px !important; 
+    }
+
+    /* ==========================================
+       3. BIRTH CHART KUTULARI VE INPUTLARI
+    ========================================== */
+    #birth-chart-view .input-wrapper { 
+        display: flex !important; 
+        width: max-content !important; 
+        min-width: 100px !important; 
+        margin: 0 auto 15px auto !important; 
+        height: 45px !important;
+    }
+    
+    #birth-chart-view .input-wrapper:focus-within {
+        border-color: #00ff88 !important; 
+        box-shadow: 0 0 10px rgba(0, 255, 136, 0.8) !important;
+    }
+
+    #birth-date, #birth-time { 
+        display: block !important; 
+        height: 100% !important;
         background: transparent !important; 
         border: none !important; color: white !important;
         font-size: 1.1rem !important; cursor: pointer !important; color-scheme: dark !important;
         -webkit-appearance: auto !important; appearance: auto !important; margin: 0 !important; padding: 0 !important;
     }
     
+    /* Doğum haritası için özel genişlikler */
     #birth-date { width: 140px !important; }
     #birth-time { width: 100px !important; }
 
-    #btn-set-alarm { display: inline-block !important; visibility: visible !important; opacity: 1 !important; margin-top: 10px !important; }
-
-    /* İOS Saat İkonu Düzeltmesi */
-    ::-webkit-calendar-picker-indicator { display: block !important; filter: invert(1) !important; opacity: 1 !important; font-size: 1.2rem !important; cursor: pointer !important; margin-left: 5px !important; }
+    /* ==========================================
+       4. GENEL İOS SAAT İKONU (BEMBEYAZ)
+    ========================================== */
+    ::-webkit-calendar-picker-indicator { 
+        display: block !important; 
+        filter: invert(1) !important; 
+        opacity: 1 !important; 
+        font-size: 1.2rem !important; 
+        cursor: pointer !important; 
+        margin-left: 5px !important; 
+    }
 
     .view-box::-webkit-scrollbar { display: none; } 
 
