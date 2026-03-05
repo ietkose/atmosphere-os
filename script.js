@@ -248,6 +248,17 @@ class TimerManager {
 
     initButtons() {
         document.getElementById('btn-timer-start')?.addEventListener('click', () => {
+            
+            // Mobilde ses kilidini kıran maymuncuk
+            if(this.audio) {
+                this.audio.muted = true; // Sesi tamamen kıs
+                this.audio.play().then(() => {
+                    this.audio.pause(); // Anında durdur
+                    this.audio.muted = false; // Sesi geri aç (zamanı gelince çalması için hazır)
+                    this.audio.currentTime = 0; // Başa sar
+                }).catch(e => console.log("Siber Maymuncuk başarısız:", e));
+            }
+
             if (this.running) return;
             
             if (this.isPaused && this.remainingSeconds > 0) {
@@ -354,6 +365,17 @@ class AlarmManager {
     }
     
     setAlarm() {
+        
+        // Mobilde ses kilidini kıran maymuncuk
+        if(this.audio) {
+            this.audio.muted = true;
+            this.audio.play().then(() => {
+                this.audio.pause();
+                this.audio.muted = false;
+                this.audio.currentTime = 0;
+            }).catch(e => console.log("Siber Maymuncuk başarısız:", e));
+        }
+
         if(!this.uiTimeInput.value) return alert("Please select a time!");
         
         const now = new Date();
