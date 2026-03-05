@@ -17,23 +17,19 @@ class UIManager {
         
         this.initNavigation();
         this.initAccordion();
-        this.initFullscreen(); // Sinematik Mod
+        this.initFullscreen(); 
     }
 
-    // Akordeon
     initAccordion() {
         const accBtns = document.querySelectorAll('.accordion-btn');
         accBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const targetBtn = e.currentTarget;
                 const content = targetBtn.nextElementSibling;
-                
-                // Tıklanan butonun bir "üst" akordeon kutusu var mı diye bak (Inception koruması)
                 const parentContent = targetBtn.closest('.accordion-content');
 
                 accBtns.forEach(otherBtn => {
                     if (otherBtn !== targetBtn && otherBtn.classList.contains('open')) {
-                        // Eğer otherBtn'nin açtığı kutu, bizim içinde bulunduğumuz kutuysa kapatma
                         if (parentContent && otherBtn.nextElementSibling === parentContent) {
                             return; 
                         }
@@ -48,45 +44,40 @@ class UIManager {
         });
     }
 
-   // Sinematik Tam Ekran
     initFullscreen() {
         const fsBtn = document.getElementById('btn-fullscreen');
         if (!fsBtn) return;
 
         fsBtn.addEventListener('click', () => {
             if (!document.fullscreenElement) {
-                // PC için Tam Ekrana Geçiş
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
-                } else if (document.documentElement.webkitRequestFullscreen) { /* Safari PC */
+                } else if (document.documentElement.webkitRequestFullscreen) { 
                     document.documentElement.webkitRequestFullscreen();
-                } else if (document.documentElement.msRequestFullscreen) { /* IE11 */
+                } else if (document.documentElement.msRequestFullscreen) { 
                     document.documentElement.msRequestFullscreen();
                 }
             } else {
-                // PC için Tam Ekrandan Çıkış
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) { /* Safari PC */
+                } else if (document.webkitExitFullscreen) { 
                     document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { /* IE11 */
+                } else if (document.msExitFullscreen) { 
                     document.msExitFullscreen();
                 }
             }
         });
 
-        // Tarayıcı tam ekrana geçince CSS'e haber veriyoruz
         const toggleFullscreenClasses = () => {
             if (document.fullscreenElement || document.webkitFullscreenElement) {
-                document.body.classList.add('fullscreen-mode'); // CSS'teki gizleme kodlarını tetikler
+                document.body.classList.add('fullscreen-mode'); 
                 fsBtn.innerText = "⛶ Minimize";
             } else {
-                document.body.classList.remove('fullscreen-mode'); // Normale döndürür
+                document.body.classList.remove('fullscreen-mode'); 
                 fsBtn.innerText = "⛶ Fullscreen";
             }
         };
 
-        // ESC tuşuna basıldığında da ekranın bozulmaması için sensörler
         document.addEventListener('fullscreenchange', toggleFullscreenClasses);
         document.addEventListener('webkitfullscreenchange', toggleFullscreenClasses);
     }
@@ -102,9 +93,16 @@ class UIManager {
                 });
                 if (this.mainClockView) this.mainClockView.classList.add('hidden');
 
-                const featureName = item.innerText;
-                if (this.views[featureName]) {
-                    this.views[featureName].classList.remove('hidden');
+                const featureName = item.innerText.replace('⇥', '').replace(' ', '').trim();
+                let actualName = "Home";
+                if(item.innerText.includes('Stopwatch')) actualName = 'Stopwatch';
+                if(item.innerText.includes('Timer')) actualName = 'Timer';
+                if(item.innerText.includes('Alarm Clock')) actualName = 'Alarm Clock';
+                if(item.innerText.includes('World Clock')) actualName = 'World Clock';
+                if(item.innerText.includes('Birth Chart')) actualName = 'Birth Chart';
+
+                if (this.views[actualName]) {
+                    this.views[actualName].classList.remove('hidden');
                 } else if (this.mainClockView) {
                     this.mainClockView.classList.remove('hidden');
                 }
@@ -122,7 +120,7 @@ class UIManager {
         }
         
         document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
+        if(evt) evt.currentTarget.className += " active";
     }
 }
 
@@ -179,7 +177,7 @@ class StopwatchManager {
         this.lapsContainer = document.getElementById('laps-container');
         this.interval = null;
         this.elapsedTime = 0;
-        this.startTime = 0; // Kronometrenin başladığı gerçek an
+        this.startTime = 0; 
         this.running = false;
         this.lapCounter = 1;
         this.initButtons();
@@ -195,11 +193,8 @@ class StopwatchManager {
     initButtons() {
         document.getElementById('btn-start')?.addEventListener('click', () => {
             if (!this.running) {
-                // Başlama anını gerçek saatten al (Kaldığı yeri de hesaba katarak)
                 this.startTime = Date.now() - this.elapsedTime; 
-                
                 this.interval = setInterval(() => {
-                    // Tarayıcı uyusa bile, uyandığında şu anki saatle aradaki farkı yazar
                     this.elapsedTime = Date.now() - this.startTime; 
                     this.display.innerText = this.formatTime(this.elapsedTime);
                 }, 10);
@@ -244,7 +239,7 @@ class TimerManager {
         
         this.interval = null;
         this.totalSeconds = 0;
-        this.remainingSeconds = 0; // Duraklatılınca kalan süreyi hafızada tutar
+        this.remainingSeconds = 0; 
         this.running = false;
         this.isPaused = false; 
         
@@ -252,11 +247,9 @@ class TimerManager {
     }
 
     initButtons() {
-        // --- BAŞLAT (START) BUTONU ---
         document.getElementById('btn-timer-start')?.addEventListener('click', () => {
             if (this.running) return;
             
-            // Eğer duraklatılmışsa, kaldığı saniyeden devam et. Değilse inputlardan yeni süre oku.
             if (this.isPaused && this.remainingSeconds > 0) {
                 this.totalSeconds = this.remainingSeconds;
                 this.isPaused = false;
@@ -267,7 +260,7 @@ class TimerManager {
                 this.totalSeconds = (hour * 3600) + (min * 60) + sec;
             }
 
-            if (this.totalSeconds <= 0) return; // Süre girilmediyse hiçbir şey yapma
+            if (this.totalSeconds <= 0) return; 
 
             this.running = true;
             const endTime = Date.now() + (this.totalSeconds * 1000); 
@@ -280,7 +273,6 @@ class TimerManager {
                     this.running = false;
                     this.isPaused = false;
                     
-                    // Bitiş efekti
                     this.display.innerText = "TIME IS UP!";
                     this.display.style.color = "#ff4444"; 
                     this.display.style.textShadow = "0 0 15px rgba(255, 68, 68, 0.8)";
@@ -301,12 +293,9 @@ class TimerManager {
             }, 1000);
         });
 
-        // --- DURAKLAT VE SESİ SUSTUR (PAUSE / STOP) BUTONU ---
         document.getElementById('btn-timer-pause')?.addEventListener('click', () => {
-
             if(this.uiCreditBox) this.uiCreditBox.style.display = 'none';
 
-            // Eğer süre bittiyse ve alarm çalıyorsa onu sustur ve ekranı normale çevir
             if(this.audio && !this.audio.paused) {
                 this.audio.pause();
                 this.audio.currentTime = 0;
@@ -315,7 +304,6 @@ class TimerManager {
                 this.display.innerText = "00:00:00";
             }
 
-            // Eğer timer geriye sayıyorsa onu donuk duruma (Pause) geçir
             if (this.running) {
                 clearInterval(this.interval);
                 this.running = false;
@@ -323,27 +311,23 @@ class TimerManager {
             }
         });
 
-        // --- SIFIRLA (RESET) BUTONU ---
         document.getElementById('btn-timer-reset')?.addEventListener('click', () => {
             clearInterval(this.interval);
             this.running = false;
             this.isPaused = false;
             this.remainingSeconds = 0;
             
-            // Ekranı ve renkleri sıfırla
             this.display.innerText = "00:00:00";
             this.display.style.color = "white";
             this.display.style.textShadow = "1px 1px 5px rgba(0,0,0,0.6)";
 
             if(this.uiCreditBox) this.uiCreditBox.style.display = 'none';
             
-            // Çalan sesi kapat
             if(this.audio) { 
                 this.audio.pause(); 
                 this.audio.currentTime = 0; 
             }
             
-            // Input kutularını temizle
             if(this.inputHour) this.inputHour.value = "";
             if(this.inputMin) this.inputMin.value = "";
             if(this.inputSec) this.inputSec.value = "";
@@ -377,7 +361,7 @@ class AlarmManager {
         let alarmDate = new Date();
         alarmDate.setHours(hours, minutes, 0, 0);
         
-        if (alarmDate <= now) alarmDate.setDate(alarmDate.getDate() + 1); // Saati geçtiyse yarına kur
+        if (alarmDate <= now) alarmDate.setDate(alarmDate.getDate() + 1); 
         
         const timeToAlarm = alarmDate.getTime() - now.getTime();
         if(this.alarmTimeout) clearTimeout(this.alarmTimeout);
@@ -412,7 +396,7 @@ class AlarmManager {
     
     snoozeAlarm() {
         this.dismissAlarm();
-        const snoozeTime = new Date(new Date().getTime() + 5 * 60000); // 5 dk ertele
+        const snoozeTime = new Date(new Date().getTime() + 5 * 60000); 
         this.uiTimeInput.value = `${String(snoozeTime.getHours()).padStart(2, '0')}:${String(snoozeTime.getMinutes()).padStart(2, '0')}`;
         this.setAlarm();
     }
@@ -434,7 +418,6 @@ class AstrologyManager {
 
     calculate() {
         if(!this.uiDate.value) {
-            // Dil ayarına göre hata mesajı!
             const isTr = typeof currentLang !== 'undefined' && currentLang === 'tr';
             return alert(isTr ? "Lütfen doğum tarihinizi girin!" : "Please enter your birth date!");
         }
@@ -473,7 +456,6 @@ class AstrologyManager {
 
     getElement(sign) {
         const isTr = typeof currentLang !== 'undefined' && currentLang === 'tr';
-        // Emojiler evrensel olduğu için dil fark etmeksizin kod okuyabilir!
         if(sign.includes("♈") || sign.includes("♌") || sign.includes("♐")) return isTr ? "Ateş 🔥" : "Fire 🔥";
         if(sign.includes("♉") || sign.includes("♍") || sign.includes("♑")) return isTr ? "Toprak 🌿" : "Earth 🌿";
         if(sign.includes("♊") || sign.includes("♎") || sign.includes("♒")) return isTr ? "Hava 💨" : "Air 💨";
@@ -526,7 +508,6 @@ class AssetManager {
         this.body = document.body;
         this.imagePath = "assets/images/"; 
         
-        // Temaları bir diziye koyup, girişte rastgele birini seçiyoruz
         const themes = ['cowboy-era', 'cyber-world', 'dark-fantasy', 'light-fantasy', 'jazz-romance', 'rock-n-roll'];
         this.currentTheme = themes[Math.floor(Math.random() * themes.length)]; 
         
@@ -564,9 +545,6 @@ class AssetManager {
     }
 }
 
-// ==========================================
-// AUDIO MANAGER (AKILLI Müzik & Ambiyans Oynatıcı)
-// ==========================================
 class AudioManager {
     constructor() {
         this.bgPlayer = document.getElementById('bg-player');
@@ -584,110 +562,54 @@ class AudioManager {
         this.uiThemeName = document.getElementById('current-theme-name');
         this.uiTrackName = document.getElementById('current-track-name');
         
-        // Telif Ekranı Bağlantısı
         this.uiTrackCredit = document.getElementById('track-credit'); 
 
-        // Telif Hakları Veritabanı
         this.trackCredits = {
             'cowboy-era': {
-                1: "Music by: JHS Pedals - Cowboy Lullaby",
-                2: "Music by: Chris Haugen - Tumbleweed Texas",
-                3: "Music by: Kaazoom - Homestead",
-                4: "Music by: Kaazoom - Rider Under the Canyon Moon",
-                5: "Music by: Kaazoom - The Lonesome Rider",
-                6: "Music by: Kaazoom - Way Out West",
-                7: "Music by: Telecasted - Big River",
-                8: "Music by: Dan Lebowitz - Dumb as a Box",
-                9: "Music by: Zachariah Hickman - The Beacon",
-                10: "Music by: Cumbia Deli - Sabor a la Antigua",
-                11: "Music by: Litesaturation - Country Rock",
-                12: "Music by: Track Tribe - Hotlanta",
+                1: "Music by: JHS Pedals - Cowboy Lullaby", 2: "Music by: Chris Haugen - Tumbleweed Texas", 3: "Music by: Kaazoom - Homestead",
+                4: "Music by: Kaazoom - Rider Under the Canyon Moon", 5: "Music by: Kaazoom - The Lonesome Rider", 6: "Music by: Kaazoom - Way Out West",
+                7: "Music by: Telecasted - Big River", 8: "Music by: Dan Lebowitz - Dumb as a Box", 9: "Music by: Zachariah Hickman - The Beacon",
+                10: "Music by: Cumbia Deli - Sabor a la Antigua", 11: "Music by: Litesaturation - Country Rock", 12: "Music by: Track Tribe - Hotlanta",
             },
             'cyber-world': {
-                1: "Music by: Ribhavagrawal - Nostalgic",
-                2: "Music by: Ribhavagrawal - Royal Entry",
-                3: "Music by: Ribhavagrawal - Teleporting",
-                4: "Music by: Ribhavagrawal - Villian Arrives",
-                5: "Music by: The Soundlings - 360 No Scope",
-                6: "Music by: Dan Lebowitz - Boomin'",
-                7: "Music by: Dan Lebowitz - In It to Win It",
-                8: "Music by: Telecasted - Jetski",
-                9: "Music by: Telecasted - The Last Goodbye",
-                10: "Music by: Everet Almond - Wrangle the Crazy",
-                11: "Music by: half.cool - Sharp Edges",
-                12: "Music by: half.cool - Virtual Roaming Charges",
+                1: "Music by: Ribhavagrawal - Nostalgic", 2: "Music by: Ribhavagrawal - Royal Entry", 3: "Music by: Ribhavagrawal - Teleporting",
+                4: "Music by: Ribhavagrawal - Villian Arrives", 5: "Music by: The Soundlings - 360 No Scope", 6: "Music by: Dan Lebowitz - Boomin'",
+                7: "Music by: Dan Lebowitz - In It to Win It", 8: "Music by: Telecasted - Jetski", 9: "Music by: Telecasted - The Last Goodbye",
+                10: "Music by: Everet Almond - Wrangle the Crazy", 11: "Music by: half.cool - Sharp Edges", 12: "Music by: half.cool - Virtual Roaming Charges",
             },
             'dark-fantasy': {
-                1: "Music by: Alexaa221 from Pixabay",
-                2: "Music by: Everet Almond - Among the Stars",
-                3: "Music by: Puddle of Infinity - Cloud Wheels, Castle Builder",
-                4: "Music by: Kellepics - Pandora",
-                5: "Music by: Quincas Moreira - London Fog",
-                6: "Music by: Montogoronto from Pixabay",
-                7: "Music by: Density & Time - Level",
-                8: "Music by: Openmindaudio from Pixabay",
-                9: "Music by: Density & Time - Radar",
-                10: "Music by: Brian Bolger - Black Mass",
-                11: "Music by: NIVIRO - Rumble | Provided by NCS",
-                12: "Music by: Kevin MacLeod - Hall of the Mountain King | CC BY 4.0 (incompetech.com)",
+                1: "Music by: Alexaa221 from Pixabay", 2: "Music by: Everet Almond - Among the Stars", 3: "Music by: Puddle of Infinity - Cloud Wheels, Castle Builder",
+                4: "Music by: Kellepics - Pandora", 5: "Music by: Quincas Moreira - London Fog", 6: "Music by: Montogoronto from Pixabay",
+                7: "Music by: Density & Time - Level", 8: "Music by: Openmindaudio from Pixabay", 9: "Music by: Density & Time - Radar",
+                10: "Music by: Brian Bolger - Black Mass", 11: "Music by: NIVIRO - Rumble | Provided by NCS", 12: "Music by: Kevin MacLeod - Hall of the Mountain King | CC BY 4.0 (incompetech.com)",
             },
             'light-fantasy': {
-                1: "Music by: Meditativetiger - Ethereal Harp Lullaby",
-                2: "Music by: Alanajordan - Ethereal Visit",
-                3: "Music by: Dreaming Under The Stars from Pixabay",
-                4: "Music by: Jumpingbunny from Pixabay",
-                5: "Music by: Zachariah Hickman - Leaning On the Everlasting Arms",
-                6: "Music by: Whatssmooth - The Fairy of Crimson Light",
-                7: "Music by: Kevin MacLeod - Pooka | CC BY 4.0 (incompetech.com)",
-                8: "Music by: Brian Bolger - Music Box",
-                9: "Music by: Aaron Kenny - Happy Haunts",
-                10: "Music by: Reed Mathis - Orphan",
-                11: "Music by: Nathan Moore - With a Rose in Your Teeth",
-                12: "Music by: Esther Abrami - No.3 Morning Folk Song",
+                1: "Music by: Meditativetiger - Ethereal Harp Lullaby", 2: "Music by: Alanajordan - Ethereal Visit", 3: "Music by: Dreaming Under The Stars from Pixabay",
+                4: "Music by: Jumpingbunny from Pixabay", 5: "Music by: Zachariah Hickman - Leaning On the Everlasting Arms", 6: "Music by: Whatssmooth - The Fairy of Crimson Light",
+                7: "Music by: Kevin MacLeod - Pooka | CC BY 4.0 (incompetech.com)", 8: "Music by: Brian Bolger - Music Box", 9: "Music by: Aaron Kenny - Happy Haunts",
+                10: "Music by: Reed Mathis - Orphan", 11: "Music by: Nathan Moore - With a Rose in Your Teeth", 12: "Music by: Esther Abrami - No.3 Morning Folk Song",
             },
             'jazz-romance': {
-                1: "Music by: Surprising Media - Gentle Glow",
-                2: "Music by: Surprising Media from Pixabay",
-                3: "Music by: Surprising Media from Pixabay",
-                4: "Music by: Surprising Media from Pixabay",
-                5: "Music by: E's Jammy Jams - Arabian Sand",
-                6: "Music by: Alex Hamlin - Dance Number 24449",
-                7: "Music by: Bird Creek - Ipanema Daydream",
-                8: "Music by: Valerystarfell - Snowflake",
-                9: "Music by: Doug Maxwell - 1940's Slow Dance",
-                10: "Music by: Casa Rosa's Tulum Vibes - Bah Dop Bop",
-                11: "Music by: Jimmy Fontanez - ChaCha Fontanez",
-                12: "Music by: Quincas Moreira - Tango Mango",
+                1: "Music by: Surprising Media - Gentle Glow", 2: "Music by: Surprising Media from Pixabay", 3: "Music by: Surprising Media from Pixabay",
+                4: "Music by: Surprising Media from Pixabay", 5: "Music by: E's Jammy Jams - Arabian Sand", 6: "Music by: Alex Hamlin - Dance Number 24449",
+                7: "Music by: Bird Creek - Ipanema Daydream", 8: "Music by: Valerystarfell - Snowflake", 9: "Music by: Doug Maxwell - 1940's Slow Dance",
+                10: "Music by: Casa Rosa's Tulum Vibes - Bah Dop Bop", 11: "Music by: Jimmy Fontanez - ChaCha Fontanez", 12: "Music by: Quincas Moreira - Tango Mango",
             },
             'rock-n-roll': {
-                1: "Music by: Businessstar - On the Road",
-                2: "Music by: Freedom Trail Studio - I'm Happy For This Guitar",
-                3: "Music by: Magic In The Other - Life is Good",
-                4: "Music by: Audionautix - Keep It Real | CC BY 4.0 (audionautix.com)",
-                5: "Music by: Telecasted - Lonely Day",
-                6: "Music by: Freedom Trail Studio - Love On File",
-                7: "Music by: Emmraan - Cool Rider",
-                8: "Music by: Emmraan - Crazy Funny Rock",
-                9: "Music by: Track Tribe - Hotlanta",
-                10: "Music by: Track Tribe - Drag Race",
-                11: "Music by: Track Tribe - SeaTac",
-                12: "Music by: UniqueCreativeAudio from Pixabay",
+                1: "Music by: Businessstar - On the Road", 2: "Music by: Freedom Trail Studio - I'm Happy For This Guitar", 3: "Music by: Magic In The Other - Life is Good",
+                4: "Music by: Audionautix - Keep It Real | CC BY 4.0 (audionautix.com)", 5: "Music by: Telecasted - Lonely Day", 6: "Music by: Freedom Trail Studio - Love On File",
+                7: "Music by: Emmraan - Cool Rider", 8: "Music by: Emmraan - Crazy Funny Rock", 9: "Music by: Track Tribe - Hotlanta",
+                10: "Music by: Track Tribe - Drag Race", 11: "Music by: Track Tribe - SeaTac", 12: "Music by: UniqueCreativeAudio from Pixabay",
             }
         };
 
-        // Sesler için Arayüz Bağlantısı
         this.uiSoundCredit = document.getElementById('sound-credit');
 
-        // Ses Telif Veritabanı
         this.soundCredits = {
-            'winter-wind': "Sound by: Dragon Studio from Pixabay",
-            'rain': "Sound by: Liecio from Pixabay",
-            'birds': "Sound by: Freesound Community from Pixabay",
-            'birds-rain': "Sound by: SoundReality from Pixabay",
-            'waves-seagulls': "Sound by: Soundsvisual from Pixabay",
-            'fire': "Sound by: SoundReality from Pixabay",
-            'cafe-noise': "Sound by: Freesound Community from Pixabay",
-            'train': "Sound by: SSPsurvival from Pixabay",
+            'winter-wind': "Sound by: Dragon Studio from Pixabay", 'rain': "Sound by: Liecio from Pixabay",
+            'birds': "Sound by: Freesound Community from Pixabay", 'birds-rain': "Sound by: SoundReality from Pixabay",
+            'waves-seagulls': "Sound by: Soundsvisual from Pixabay", 'fire': "Sound by: SoundReality from Pixabay",
+            'cafe-noise': "Sound by: Freesound Community from Pixabay", 'train': "Sound by: SSPsurvival from Pixabay",
             'koto-japanese-zither': "Sound by: Freesound"
         };
 
@@ -699,39 +621,31 @@ class AudioManager {
         }
     }
 
-    // --- DOĞA SESLERİ (AMBİYANS) YÖNETİMİ ---
     initAmbiences() {
-        this.activeAmbiences = []; // Açık olan sesleri hafızada tutar
+        this.activeAmbiences = []; 
         this.uiSoundsPlayPauseBtn = document.getElementById('btn-sounds-play-pause');
         if(this.uiSoundsPlayPauseBtn) {
             this.uiSoundsPlayPauseBtn.addEventListener('click', () => this.toggleMasterAmbience());
         }
 
         this.ambienceButtons = {
-            'winter-wind': document.getElementById('btn-winter-wind'),
-            'rain': document.getElementById('btn-rain'),
-            'birds': document.getElementById('btn-birds'),
-            'birds-rain': document.getElementById('btn-birds-rain'),
-            'waves-seagulls': document.getElementById('btn-waves-seagulls'),
-            'fire': document.getElementById('btn-fire'),
-            'cafe-noise': document.getElementById('btn-cafe-noise'),
-            'train': document.getElementById('btn-train'),
+            'winter-wind': document.getElementById('btn-winter-wind'), 'rain': document.getElementById('btn-rain'),
+            'birds': document.getElementById('btn-birds'), 'birds-rain': document.getElementById('btn-birds-rain'),
+            'waves-seagulls': document.getElementById('btn-waves-seagulls'), 'fire': document.getElementById('btn-fire'),
+            'cafe-noise': document.getElementById('btn-cafe-noise'), 'train': document.getElementById('btn-train'),
             'koto-japanese-zither': document.getElementById('btn-koto-japanese-zither')
         };
     }
 
-    // Kaç sesin açık olduğunu sayıp ekrana yazar
     updateSoundCreditText() {
         if (!this.uiSoundCredit) return;
         
         if (this.activeAmbiences.length === 0) {
             this.uiSoundCredit.innerText = "Play / Pause Active Audio";
         } else if (this.activeAmbiences.length === 1) {
-            // Sadece 1 ses açıksa, onun adını ve telifini yaz
             const playingId = this.activeAmbiences[0];
             this.uiSoundCredit.innerText = this.soundCredits[playingId] || "Sound is Playing...";
         } else {
-            // Birden fazla ses açıksa Mix (Karışım) moduna geç
             this.uiSoundCredit.innerText = `Special mix: ${this.activeAmbiences.length} sounds active ⁉️`;
         }
     }
@@ -782,7 +696,6 @@ class AudioManager {
         }
     }
 
-    // --- MÜZİK ÇALAR YÖNETİMİ ---
     initPlayerButtons() {
         if(this.uiPlayPauseBtn) this.uiPlayPauseBtn.addEventListener('click', () => this.togglePlayPause());
         if(this.uiNextBtn) this.uiNextBtn.addEventListener('click', () => this.playNextTrack());
@@ -806,12 +719,10 @@ class AudioManager {
         this.bgPlayer.src = src;
         this.bgPlayer.play()
             .then(() => {
-                // UI Güncellemeleri
                 if(this.uiPlayPauseBtn) this.uiPlayPauseBtn.innerHTML = '&#10074;&#10074;'; 
                 if(this.uiThemeName) this.uiThemeName.innerText = this.currentTheme.toUpperCase().replace('-', ' ');
                 if(this.uiTrackName) this.uiTrackName.innerText = `\Track ${this.currentTrackIndex}`;
                 
-                // Telif metinini ekrana basar
                 if(this.uiTrackCredit) {
                     let creditInfo = this.trackCredits[this.currentTheme] && this.trackCredits[this.currentTheme][this.currentTrackIndex];
                     this.uiTrackCredit.innerText = creditInfo ? creditInfo : "Copyright Information Not Found";
@@ -866,9 +777,6 @@ class AudioManager {
     }
 }
 
-// ==========================================
-// UYGULAMAYI BAŞLATMA (MOTORLARI ÇALIŞTIR)
-// ==========================================
 const ui = new UIManager();
 const clock = new ClockManager();
 const stopwatch = new StopwatchManager();
@@ -878,45 +786,22 @@ const astro = new AstrologyManager();
 const audioManager = new AudioManager(); 
 const theme = new AssetManager(); 
 
-// HTML'den gelen tıklamaları JS motorlarına bağlayan gizli köprüler:
 window.playTheme = (themeName) => { if(audioManager) audioManager.playTheme(themeName); };
 window.openTab = (evt, tabName) => UIManager.openTab(evt, tabName);
 window.changeTheme = (themeName) => { if(theme) theme.changeVisualTheme(themeName); };
 window.toggleAmbience = (soundId) => { if(audioManager) audioManager.toggleAmbience(soundId); };
 
-// ==========================================
-// SİBER GÜVENLİK KALKANLARI (ANTI-COPY & ANTI-INSPECT)
-// ==========================================
-
-// 1. Sağ Tıklamayı (Context Menu) Tamamen Yasakla
-document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-});
-
-// 2. Klavye Kısayollarını (F12, Ctrl+Shift+I, Ctrl+U vb.) Blokla
+document.addEventListener('contextmenu', (e) => { e.preventDefault(); });
 document.addEventListener('keydown', (e) => {
-    // F12 Tuşu (Geliştirici Seçenekleri)
-    if (e.key === 'F12') {
-        e.preventDefault();
-    }
-    // Ctrl + Shift + I / J / C (İnceleme Panelleri)
-    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
-        e.preventDefault();
-    }
-    // Ctrl + U (Sayfa Kaynağını Görüntüle)
-    if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
-        e.preventDefault();
-    }
+    if (e.key === 'F12') { e.preventDefault(); }
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) { e.preventDefault(); }
+    if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); }
 });
 
 // ==========================================
 // DİL MOTORU (TR / EN)
 // ==========================================
-
-// Cihazın dilini gizlice oku!
 let userBrowserLang = navigator.language || navigator.userLanguage;
-
-// Dil 'tr' ile başlıyorsa Türkçe yap, değilse İngilizce yap
 let currentLang = userBrowserLang.toLowerCase().startsWith('tr') ? 'tr' : 'en';
 
 const translations = {
@@ -946,35 +831,40 @@ const translations = {
     }
 };
 
-// ÇEVİRİ İŞLEMİNİ YAPAN ANA MOTOR
 function applyTranslations() {
     const t = translations[currentLang];
     
-
-    if(!document.fullscreenElement) document.getElementById('btn-fullscreen').innerText = t.fullscreen;
-    else document.getElementById('btn-fullscreen').innerText = t.minimize;
-    
-    document.getElementById('btn-start').innerText = t.start;
-    document.getElementById('btn-stop').innerText = t.stop;
-    document.getElementById('btn-lap').innerText = t.lap;
-    document.getElementById('btn-reset').innerText = t.reset;
-    document.getElementById('btn-timer-start').innerText = t.start;
-    document.getElementById('btn-timer-pause').innerText = t.pause;
-    document.getElementById('btn-timer-reset').innerText = t.reset;
-    document.getElementById('btn-set-alarm').innerText = t.set;
-    document.getElementById('btn-cancel-alarm').innerText = t.cancel;
-    if(document.getElementById('alarm-status').innerText === "No Alarm Set" || document.getElementById('alarm-status').innerText === "Alarm Kurulmadı") {
-        document.getElementById('alarm-status').innerText = t.noAlarm;
+    if(!document.fullscreenElement) {
+        const fsBtn = document.getElementById('btn-fullscreen');
+        if(fsBtn) fsBtn.innerText = t.fullscreen;
+    } else {
+        const fsBtn = document.getElementById('btn-fullscreen');
+        if(fsBtn) fsBtn.innerText = t.minimize;
     }
-    document.getElementById('btn-snooze').innerText = t.snooze;
-    document.getElementById('btn-dismiss').innerText = t.dismiss;
-    document.getElementById('btn-calculate-zodiac').innerText = t.calc;
+    
+    if(document.getElementById('btn-start')) document.getElementById('btn-start').innerText = t.start;
+    if(document.getElementById('btn-stop')) document.getElementById('btn-stop').innerText = t.stop;
+    if(document.getElementById('btn-lap')) document.getElementById('btn-lap').innerText = t.lap;
+    if(document.getElementById('btn-reset')) document.getElementById('btn-reset').innerText = t.reset;
+    if(document.getElementById('btn-timer-start')) document.getElementById('btn-timer-start').innerText = t.start;
+    if(document.getElementById('btn-timer-pause')) document.getElementById('btn-timer-pause').innerText = t.pause;
+    if(document.getElementById('btn-timer-reset')) document.getElementById('btn-timer-reset').innerText = t.reset;
+    if(document.getElementById('btn-set-alarm')) document.getElementById('btn-set-alarm').innerText = t.set;
+    if(document.getElementById('btn-cancel-alarm')) document.getElementById('btn-cancel-alarm').innerText = t.cancel;
+    if(document.getElementById('alarm-status')) {
+        if(document.getElementById('alarm-status').innerText === "No Alarm Set" || document.getElementById('alarm-status').innerText === "Alarm Kurulmadı") {
+            document.getElementById('alarm-status').innerText = t.noAlarm;
+        }
+    }
+    if(document.getElementById('btn-snooze')) document.getElementById('btn-snooze').innerText = t.snooze;
+    if(document.getElementById('btn-dismiss')) document.getElementById('btn-dismiss').innerText = t.dismiss;
+    if(document.getElementById('btn-calculate-zodiac')) document.getElementById('btn-calculate-zodiac').innerText = t.calc;
 
-    document.querySelector('#stopwatch-view h2').innerText = t.stopwatch;
-    document.querySelector('#timer-view h2').innerText = t.timer;
-    document.querySelector('#alarm-view h2').innerText = t.alarm;
-    document.querySelector('#world-clock-view h2').innerText = t.worldclock;
-    document.querySelector('#birth-chart-view h2').innerText = t.birthchart;
+    if(document.querySelector('#stopwatch-view h2')) document.querySelector('#stopwatch-view h2').innerText = t.stopwatch;
+    if(document.querySelector('#timer-view h2')) document.querySelector('#timer-view h2').innerText = t.timer;
+    if(document.querySelector('#alarm-view h2')) document.querySelector('#alarm-view h2').innerText = t.alarm;
+    if(document.querySelector('#world-clock-view h2')) document.querySelector('#world-clock-view h2').innerText = t.worldclock;
+    if(document.querySelector('#birth-chart-view h2')) document.querySelector('#birth-chart-view h2').innerText = t.birthchart;
 
     const featureLinks = document.querySelectorAll('#features-list li');
     if(featureLinks.length > 0) {
@@ -986,11 +876,11 @@ function applyTranslations() {
         featureLinks[5].innerHTML = `&#x21A0; &nbsp; ${t.birthchart}`;
     }
 
-    if(document.getElementById('res-sun')) document.getElementById('res-sun').previousSibling.nodeValue = t.bcSun;
-    if(document.getElementById('res-element')) document.getElementById('res-element').previousSibling.nodeValue = t.bcElement;
-    if(document.getElementById('res-chinese')) document.getElementById('res-chinese').previousSibling.nodeValue = t.bcChinese;
-    if(document.getElementById('res-lifepath')) document.getElementById('res-lifepath').previousSibling.nodeValue = t.bcLifePath;
-    if(document.getElementById('res-moon-phase')) document.getElementById('res-moon-phase').previousSibling.nodeValue = t.bcMoon;
+    if(document.getElementById('res-sun') && document.getElementById('res-sun').previousSibling) document.getElementById('res-sun').previousSibling.nodeValue = t.bcSun;
+    if(document.getElementById('res-element') && document.getElementById('res-element').previousSibling) document.getElementById('res-element').previousSibling.nodeValue = t.bcElement;
+    if(document.getElementById('res-chinese') && document.getElementById('res-chinese').previousSibling) document.getElementById('res-chinese').previousSibling.nodeValue = t.bcChinese;
+    if(document.getElementById('res-lifepath') && document.getElementById('res-lifepath').previousSibling) document.getElementById('res-lifepath').previousSibling.nodeValue = t.bcLifePath;
+    if(document.getElementById('res-moon-phase') && document.getElementById('res-moon-phase').previousSibling) document.getElementById('res-moon-phase').previousSibling.nodeValue = t.bcMoon;
 
     if(document.getElementById('btn-winter-wind')) document.getElementById('btn-winter-wind').innerHTML = `&#x21A0; &nbsp; ${t.sndWinter}`;
     if(document.getElementById('btn-rain')) document.getElementById('btn-rain').innerHTML = `&#x21A0; &nbsp; ${t.sndRain}`;
@@ -1002,23 +892,48 @@ function applyTranslations() {
     if(document.getElementById('btn-train')) document.getElementById('btn-train').innerHTML = `&#x21A0; &nbsp; ${t.sndTrain}`;
     if(document.getElementById('btn-koto-japanese-zither')) document.getElementById('btn-koto-japanese-zither').innerHTML = `&#x21A0; &nbsp; ${t.sndKoto}`;
 
-    document.querySelector('.support-content h3').innerText = t.supportTitle;
-    document.querySelector('.support-content p').innerText = t.supportText;
-    document.querySelector('.cyber-coffee-btn span').innerText = t.buyCoffee;
-    document.querySelector('#mobile-vibe-hint p').innerHTML = t.vibeHint;
+    if(document.querySelector('.support-content h3')) document.querySelector('.support-content h3').innerText = t.supportTitle;
+    if(document.querySelector('.support-content p')) document.querySelector('.support-content p').innerText = t.supportText;
+    if(document.querySelector('.cyber-coffee-btn span')) document.querySelector('.cyber-coffee-btn span').innerText = t.buyCoffee;
+    if(document.querySelector('#mobile-vibe-hint p')) document.querySelector('#mobile-vibe-hint p').innerHTML = t.vibeHint;
     
     const noteEl = document.querySelector('.sidebar div p');
     if (noteEl && (noteEl.innerHTML.includes("Quick Note") || noteEl.innerHTML.includes("Kısa Not"))) {
         noteEl.innerHTML = t.quickNote;
     }
 
-    if (document.getElementById('zodiac-result').style.display === 'block' && typeof astro !== 'undefined') {
+    if (document.getElementById('zodiac-result') && document.getElementById('zodiac-result').style.display === 'block' && typeof astro !== 'undefined') {
         astro.calculate();
     }
 }
 
-// SİTE AÇILIR AÇILMAZ DİLİ OTOMATİK TESPİT ET VE UYGULA!
 document.addEventListener('DOMContentLoaded', () => {
     applyTranslations();
+});
+
+// YATAY MOD (LANDSCAPE) GÜVENLİK VE OTOMATİK GEÇİŞ SİSTEMİ
+window.addEventListener('resize', () => {
+    // Eğer telefon yatay konuma geçildiyse
+    if(window.innerWidth > window.innerHeight && window.innerWidth <= 950) {
+        const wc = document.getElementById('world-clock-view');
+        const bc = document.getElementById('birth-chart-view');
+        
+        // Eğer World Clock veya Birth Chart açıksa, otomatik olarak Home (Saat) ekranına at
+        if((wc && wc.style.display === 'block') || (bc && bc.style.display === 'block')) {
+            if(wc) wc.style.display = 'none';
+            if(bc) bc.style.display = 'none';
+            
+            const home = document.getElementById('clock-view');
+            if(home) home.style.display = 'block';
+            
+            // Yan menüdeki seçili barı da ana sayfaya al 
+            const tablinks = document.getElementsByClassName("tab-link");
+            for (let i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
+            if(tablinks[0]) tablinks[0].classList.add("active");
+        }
+        
+        // Yatayda da çevirinin bozulmadığını %100 garantiye almak için tetikleyici
+        applyTranslations();
+    }
 });
 

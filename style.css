@@ -35,7 +35,6 @@ h1, h2, h3, p, span, button { text-shadow: 1px 1px 5px rgba(0,0,0,0.6); }
     color: #ffffff !important; 
     font-weight: 600 !important; 
     letter-spacing: 4px !important;
-    /* 4 katmanlı kırmızı lazer efekti! */
     text-shadow: 0 0 5px #ff003c, 0 0 10px #ff003c, 0 0 20px #ff003c, 0 0 40px #ff003c !important;
     margin: 10px 0 !important;
 }
@@ -92,13 +91,10 @@ h1, h2, h3, p, span, button { text-shadow: 1px 1px 5px rgba(0,0,0,0.6); }
 }
 .player-controls { display: flex; justify-content: center; gap: 20px; align-items: center; }
 
-/* --- SPOTIFY KONTROL BUTONLARI (Beyazdan Yeşile Geçiş) --- */
 .control-btn {
     color: #e0e0e0 !important; background: transparent; border: none; cursor: pointer; font-size: 18px; transition: all 0.3s ease; padding: 0;
 }
-.control-btn:hover {
-    color: #00ff88 !important; text-shadow: 0 0 10px #00ff88 !important; transform: scale(1.1);
-}
+.control-btn:hover { color: #00ff88 !important; text-shadow: 0 0 10px #00ff88 !important; transform: scale(1.1); }
 .play-btn { font-size: 24px; }
 .credit-divider { margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%; }
 .sidebar-player .credit-text { display: block; font-size: 12px; color: #00ff88; font-family: monospace; letter-spacing: 0.5px; text-shadow: 0 0 5px rgba(0, 255, 136, 0.3); }
@@ -128,258 +124,120 @@ body.fullscreen-mode .app-container { background: transparent; }
 body.fullscreen-mode .view-box { position: absolute; bottom: 8%; background: transparent; backdrop-filter: none; border: none; box-shadow: none; transform: scale(1.1); }
 
 /* ==========================================
-   7. İNPUT KUTULARI, SAYAÇ VE ALARM (KUSURSUZ HALİ)
+   7. İNPUT KUTULARI, SAYAÇ VE ALARM
 ========================================== */
-
-/* --- ORTAK ÇERÇEVE (Cam Efekti ve Parlama) --- */
 .input-wrapper {
-    display: flex; 
-    align-items: center; 
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.15); 
-    border-radius: 8px;
-    transition: all 0.3s ease; 
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
-    overflow: hidden; 
+    display: flex; align-items: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15); 
+    border-radius: 8px; transition: all 0.3s ease; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); overflow: hidden; 
 }
-
-/* --- ÇERÇEVEYE TIKLANINCA GERÇEK NEON GİBİ PARLASIN --- */
 .input-wrapper:focus-within {
     border-color: #00ff88 !important; 
-    /* Çift katmanlı gölge: Biri parlak ve dar, diğeri geniş ve yayılmış aura */
     box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 25px rgba(0, 255, 136, 0.4) !important;
     background: rgba(0, 0, 0, 0.6) !important;
 }
-
-/* ---SAYAÇ (TIMER) KUTULARI (Nükleer Hedefleme ile Küçültüldü) --- */
 .timer-input-group { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 20px; }
 
+#timer-input-hour,
 #timer-input-min, 
 #timer-input-sec {
-    width: 40px !important;
-    height: 35px !important;
-    font-size: 18px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    text-align: center !important;
-    background: transparent !important;
-    border: none !important;
-    color: white !important;
-    outline: none !important;
-    box-shadow: none !important;
+    width: 40px !important; height: 35px !important; font-size: 18px !important; padding: 0 !important; margin: 0 !important;
+    text-align: center !important; background: transparent !important; border: none !important; color: white !important;
+    outline: none !important; box-shadow: none !important;
 }
-
-/* --- ALARM VE DOĞUM HARİTASI KUTULARI (Sayaçla Hizalandı) --- */
-#alarm-time-input, 
-#birth-date, 
-#birth-time {
-    height: 35px !important;
-    font-size: 16px !important;
-    padding: 0 10px !important;
-    text-align: center !important;
-    background: transparent !important;
-    border: none !important;
-    color: white !important;
-    outline: none !important;
-    box-shadow: none !important;
-    cursor: pointer !important;
-    color-scheme: dark !important; 
+#alarm-time-input, #birth-date, #birth-time {
+    height: 35px !important; font-size: 16px !important; padding: 0 10px !important; text-align: center !important;
+    background: transparent !important; border: none !important; color: white !important; outline: none !important;
+    box-shadow: none !important; cursor: pointer !important; color-scheme: dark !important; 
 }
-
-/* --- + VE - BUTONLARI --- */
-.spin-btn {
-    background: transparent; border: none; color: #b3b3b3;
-    font-size: 18px; cursor: pointer; padding: 5px 10px; transition: 0.3s;
-}
+.spin-btn { background: transparent; border: none; color: #b3b3b3; font-size: 18px; cursor: pointer; padding: 5px 10px; transition: 0.3s; }
 .spin-btn:hover { color: #00ff88; transform: scale(1.2); }
 
-/* --- OKLARI GİZLEME --- */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; margin: 0; 
-}
-input[type="number"] { 
-    -moz-appearance: textfield; 
-    appearance: textfield; 
-}
-
-/* --- TAKVİM/SAAT İKONLARINI BEYAZ YAPMA --- */
-::-webkit-calendar-picker-indicator {
-    filter: invert(1) !important;
-    cursor: pointer !important;
-    opacity: 0.7;
-    transition: 0.3s;
-}
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+::-webkit-calendar-picker-indicator { filter: invert(1) !important; cursor: pointer !important; opacity: 0.7; transition: 0.3s; }
 ::-webkit-calendar-picker-indicator:hover { opacity: 1 !important; }
-
-/* --- YEŞİL RENK --- */
-::selection {
-    background: rgba(0, 255, 136, 0.4) !important;
-    color: white !important;
-}
-
-::-webkit-datetime-edit-year-field:focus,
-::-webkit-datetime-edit-month-field:focus,
-::-webkit-datetime-edit-day-field:focus,
-::-webkit-datetime-edit-hour-field:focus,
-::-webkit-datetime-edit-minute-field:focus,
-::-webkit-datetime-edit-ampm-field:focus {
-    background-color: rgba(0, 255, 136, 0.4) !important;
-    color: white !important;
-    outline: none !important;
-}
-
-/* --- DESTEK PANOSU --- */
-/* --- ANA SAĞ PANO (Arka Plan Manzarası ve Ortalama) --- */
-.right-panel {
-    background-image: url('assets/images/right-panel/uzay.jpg'); 
-    background-size: cover;
-    background-position: center; 
-    
-    /* İçindeki kahve kutusunu tam ortaya hizalama */
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    
-    border-radius: 0px; 
-    overflow: hidden; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
-    min-height: 400px;
-}
-
-/* İÇTEKİ KAHVE KUTUSU */
-.support-panel-container {
-    background: rgba(10, 10, 10, 0.6); 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px); 
-    
-    /* Çerçeveye çok hafif neon yeşil bir parlama */
-    border: 1px solid rgba(0, 255, 102, 0.2); 
-    border-radius: 16px;
-    padding: 35px 25px; 
-    text-align: center;
-    color: #ffffff;
-    
-    width: 85%; 
-    max-width: 350px; 
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); 
-}
-
-/* BAŞLIK RENKLERİ (Neon Kırmızı'dan Neon Yeşil'e geçiş) */
-.support-content h3 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    background: linear-gradient(90deg, #ff003c, #00ff66); 
-    -webkit-background-clip: text; 
-    background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-    color: transparent; 
-}
-
-/* Metin */
-.support-content p {
-    font-size: 0.85rem !important; 
-    opacity: 0.7 !important; 
-    margin-bottom: 30px !important;
-    line-height: 1.5 !important;
-}
-
-/* KAHVE BUTONU (Matrix Neon Kırmızısı ve Siyah Yazı) */
-.cyber-coffee-btn {
-    display: inline-flex;
-    align-items: center;
-    background-color: #ff003c; 
-    color: #000000; 
-    padding: 10px 24px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.4); 
-}
-
-/* Fincan logosundaki sarıyı gizleyip temaya uydurma */
-.cyber-coffee-btn img {
-    height: 22px;
-    margin-right: 10px;
-    filter: grayscale(100%) contrast(200%); /* Fincan siyah/beyaz/gri oldu */
-}
-
-.cyber-coffee-btn:hover {
-    transform: translateY(-3px) scale(1.05); 
-    background-color: #ff003c; 
-    box-shadow: 0 0 25px rgba(0, 255, 102, 0.8); 
-}
+::selection { background: rgba(0, 255, 136, 0.4) !important; color: white !important; }
 
 /* ==========================================
-    MOBİL DİKEY (PORTRAIT)
+   8. DESTEK PANOSU
+========================================== */
+.right-panel {
+    background-image: url('assets/images/right-panel/uzay.jpg'); background-size: cover; background-position: center; 
+    display: flex; justify-content: center; align-items: center; border-radius: 0px; overflow: hidden; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); min-height: 400px;
+}
+.support-panel-container {
+    background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
+    border: 1px solid rgba(0, 255, 102, 0.2); border-radius: 16px; padding: 35px 25px; text-align: center; color: #ffffff;
+    width: 85%; max-width: 350px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); 
+}
+.support-content h3 { margin-top: 0; font-size: 1.5rem; background: linear-gradient(90deg, #ff003c, #00ff66); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+.support-content p { font-size: 0.85rem !important; opacity: 0.7 !important; margin-bottom: 30px !important; line-height: 1.5 !important; }
+.cyber-coffee-btn { display: inline-flex; align-items: center; background-color: #ff003c; color: #000000; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(0, 255, 102, 0.4); }
+.cyber-coffee-btn img { height: 22px; margin-right: 10px; filter: grayscale(100%) contrast(200%); }
+.cyber-coffee-btn:hover { transform: translateY(-3px) scale(1.05); background-color: #ff003c; box-shadow: 0 0 25px rgba(0, 255, 102, 0.8); }
+
+/* ==========================================
+   MOBİL DİKEY (PORTRAIT)
 ========================================== */
 @media (max-width: 768px) and (orientation: portrait) {
     body, html { height: 100dvh !important; overflow: hidden !important; }
     
-    /* 1. Üst Kutu */
     .app-container {
         display: flex !important; flex-direction: column !important; justify-content: center !important; 
         align-items: center !important; gap: 15px !important; padding-bottom: 80px !important; 
         height: 100dvh !important; overflow-y: auto; overflow-x: hidden;
     }
 
+    /* Üst Kutu */
     .sidebar {
         position: static !important; width: 90% !important; max-width: 400px !important; 
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
-        flex: 0 0 237px !important; 
-        margin: 0 !important; padding: 15px; z-index: 10; border-radius: 20px !important; 
-        margin-top: -35px !important; box-sizing: border-box !important;
+        flex: 0 0 237px !important; margin: 0 !important; padding: 15px; z-index: 10 !important; 
+        border-radius: 20px !important; box-sizing: border-box !important;
+        transform: translateY(-30px) !important; /* Tıklanma bug'ı çözüldü */
     }
 
-    /* 2. Orta Kutu */
+    /* Orta Kutu */
     .main-content {
         position: static !important; width: 90% !important; max-width: 400px !important;
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
-        flex: 0 0 190px !important; 
-        margin: 0 !important; padding: 0 !important;
+        flex: 0 0 190px !important; margin: 0 !important; padding: 0 !important;
         display: flex; justify-content: center; align-items: center; 
-        margin-top: -20px !important; box-sizing: border-box !important;
+        z-index: 20 !important; box-sizing: border-box !important;
+        transform: translateY(-30px) !important;
     }
     
     .view-box {
-        width: 100% !important; 
-        height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
+        width: 100% !important; height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         margin: 0 !important; padding: 15px 10px !important;
-        overflow-y: auto !important; border-radius: 20px !important;
-        box-sizing: border-box !important; 
+        overflow-y: auto !important; border-radius: 20px !important; box-sizing: border-box !important; 
     }
 
-    /* Sadece JS'nin aktif ettiği kutuyu esnek yap */
     .view-box[style*="block"] {
-        display: flex !important; 
-        flex-direction: column !important; 
-        justify-content: center !important; 
-        align-items: center !important;
+        display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important;
     }
 
-    /* Yazı Boyutları */
-    .view-box h1, .timer-display { 
-        font-size: 2.2rem !important; 
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important;
-        font-variant-numeric: tabular-nums !important; 
-    }
-    .view-box h3, .view-box p { 
-        font-size: 0.95rem !important; 
-    }
+    /* Kutu içindekileri küçültme */
+    .view-box h1, .timer-display { font-size: 2.2rem !important; text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important; font-variant-numeric: tabular-nums !important; }
+    .view-box h2 { font-size: 1.5rem !important; margin: 5px 0 10px 0 !important; } /* Başlıklar artık küçüldü! */
+    .view-box h3, .view-box p { font-size: 0.95rem !important; }
+    
+    .timer-input-group { transform: scale(0.85); margin-bottom: 5px !important; } /* Timer kutucukları küçüldü! */
 
     .view-box::-webkit-scrollbar { display: none; } 
 
-    /* 3. Metin */
+    /* Fiyakalı Metin */
     #mobile-vibe-hint {
         position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center;
         text-align: center; margin: 0 !important; animation: fadeInOut 3s infinite ease-in-out;
-        margin-top: -10px !important;
+        transform: translateY(-30px) !important;
     }
     #mobile-vibe-hint p { font-size: 11px; color: #cdcccc; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
     #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
     .pulse-icon { font-size: 18px; animation: pulse 2s infinite; }
 
+    /* Alt Kutu */
     .right-panel {
         position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important;
         height: auto !important; min-height: 70px !important; padding: 18px 25px 18px 25px !important; 
@@ -393,7 +251,7 @@ input[type="number"] {
     .support-content p { display: none !important; }
     .cyber-coffee-btn { padding: 8px 15px !important; font-size: 11px !important; margin: 0 !important; border-radius: 20px !important; }
     
-    #btn-fullscreen { display: none !important; }
+    #btn-fullscreen { display: block !important; color: #ffffff !important; text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important; }
 }
 
 @keyframes fadeInOut { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
@@ -401,47 +259,34 @@ input[type="number"] {
 
 
 /* ==========================================
-   MOBİL YATAY (LANDSCAPE)
+   MOBİL YATAY (LANDSCAPE) 
 ========================================== */
 @media (max-width: 950px) and (orientation: landscape) {
     .sidebar, .right-panel, #mobile-vibe-hint, #btn-fullscreen { display: none !important; }
+    
+    /* Sadece odaklanılanları göster diğerlerini gizle */
+    #world-clock-view, #birth-chart-view { display: none !important; }
 
     body, html {
         height: 100dvh !important; width: 100vw !important; overflow: hidden !important;
         background-size: cover !important; background-position: center center !important; 
     }
     
-    .app-container {
-        background: transparent !important; display: flex !important;
-        height: 100dvh !important; width: 100vw !important;
-    }
+    .app-container { background: transparent !important; display: flex !important; height: 100dvh !important; width: 100vw !important; }
 
     .main-content {
-        margin: 0 !important; padding: 0 !important;
-        height: 100dvh !important; width: 100vw !important; 
-        position: relative !important; 
-        display: block !important; 
-        transform: none !important; 
+        margin: 0 !important; padding: 0 !important; height: 100dvh !important; width: 100vw !important; 
+        position: relative !important; display: block !important; transform: none !important; 
     }
 
-    /* Saat Kutusu */
     .view-box {
         background: rgba(0, 0, 0, 0.15) !important; border: 1px solid rgba(0, 255, 136, 0.35) !important; 
         box-shadow: 0 0 20px rgba(0, 255, 136, 0.15) !important; backdrop-filter: blur(10px) !important; 
         border-radius: 20px !important; padding: 10px 25px !important;
-        
         width: 400px !important; min-width: 400px !important; max-width: 400px !important; 
-        
         height: 70px !important; min-height: 70px !important; max-height: 70px !important;
-        
-        position: absolute !important;
-        bottom: 30px !important; 
-        left: 50% !important; 
-        transform: translateX(-50%) !important; 
-        
-        overflow-y: auto !important; 
-        overflow-x: hidden !important; 
-        box-sizing: border-box !important;
+        position: absolute !important; bottom: 30px !important; left: 50% !important; transform: translateX(-50%) !important; 
+        overflow-y: auto !important; overflow-x: hidden !important; box-sizing: border-box !important;
     }
     .view-box::-webkit-scrollbar { display: none; }
 
@@ -450,17 +295,10 @@ input[type="number"] {
         justify-content: center !important; gap: 15px !important;
     }
 
-    /* Yazı Boyutları */
-    .view-box h1, .timer-display { 
-        font-size: 1.4rem !important; 
-        text-shadow: 0 0 15px rgba(0, 255, 136, 0.8) !important; margin: 0 !important;
-        font-variant-numeric: tabular-nums !important; 
-    }
-    .view-box h3, .view-box p { 
-        font-size: 0.6rem !important; 
-        opacity: 0.8 !important; margin: 0 !important; 
-    }
+    .view-box h1, .timer-display { font-size: 1.4rem !important; text-shadow: 0 0 15px rgba(0, 255, 136, 0.8) !important; margin: 0 !important; font-variant-numeric: tabular-nums !important; }
+    .view-box h3, .view-box p { font-size: 0.6rem !important; opacity: 0.8 !important; margin: 0 !important; }
 
+    /* Not: Yatay mod sinematik bir moddur, o yüzden input ve butonlar bilerek gizlidir */
     .timer-controls, .timer-input-group, .stopwatch-controls, #btn-set-alarm, #btn-calculate-zodiac, .input-wrapper, #alarm-status, #zodiac-result, #laps-container {
         display: none !important;
     }
