@@ -923,11 +923,13 @@ window.addEventListener('orientationchange', () => {
         if(window.innerWidth > window.innerHeight) {
             const wc = document.getElementById('world-clock-view');
             const bc = document.getElementById('birth-chart-view');
+            const av = document.getElementById('alarm-view');
             
             // Eğer World Clock veya Birth Chart açıksa, otomatik olarak Home ekranına at
-            if((wc && wc.style.display === 'block') || (bc && bc.style.display === 'block')) {
+            if((wc && wc.style.display === 'block') || (bc && bc.style.display === 'block') || (av && av.style.display === 'block')) {
                 if(wc) wc.style.display = 'none';
                 if(bc) bc.style.display = 'none';
+                if(av) av.style.display = 'none';
                 
                 const home = document.getElementById('clock-view');
                 if(home) home.style.display = 'block';
