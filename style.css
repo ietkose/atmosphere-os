@@ -424,21 +424,26 @@ input[type="number"] {
         transform: none !important; 
     }
 
+    /* Saat Kutusu */
     .view-box {
         background: rgba(0, 0, 0, 0.15) !important; border: 1px solid rgba(0, 255, 136, 0.35) !important; 
         box-shadow: 0 0 20px rgba(0, 255, 136, 0.15) !important; backdrop-filter: blur(10px) !important; 
         border-radius: 20px !important; padding: 10px 25px !important;
         
-        width: 350px !important; min-width: 350px !important; max-width: 350px !important; 
-        height: auto !important; min-height: auto !important; max-height: auto !important;
+        width: 400px !important; min-width: 400px !important; max-width: 400px !important; 
+        
+        height: 100px !important; min-height: 100px !important; max-height: 100px !important;
         
         position: absolute !important;
-        bottom: 30px !important; /* Kutuyu 30px yukarı kaldır */
+        bottom: 30px !important; 
         left: 50% !important; 
         transform: translateX(-50%) !important; 
         
-        overflow: hidden !important; box-sizing: border-box !important;
+        overflow-y: auto !important; 
+        overflow-x: hidden !important; 
+        box-sizing: border-box !important;
     }
+    .view-box::-webkit-scrollbar { display: none; }
 
     .view-box[style*="block"] {
         display: flex !important; flex-direction: row !important; align-items: center !important;

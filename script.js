@@ -950,9 +950,6 @@ const translations = {
 function applyTranslations() {
     const t = translations[currentLang];
     
-    // Kullanıcı manuel değiştirmek isterse diye
-    const langBtn = document.getElementById('btn-lang-toggle');
-    if(langBtn) langBtn.innerText = currentLang === 'en' ? 'TR' : 'EN'; 
 
     if(!document.fullscreenElement) document.getElementById('btn-fullscreen').innerText = t.fullscreen;
     else document.getElementById('btn-fullscreen').innerText = t.minimize;
@@ -1022,12 +1019,6 @@ function applyTranslations() {
 
 // SİTE AÇILIR AÇILMAZ DİLİ OTOMATİK TESPİT ET VE UYGULA!
 document.addEventListener('DOMContentLoaded', () => {
-    applyTranslations();
-});
-
-// Kullanıcı butona basıp manuel değiştirmek isterse diye
-document.getElementById('btn-lang-toggle')?.addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'tr' : 'en';
     applyTranslations();
 });
 
