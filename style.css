@@ -325,16 +325,16 @@ input[type="number"] {
     }
 
     .sidebar {
-        position: static !important; width: 90% !important; max-width: 380px !important; 
+        position: static !important; width: 90% !important; max-width: 400px !important; 
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         flex: 0 0 237px !important; 
         margin: 0 !important; padding: 15px; z-index: 10; border-radius: 20px !important; 
-        margin-top: -25px !important; box-sizing: border-box !important;
+        margin-top: -35px !important; box-sizing: border-box !important;
     }
 
     /* 2. Orta Kutu */
     .main-content {
-        position: static !important; width: 90% !important; max-width: 380px !important;
+        position: static !important; width: 90% !important; max-width: 400px !important;
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         flex: 0 0 190px !important; 
         margin: 0 !important; padding: 0 !important;
@@ -432,7 +432,7 @@ input[type="number"] {
         
         width: 400px !important; min-width: 400px !important; max-width: 400px !important; 
         
-        height: 100px !important; min-height: 100px !important; max-height: 100px !important;
+        height: 70px !important; min-height: 70px !important; max-height: 70px !important;
         
         position: absolute !important;
         bottom: 30px !important; 
@@ -452,12 +452,12 @@ input[type="number"] {
 
     /* Yazı Boyutları */
     .view-box h1, .timer-display { 
-        font-size: 1.8rem !important; 
+        font-size: 1.4rem !important; 
         text-shadow: 0 0 15px rgba(0, 255, 136, 0.8) !important; margin: 0 !important;
         font-variant-numeric: tabular-nums !important; 
     }
     .view-box h3, .view-box p { 
-        font-size: 0.85rem !important; 
+        font-size: 0.6rem !important; 
         opacity: 0.8 !important; margin: 0 !important; 
     }
 
