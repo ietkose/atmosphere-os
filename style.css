@@ -328,3 +328,4 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 
 @media (min-width: 769px) { #mobile-vibe-hint { display: none !important; } }
 
+

@@ -940,3 +940,4 @@ window.addEventListener('orientationchange', () => {
     applyTranslations();
 });
 
+
