@@ -329,7 +329,7 @@ input[type="number"] {
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         flex: 0 0 237px !important; 
         margin: 0 !important; padding: 15px; z-index: 10; border-radius: 20px !important; 
-        transform: translateY(-30px) !important; box-sizing: border-box !important;
+        margin-top: -25px !important; box-sizing: border-box !important;
     }
 
     /* 2. Orta Kutu */
@@ -339,7 +339,7 @@ input[type="number"] {
         flex: 0 0 190px !important; 
         margin: 0 !important; padding: 0 !important;
         display: flex; justify-content: center; align-items: center; 
-        transform: translateY(-30px) !important; box-sizing: border-box !important;
+        margin-top: -20px !important; box-sizing: border-box !important;
     }
     
     .view-box {
@@ -358,6 +358,15 @@ input[type="number"] {
         align-items: center !important;
     }
 
+    /* Yazı Boyutları */
+    .view-box h1, .timer-display { 
+        font-size: 2.2rem !important; 
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important;
+        font-variant-numeric: tabular-nums !important; 
+    }
+    .view-box h3, .view-box p { 
+        font-size: 0.95rem !important; 
+    }
 
     .view-box::-webkit-scrollbar { display: none; } 
 
@@ -365,9 +374,9 @@ input[type="number"] {
     #mobile-vibe-hint {
         position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center;
         text-align: center; margin: 0 !important; animation: fadeInOut 3s infinite ease-in-out;
-        transform: translateY(-20px) !important;
+        margin-top: -10px !important;
     }
-    #mobile-vibe-hint p { font-size: 11px; color: #b3b3b3; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
+    #mobile-vibe-hint p { font-size: 11px; color: #cdcccc; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
     #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
     .pulse-icon { font-size: 18px; animation: pulse 2s infinite; }
 
@@ -435,10 +444,6 @@ input[type="number"] {
         display: flex !important; flex-direction: row !important; align-items: center !important;
         justify-content: center !important; gap: 15px !important;
     }
-
-    #world-clock-view.view-box[style*="block"] { flex-wrap: wrap !important; align-content: center !important; }
-    #world-clock-view p { margin: 5px 15px !important; font-size: 0.95rem !important; text-align: center !important; }
-    #world-clock-view h2 { display: none !important; }
 
     /* Yazı Boyutları */
     .view-box h1, .timer-display { 

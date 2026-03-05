@@ -433,7 +433,11 @@ class AstrologyManager {
     }
 
     calculate() {
-        if(!this.uiDate.value) return alert("Please enter your birth date!");
+        if(!this.uiDate.value) {
+            // Dil ayarına göre hata mesajı!
+            const isTr = typeof currentLang !== 'undefined' && currentLang === 'tr';
+            return alert(isTr ? "Lütfen doğum tarihinizi girin!" : "Please enter your birth date!");
+        }
 
         const date = new Date(this.uiDate.value);
         const day = date.getDate();
@@ -452,27 +456,38 @@ class AstrologyManager {
     }
 
     getSunSign(d, m) {
-        if((m==1&&d<=20)||(m==12&&d>=22)) return "Capricorn ♑"; if((m==1&&d>=21)||(m==2&&d<=18)) return "Aquarius ♒";
-        if((m==2&&d>=19)||(m==3&&d<=20)) return "Pisces ♓"; if((m==3&&d>=21)||(m==4&&d<=19)) return "Aries ♈";
-        if((m==4&&d>=20)||(m==5&&d<=20)) return "Taurus ♉"; if((m==5&&d>=21)||(m==6&&d<=20)) return "Gemini ♊";
-        if((m==6&&d>=21)||(m==7&&d<=22)) return "Cancer ♋"; if((m==7&&d>=23)||(m==8&&d<=22)) return "Leo ♌";
-        if((m==8&&d>=23)||(m==9&&d<=22)) return "Virgo ♍"; if((m==9&&d>=23)||(m==10&&d<=22)) return "Libra ♎";
-        if((m==10&&d>=23)||(m==11&&d<=21)) return "Scorpio ♏"; return "Sagittarius ♐";
+        const isTr = typeof currentLang !== 'undefined' && currentLang === 'tr';
+        if((m==1&&d<=20)||(m==12&&d>=22)) return isTr ? "Oğlak ♑" : "Capricorn ♑";
+        if((m==1&&d>=21)||(m==2&&d<=18)) return isTr ? "Kova ♒" : "Aquarius ♒";
+        if((m==2&&d>=19)||(m==3&&d<=20)) return isTr ? "Balık ♓" : "Pisces ♓";
+        if((m==3&&d>=21)||(m==4&&d<=19)) return isTr ? "Koç ♈" : "Aries ♈";
+        if((m==4&&d>=20)||(m==5&&d<=20)) return isTr ? "Boğa ♉" : "Taurus ♉";
+        if((m==5&&d>=21)||(m==6&&d<=20)) return isTr ? "İkizler ♊" : "Gemini ♊";
+        if((m==6&&d>=21)||(m==7&&d<=22)) return isTr ? "Yengeç ♋" : "Cancer ♋";
+        if((m==7&&d>=23)||(m==8&&d<=22)) return isTr ? "Aslan ♌" : "Leo ♌";
+        if((m==8&&d>=23)||(m==9&&d<=22)) return isTr ? "Başak ♍" : "Virgo ♍";
+        if((m==9&&d>=23)||(m==10&&d<=22)) return isTr ? "Terazi ♎" : "Libra ♎";
+        if((m==10&&d>=23)||(m==11&&d<=21)) return isTr ? "Akrep ♏" : "Scorpio ♏";
+        return isTr ? "Yay ♐" : "Sagittarius ♐";
     }
 
     getElement(sign) {
-        if(["Aries ♈", "Leo ♌", "Sagittarius ♐"].includes(sign)) return "Fire 🔥";
-        if(["Taurus ♉", "Virgo ♍", "Capricorn ♑"].includes(sign)) return "Earth 🌿";
-        if(["Gemini ♊", "Libra ♎", "Aquarius ♒"].includes(sign)) return "Air 💨";
-        return "Water 💧";
+        const isTr = typeof currentLang !== 'undefined' && currentLang === 'tr';
+        // Emojiler evrensel olduğu için dil fark etmeksizin kod okuyabilir!
+        if(sign.includes("♈") || sign.includes("♌") || sign.includes("♐")) return isTr ? "Ateş 🔥" : "Fire 🔥";
+        if(sign.includes("♉") || sign.includes("♍") || sign.includes("♑")) return isTr ? "Toprak 🌿" : "Earth 🌿";
+        if(sign.includes("♊") || sign.includes("♎") || sign.includes("♒")) return isTr ? "Hava 💨" : "Air 💨";
+        return isTr ? "Su 💧" : "Water 💧";
     }
 
     getChineseZodiac(year, month, day) {
+        const isTr = typeof currentLang !== 'undefined' && currentLang === 'tr';
         let cYear = (month === 1 || (month === 2 && day <= 4)) ? year - 1 : year;
-        const animals = ["Rat 🐁", "Ox 🐂", "Tiger 🐅", "Rabbit 🐇", "Dragon 🐉", "Snake 🐍", "Horse 🐎", "Goat 🐐", "Monkey 🐒", "Rooster 🐓", "Dog 🐕", "Pig 🐖"];
+        const animalsEn = ["Rat 🐁", "Ox 🐂", "Tiger 🐅", "Rabbit 🐇", "Dragon 🐉", "Snake 🐍", "Horse 🐎", "Goat 🐐", "Monkey 🐒", "Rooster 🐓", "Dog 🐕", "Pig 🐖"];
+        const animalsTr = ["Fare 🐁", "Öküz 🐂", "Kaplan 🐅", "Tavşan 🐇", "Ejderha 🐉", "Yılan 🐍", "At 🐎", "Keçi 🐐", "Maymun 🐒", "Horoz 🐓", "Köpek 🐕", "Domuz 🐖"];
         let index = (cYear - 4) % 12;
         if (index < 0) index += 12;
-        return animals[index];
+        return isTr ? animalsTr[index] : animalsEn[index];
     }
 
     getLifePathNumber(y, m, d) {
@@ -487,6 +502,7 @@ class AstrologyManager {
     }
 
     getAccurateMoonPhase(year, month, day) {
+        const isTr = typeof currentLang !== 'undefined' && currentLang === 'tr';
         let y = year, m = month;
         if (m < 3) { y--; m += 12; }
         m++;
@@ -499,8 +515,9 @@ class AstrologyManager {
         b = Math.round(jd * 8); 
         if (b >= 8) b = 0; 
         
-        const phases = ["New Moon 🌑", "Waxing Crescent 🌒", "First Quarter 🌓", "Waxing Gibbous 🌔", "Full Moon 🌕", "Waning Gibbous 🌖", "Last Quarter 🌗", "Waning Crescent 🌘"];
-        return phases[b];
+        const phasesEn = ["New Moon 🌑", "Waxing Crescent 🌒", "First Quarter 🌓", "Waxing Gibbous 🌔", "Full Moon 🌕", "Waning Gibbous 🌖", "Last Quarter 🌗", "Waning Crescent 🌘"];
+        const phasesTr = ["Yeni Ay 🌑", "İlk Hilal 🌒", "İlk Dördün 🌓", "Büyüyen Ay 🌔", "Dolunay 🌕", "Küçülen Ay 🌖", "Son Dördün 🌗", "Son Hilal 🌘"];
+        return isTr ? phasesTr[b] : phasesEn[b];
     }
 }
 
@@ -890,5 +907,127 @@ document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
         e.preventDefault();
     }
+});
+
+// ==========================================
+// DİL MOTORU (TR / EN)
+// ==========================================
+
+// Cihazın dilini gizlice oku!
+let userBrowserLang = navigator.language || navigator.userLanguage;
+
+// Dil 'tr' ile başlıyorsa Türkçe yap, değilse İngilizce yap
+let currentLang = userBrowserLang.toLowerCase().startsWith('tr') ? 'tr' : 'en';
+
+const translations = {
+    'en': {
+        fullscreen: "⛶ Fullscreen", minimize: "⛶ Minimize",
+        home: "Home", stopwatch: "Stopwatch", timer: "Timer", alarm: "Alarm Clock", worldclock: "World Clock", birthchart: "Birth Chart",
+        start: "Start", stop: "Stop", lap: "Lap", reset: "Reset", pause: "Pause / Stop", set: "Set", cancel: "Cancel",
+        noAlarm: "No Alarm Set", snooze: "Snooze (5 min)", dismiss: "Dismiss", calc: "Calculate",
+        supportTitle: "Support Me!", supportText: "This project is designed for 100% focus and zero ads. You can support the server costs by buying me a coffee.", buyCoffee: "Buy Me a Coffee",
+        vibeHint: "Set your vibe, then <strong>rotate your device</strong> for the ultimate fullscreen experience.",
+        
+        bcSun: "☀️ Sun Sign: ", bcElement: "🌿 Element: ", bcChinese: "🐉 Chinese Zodiac: ", bcLifePath: "🔢 Life Path Number: ", bcMoon: "🌕 Moon Phase: ",
+        sndWinter: "Winter Wind", sndRain: "Rain", sndBirds: "Birds", sndBirdsRain: "Birds in the Rain", sndWaves: "Waves & Seagulls", sndFire: "Fireplace", sndCafe: "Cafe Ambience", sndTrain: "Train Journey", sndKoto: "Koto (Japanese Zither)",
+        quickNote: "<strong>Quick Note:</strong> High-fidelity audio in use. Wi-Fi connection is recommended to save your mobile data."
+    },
+    'tr': {
+        fullscreen: "⛶ Tam Ekran", minimize: "⛶ Küçült",
+        home: "Ana Sayfa", stopwatch: "Kronometre", timer: "Sayaç", alarm: "Çalar Saat", worldclock: "Dünya Saati", birthchart: "Doğum Haritası",
+        start: "Başlat", stop: "Durdur", lap: "Tur", reset: "Sıfırla", pause: "Duraklat / Bitir", set: "Kur", cancel: "İptal",
+        noAlarm: "Alarm Kurulmadı", snooze: "Ertele (5 dk)", dismiss: "Kapat", calc: "Hesapla",
+        supportTitle: "Destek Ol!", supportText: "Bu proje %100 odaklanma ve sıfır reklam için tasarlandı. Bana bir kahve ısmarlayarak sunucu masraflarına destek olabilirsiniz.", buyCoffee: "Kahve Ismarla",
+        vibeHint: "Ambiyansınızı seçin, ardından tam ekran deneyimi için <strong>cihazınızı yan çevirin</strong>.",
+        
+        bcSun: "☀️ Güneş Burcu: ", bcElement: "🌿 Element: ", bcChinese: "🐉 Çin Burcu: ", bcLifePath: "🔢 Yaşam Yolu Sayısı: ", bcMoon: "🌕 Ay Evresi: ",
+        sndWinter: "Kış Rüzgarı", sndRain: "Yağmur", sndBirds: "Kuşlar", sndBirdsRain: "Yağmurlu Orman", sndWaves: "Dalgalar ve Martılar", sndFire: "Şömine", sndCafe: "Kafe Ambiyansı", sndTrain: "Tren Yolculuğu", sndKoto: "Japon Kotosu",
+        quickNote: "<strong>Kısa Not:</strong> Yüksek kaliteli ses kullanılıyor. Mobil verinizi korumak için Wi-Fi bağlantısı önerilir."
+    }
+};
+
+// ÇEVİRİ İŞLEMİNİ YAPAN ANA MOTOR
+function applyTranslations() {
+    const t = translations[currentLang];
+    
+    // Kullanıcı manuel değiştirmek isterse diye
+    const langBtn = document.getElementById('btn-lang-toggle');
+    if(langBtn) langBtn.innerText = currentLang === 'en' ? 'TR' : 'EN'; 
+
+    if(!document.fullscreenElement) document.getElementById('btn-fullscreen').innerText = t.fullscreen;
+    else document.getElementById('btn-fullscreen').innerText = t.minimize;
+    
+    document.getElementById('btn-start').innerText = t.start;
+    document.getElementById('btn-stop').innerText = t.stop;
+    document.getElementById('btn-lap').innerText = t.lap;
+    document.getElementById('btn-reset').innerText = t.reset;
+    document.getElementById('btn-timer-start').innerText = t.start;
+    document.getElementById('btn-timer-pause').innerText = t.pause;
+    document.getElementById('btn-timer-reset').innerText = t.reset;
+    document.getElementById('btn-set-alarm').innerText = t.set;
+    document.getElementById('btn-cancel-alarm').innerText = t.cancel;
+    if(document.getElementById('alarm-status').innerText === "No Alarm Set" || document.getElementById('alarm-status').innerText === "Alarm Kurulmadı") {
+        document.getElementById('alarm-status').innerText = t.noAlarm;
+    }
+    document.getElementById('btn-snooze').innerText = t.snooze;
+    document.getElementById('btn-dismiss').innerText = t.dismiss;
+    document.getElementById('btn-calculate-zodiac').innerText = t.calc;
+
+    document.querySelector('#stopwatch-view h2').innerText = t.stopwatch;
+    document.querySelector('#timer-view h2').innerText = t.timer;
+    document.querySelector('#alarm-view h2').innerText = t.alarm;
+    document.querySelector('#world-clock-view h2').innerText = t.worldclock;
+    document.querySelector('#birth-chart-view h2').innerText = t.birthchart;
+
+    const featureLinks = document.querySelectorAll('#features-list li');
+    if(featureLinks.length > 0) {
+        featureLinks[0].innerHTML = `&#x21A0; &nbsp; ${t.home}`;
+        featureLinks[1].innerHTML = `&#x21A0; &nbsp; ${t.stopwatch}`;
+        featureLinks[2].innerHTML = `&#x21A0; &nbsp; ${t.timer}`;
+        featureLinks[3].innerHTML = `&#x21A0; &nbsp; ${t.alarm}`;
+        featureLinks[4].innerHTML = `&#x21A0; &nbsp; ${t.worldclock}`;
+        featureLinks[5].innerHTML = `&#x21A0; &nbsp; ${t.birthchart}`;
+    }
+
+    if(document.getElementById('res-sun')) document.getElementById('res-sun').previousSibling.nodeValue = t.bcSun;
+    if(document.getElementById('res-element')) document.getElementById('res-element').previousSibling.nodeValue = t.bcElement;
+    if(document.getElementById('res-chinese')) document.getElementById('res-chinese').previousSibling.nodeValue = t.bcChinese;
+    if(document.getElementById('res-lifepath')) document.getElementById('res-lifepath').previousSibling.nodeValue = t.bcLifePath;
+    if(document.getElementById('res-moon-phase')) document.getElementById('res-moon-phase').previousSibling.nodeValue = t.bcMoon;
+
+    if(document.getElementById('btn-winter-wind')) document.getElementById('btn-winter-wind').innerHTML = `&#x21A0; &nbsp; ${t.sndWinter}`;
+    if(document.getElementById('btn-rain')) document.getElementById('btn-rain').innerHTML = `&#x21A0; &nbsp; ${t.sndRain}`;
+    if(document.getElementById('btn-birds')) document.getElementById('btn-birds').innerHTML = `&#x21A0; &nbsp; ${t.sndBirds}`;
+    if(document.getElementById('btn-birds-rain')) document.getElementById('btn-birds-rain').innerHTML = `&#x21A0; &nbsp; ${t.sndBirdsRain}`;
+    if(document.getElementById('btn-waves-seagulls')) document.getElementById('btn-waves-seagulls').innerHTML = `&#x21A0; &nbsp; ${t.sndWaves}`;
+    if(document.getElementById('btn-fire')) document.getElementById('btn-fire').innerHTML = `&#x21A0; &nbsp; ${t.sndFire}`;
+    if(document.getElementById('btn-cafe-noise')) document.getElementById('btn-cafe-noise').innerHTML = `&#x21A0; &nbsp; ${t.sndCafe}`;
+    if(document.getElementById('btn-train')) document.getElementById('btn-train').innerHTML = `&#x21A0; &nbsp; ${t.sndTrain}`;
+    if(document.getElementById('btn-koto-japanese-zither')) document.getElementById('btn-koto-japanese-zither').innerHTML = `&#x21A0; &nbsp; ${t.sndKoto}`;
+
+    document.querySelector('.support-content h3').innerText = t.supportTitle;
+    document.querySelector('.support-content p').innerText = t.supportText;
+    document.querySelector('.cyber-coffee-btn span').innerText = t.buyCoffee;
+    document.querySelector('#mobile-vibe-hint p').innerHTML = t.vibeHint;
+    
+    const noteEl = document.querySelector('.sidebar div p');
+    if (noteEl && (noteEl.innerHTML.includes("Quick Note") || noteEl.innerHTML.includes("Kısa Not"))) {
+        noteEl.innerHTML = t.quickNote;
+    }
+
+    if (document.getElementById('zodiac-result').style.display === 'block' && typeof astro !== 'undefined') {
+        astro.calculate();
+    }
+}
+
+// SİTE AÇILIR AÇILMAZ DİLİ OTOMATİK TESPİT ET VE UYGULA!
+document.addEventListener('DOMContentLoaded', () => {
+    applyTranslations();
+});
+
+// Kullanıcı butona basıp manuel değiştirmek isterse diye
+document.getElementById('btn-lang-toggle')?.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'tr' : 'en';
+    applyTranslations();
 });
 
