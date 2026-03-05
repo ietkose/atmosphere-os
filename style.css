@@ -233,37 +233,50 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         background: transparent !important; border: none !important; color: white !important;
     }
     .timer-input-group { transform: scale(0.85); margin-bottom: 5px !important; } 
-
-    #alarm-view .input-wrapper { 
-        display: flex !important; width: auto !important; min-width: 140px !important; margin: 0 auto 15px auto !important; padding: 0 15px !important;
-        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; height: 45px !important; 
-        align-items: center !important; /* Dikey Ortalama */
-        justify-content: center !important; /* Yatay Ortalama */
-    }
-    #alarm-time-input { 
-        display: inline-block !important; height: auto !important; 
-        min-width: 100px !important; 
-        font-size: 1.2rem !important; color: white !important; background: transparent !important; 
-        border: none !important; outline: none !important; color-scheme: dark !important; 
-        cursor: pointer !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important;
-    }
-    #btn-set-alarm { display: inline-block !important; visibility: visible !important; opacity: 1 !important; }
-
-    #birth-chart-view .input-wrapper { 
-        display: flex !important; width: auto !important; padding: 0 10px !important;
-        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; height: 45px !important; 
-        align-items: center !important; 
-        justify-content: center !important;
-    }
-    #birth-date, #birth-time { 
-        display: inline-block !important; height: auto !important; font-size: 1rem !important;
-        color: white !important; background: transparent !important; border: none !important; outline: none !important;
-        color-scheme: dark !important; cursor: pointer !important; margin: 0 !important; padding: 0 !important; 
-        line-height: 1 !important; 
-    }
     
-    /* İOS Saat İkonu Düzeltmesi */
-    ::-webkit-calendar-picker-indicator { display: block !important; filter: invert(1) !important; opacity: 1 !important; font-size: 1.2rem !important; cursor: pointer !important; }
+    #alarm-view .input-wrapper,
+    #birth-chart-view .input-wrapper {
+        display: flex !important;
+        width: 100% !important;
+        max-width: 280px !important; 
+        height: 50px !important;
+        margin: 0 auto 15px auto !important;
+        padding: 0 10px !important;
+        background: rgba(0,0,0,0.6) !important;
+        border: 1px solid rgba(0, 255, 136, 0.4) !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+    }
+
+    #alarm-time-input, #birth-date, #birth-time {
+        display: block !important;
+        width: 110px !important; 
+        height: 35px !important;
+        line-height: 35px !important;
+        font-size: 16px !important;
+        text-align: center !important;
+        color: white !important;
+        background: rgba(255,255,255,0.1) !important; 
+        border: 1px solid rgba(255,255,255,0.3) !important; 
+        border-radius: 6px !important;
+        outline: none !important;
+        color-scheme: dark !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        cursor: pointer !important;
+        -webkit-appearance: none !important; 
+        appearance: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    #btn-set-alarm {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-top: 5px !important;
+    }
 
     .view-box::-webkit-scrollbar { display: none; } 
 
