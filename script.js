@@ -905,6 +905,9 @@ function applyTranslations() {
     if (document.getElementById('zodiac-result') && document.getElementById('zodiac-result').style.display === 'block' && typeof astro !== 'undefined') {
         astro.calculate();
     }
+
+    // Telefonun yerel saat/tarih aracına sitenin dilini bildirir (AM/PM ve Format için)
+    document.documentElement.lang = currentLang;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

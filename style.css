@@ -177,15 +177,21 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 .cyber-coffee-btn img { height: 22px; margin-right: 10px; filter: grayscale(100%) contrast(200%); }
 .cyber-coffee-btn:hover { transform: translateY(-3px) scale(1.05); background-color: #ff003c; box-shadow: 0 0 25px rgba(0, 255, 102, 0.8); }
 
+
+/* Dikey / Yatay Sistem */
+@keyframes fadeInOut { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } } 
+
+
 /* ==========================================
-   📱 MOBİL DİKEY (PORTRAIT) - THE MATRIX BROKEN!
+   MOBİL DİKEY (PORTRAIT)
 ========================================== */
 @media (max-width: 768px) and (orientation: portrait) {
     body, html { height: 100dvh !important; overflow: hidden !important; }
     
     .app-container {
         display: flex !important; flex-direction: column !important; 
-        justify-content: flex-start !important;
+        justify-content: flex-start !important; 
         align-items: center !important; 
         padding-top: 40px !important; 
         gap: 20px !important; 
@@ -193,7 +199,6 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         height: 100dvh !important; overflow-y: auto; overflow-x: hidden;
     }
 
-    /* 2. Atmosphere Kutusu */
     .sidebar {
         position: relative !important; width: 90% !important; max-width: 400px !important; 
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
@@ -201,7 +206,6 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         z-index: 10 !important; border-radius: 20px !important; box-sizing: border-box !important;
     }
 
-    /* 3. Saat/Alarm Kutu Kalkanı */
     .main-content {
         position: relative !important; width: 90% !important; max-width: 400px !important;
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
@@ -217,20 +221,21 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         border-radius: 20px !important; box-sizing: border-box !important; 
     }
 
-    /* 4. Yutulan Başlıklar Kurtarıldı */
     .view-box[style*="block"] {
         display: flex !important; flex-direction: column !important; 
         justify-content: flex-start !important; 
         align-items: center !important;
     }
 
-    /* Yazılar ve H2 Başlıkları */
+    #clock-view.view-box[style*="block"] {
+        justify-content: center !important;
+    }
+
     .view-box h1, .timer-display { font-size: 2.2rem !important; text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important; font-variant-numeric: tabular-nums !important; margin-top: 10px !important; }
     .view-box h2 { font-size: 1.5rem !important; margin: 5px 0 10px 0 !important; display: block !important; visibility: visible !important; color: white !important;} 
     .view-box h3, .view-box p { font-size: 0.95rem !important; }
     .timer-input-group { transform: scale(0.85); margin-bottom: 5px !important; } 
 
-    /* 6. Alarm Inputları */
     #alarm-view .input-wrapper, 
     #birth-chart-view .input-wrapper { 
         display: flex !important; max-width: 90% !important; width: 100% !important;
@@ -238,17 +243,16 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; 
         height: 40px !important; justify-content: center !important;
     }
-    
+
     #alarm-time-input, #birth-date, #birth-time { 
         display: block !important; width: 100% !important; height: 100% !important;
         cursor: pointer !important; visibility: visible !important; opacity: 1 !important;
         color: white !important; background: transparent !important;
-        -webkit-appearance: none !important; appearance: none !important;
+        border: none !important; outline: none !important;
     }
 
     .view-box::-webkit-scrollbar { display: none; } 
 
-    /* 7. Fiyakalı Metin */
     #mobile-vibe-hint {
         position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center;
         text-align: center; margin: 0 !important; animation: fadeInOut 3s infinite ease-in-out;
@@ -257,7 +261,6 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
     .pulse-icon { font-size: 18px; animation: pulse 2s infinite; }
 
-    /* 8. Alt Kutu */
     .right-panel {
         position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important;
         height: auto !important; min-height: 70px !important; padding: 18px 25px 18px 25px !important; 
@@ -274,17 +277,12 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     #btn-fullscreen { display: none !important; }
 }
 
-@keyframes fadeInOut { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-
-
 /* ==========================================
-   MOBİL YATAY (LANDSCAPE) 
+   MOBİL YATAY (LANDSCAPE)
 ========================================== */
 @media (max-width: 950px) and (orientation: landscape) {
     .sidebar, .right-panel, #mobile-vibe-hint, #btn-fullscreen { display: none !important; }
     
-    /* Sadece odaklanılanları göster diğerlerini gizle */
     #world-clock-view, #birth-chart-view { display: none !important; }
 
     body, html {
@@ -304,11 +302,13 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         box-shadow: 0 0 20px rgba(0, 255, 136, 0.15) !important; backdrop-filter: blur(10px) !important; 
         border-radius: 20px !important; padding: 10px 25px !important;
         width: 400px !important; min-width: 400px !important; max-width: 400px !important; 
-        height: 70px !important; min-height: 70px !important; max-height: 70px !important;
+        
+        height: 85px !important; min-height: 85px !important; max-height: 85px !important;
+        overflow: hidden !important; /* SCROLL BAR TAMAMEN İPTAL EDİLDİ */
+        
         position: absolute !important; bottom: 30px !important; left: 50% !important; transform: translateX(-50%) !important; 
-        overflow-y: auto !important; overflow-x: hidden !important; box-sizing: border-box !important;
+        box-sizing: border-box !important;
     }
-    .view-box::-webkit-scrollbar { display: none; }
 
     .view-box[style*="block"] {
         display: flex !important; flex-direction: row !important; align-items: center !important;
@@ -318,12 +318,8 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     .view-box h1, .timer-display { font-size: 1.4rem !important; text-shadow: 0 0 15px rgba(0, 255, 136, 0.8) !important; margin: 0 !important; font-variant-numeric: tabular-nums !important; }
     .view-box h3, .view-box p { font-size: 0.6rem !important; opacity: 0.8 !important; margin: 0 !important; }
 
-    /* Not: Yatay mod sinematik bir moddur, o yüzden input ve butonlar bilerek gizlidir */
     .timer-controls, .timer-input-group, .stopwatch-controls, #btn-set-alarm, #btn-calculate-zodiac, .input-wrapper, #alarm-status, #zodiac-result, #laps-container {
         display: none !important;
     }
 }
-
-@media (min-width: 769px) { #mobile-vibe-hint { display: none !important; } }
-
 
