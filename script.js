@@ -911,29 +911,32 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTranslations();
 });
 
-// YATAY MOD (LANDSCAPE) GÜVENLİK VE OTOMATİK GEÇİŞ SİSTEMİ
-window.addEventListener('resize', () => {
-    // Eğer telefon yatay konuma geçildiyse
-    if(window.innerWidth > window.innerHeight && window.innerWidth <= 950) {
-        const wc = document.getElementById('world-clock-view');
-        const bc = document.getElementById('birth-chart-view');
-        
-        // Eğer World Clock veya Birth Chart açıksa, otomatik olarak Home (Saat) ekranına at
-        if((wc && wc.style.display === 'block') || (bc && bc.style.display === 'block')) {
-            if(wc) wc.style.display = 'none';
-            if(bc) bc.style.display = 'none';
+// ==========================================
+// YATAY MOD (LANDSCAPE) GÜVENLİK
+// ==========================================
+// Ekran her milim kaydığında değil, sadece telefon yan çevrildiğinde tetiklenir
+window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+        if(window.innerWidth > window.innerHeight) {
+            const wc = document.getElementById('world-clock-view');
+            const bc = document.getElementById('birth-chart-view');
             
-            const home = document.getElementById('clock-view');
-            if(home) home.style.display = 'block';
-            
-            // Yan menüdeki seçili barı da ana sayfaya al 
-            const tablinks = document.getElementsByClassName("tab-link");
-            for (let i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
-            if(tablinks[0]) tablinks[0].classList.add("active");
+            // Eğer World Clock veya Birth Chart açıksa, otomatik olarak Home ekranına at
+            if((wc && wc.style.display === 'block') || (bc && bc.style.display === 'block')) {
+                if(wc) wc.style.display = 'none';
+                if(bc) bc.style.display = 'none';
+                
+                const home = document.getElementById('clock-view');
+                if(home) home.style.display = 'block';
+                
+                const tablinks = document.getElementsByClassName("tab-link");
+                for (let i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
+                if(tablinks[0]) tablinks[0].classList.add("active");
+            }
         }
-        
-        // Yatayda da çevirinin bozulmadığını %100 garantiye almak için tetikleyici
-        applyTranslations();
-    }
+    }, 200); // Sensörün ekranı algılaması için saniyenin beşte biri kadar bekler
+
+    // Yatayda da çevirinin bozulmadığını %100 garantiye almak için tetikleyici
+    applyTranslations();
 });
 

@@ -189,41 +189,43 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         height: 100dvh !important; overflow-y: auto; overflow-x: hidden;
     }
 
-    /* Üst Kutu */
+    /* 1. Üst Kutu */
     .sidebar {
-        position: static !important; width: 90% !important; max-width: 400px !important; 
+        position: relative !important; width: 90% !important; max-width: 400px !important; 
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
-        flex: 0 0 237px !important; margin: 0 !important; padding: 15px; z-index: 10 !important; 
-        border-radius: 20px !important; box-sizing: border-box !important;
-        transform: translateY(-30px) !important; /* Tıklanma bug'ı çözüldü */
+        flex: 0 0 237px !important; margin: 0 !important; padding: 15px; 
+        z-index: 10 !important; border-radius: 20px !important; box-sizing: border-box !important;
+        margin-top: -30px !important; transform: none !important;
     }
 
-    /* Orta Kutu */
+    /* 2. Orta Kutu  */
     .main-content {
-        position: static !important; width: 90% !important; max-width: 400px !important;
+        position: relative !important; width: 90% !important; max-width: 400px !important;
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         flex: 0 0 190px !important; margin: 0 !important; padding: 0 !important;
         display: flex; justify-content: center; align-items: center; 
         z-index: 20 !important; box-sizing: border-box !important;
-        transform: translateY(-30px) !important;
+        margin-top: -20px !important; transform: none !important;
     }
     
     .view-box {
         width: 100% !important; height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         margin: 0 !important; padding: 15px 10px !important;
-        overflow-y: auto !important; border-radius: 20px !important; box-sizing: border-box !important; 
+        overflow-y: auto !important; overflow-x: hidden !important; border-radius: 20px !important; box-sizing: border-box !important; 
     }
 
     .view-box[style*="block"] {
         display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important;
     }
 
-    /* Kutu içindekileri küçültme */
+    /* Yazılar ve Timer Inputları */
     .view-box h1, .timer-display { font-size: 2.2rem !important; text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important; font-variant-numeric: tabular-nums !important; }
-    .view-box h2 { font-size: 1.5rem !important; margin: 5px 0 10px 0 !important; } /* Başlıklar artık küçüldü! */
+    .view-box h2 { font-size: 1.5rem !important; margin: 5px 0 10px 0 !important; } 
     .view-box h3, .view-box p { font-size: 0.95rem !important; }
-    
-    .timer-input-group { transform: scale(0.85); margin-bottom: 5px !important; } /* Timer kutucukları küçüldü! */
+    .timer-input-group { transform: scale(0.85); margin-bottom: 5px !important; } 
+
+    /* Alarm İnputu */
+    #alarm-time-input { display: block !important; cursor: pointer !important; }
 
     .view-box::-webkit-scrollbar { display: none; } 
 
@@ -231,7 +233,7 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     #mobile-vibe-hint {
         position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center;
         text-align: center; margin: 0 !important; animation: fadeInOut 3s infinite ease-in-out;
-        transform: translateY(-30px) !important;
+        margin-top: -10px !important; transform: none !important;
     }
     #mobile-vibe-hint p { font-size: 11px; color: #cdcccc; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
     #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
@@ -245,13 +247,33 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         display: flex !important; align-items: center !important; z-index: 9999 !important; border-radius: 0 !important;
         box-sizing: border-box !important;
     }
+    
+    /* Çalıştırıldığında World Clock başlığını zorla görünür yap */
+    #world-clock-view h2 { 
+        display: block !important; 
+        font-size: 1.5rem !important; 
+        margin: 5px 0 10px 0 !important; 
+    }
+
+    /* Alarm kutusu sağa sola kaymasın */
+    #alarm-view { 
+        overflow-x: hidden !important; 
+    }
+    
+    /* Alarm içindeki inputun fazla uzayıp kutuyu esnetmesi engellendi */
+    #alarm-view .input-wrapper { 
+        max-width: 90% !important; 
+        box-sizing: border-box !important; 
+        margin: 0 auto 15px auto !important; 
+    }
+
     .support-panel-container { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
     .support-content { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; }
     .support-content h3 { font-size: 1.1rem !important; margin: 0 !important; }
     .support-content p { display: none !important; }
     .cyber-coffee-btn { padding: 8px 15px !important; font-size: 11px !important; margin: 0 !important; border-radius: 20px !important; }
     
-    #btn-fullscreen { display: block !important; color: #ffffff !important; text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important; }
+    #btn-fullscreen { display: none !important; }
 }
 
 @keyframes fadeInOut { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
