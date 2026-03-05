@@ -232,51 +232,30 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         padding: 0 !important; margin: 0 !important; text-align: center !important;
         background: transparent !important; border: none !important; color: white !important;
     }
-    .timer-input-group { transform: scale(0.85); margin-bottom: 5px !important; } 
+    .timer-input-group { transform: scale(0.9); margin-bottom: 5px !important; } 
+
+    #alarm-view .input-wrapper, 
+    #birth-chart-view .input-wrapper { 
+        display: flex !important; width: max-content !important; min-width: 140px !important; 
+        margin: 0 auto 15px auto !important; height: 45px !important;
+    }
+
+    #alarm-time-input, #birth-date, #birth-time { 
+        display: block !important; height: 100% !important;
+        width: 130px !important; 
+        background: transparent !important; 
+        border: none !important; color: white !important;
+        font-size: 1.1rem !important; cursor: pointer !important; color-scheme: dark !important;
+        -webkit-appearance: auto !important; appearance: auto !important; margin: 0 !important; padding: 0 !important;
+    }
     
-    #alarm-view .input-wrapper,
-    #birth-chart-view .input-wrapper {
-        display: flex !important;
-        width: 100% !important;
-        max-width: 280px !important; 
-        height: 50px !important;
-        margin: 0 auto 15px auto !important;
-        padding: 0 10px !important;
-        background: rgba(0,0,0,0.6) !important;
-        border: 1px solid rgba(0, 255, 136, 0.4) !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 10px !important;
-    }
+    #birth-date { width: 140px !important; }
+    #birth-time { width: 100px !important; }
 
-    #alarm-time-input, #birth-date, #birth-time {
-        display: block !important;
-        width: 110px !important; 
-        height: 35px !important;
-        line-height: 35px !important;
-        font-size: 16px !important;
-        text-align: center !important;
-        color: white !important;
-        background: rgba(255,255,255,0.1) !important; 
-        border: 1px solid rgba(255,255,255,0.3) !important; 
-        border-radius: 6px !important;
-        outline: none !important;
-        color-scheme: dark !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        cursor: pointer !important;
-        -webkit-appearance: none !important; 
-        appearance: none !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
+    #btn-set-alarm { display: inline-block !important; visibility: visible !important; opacity: 1 !important; margin-top: 10px !important; }
 
-    #btn-set-alarm {
-        display: inline-block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        margin-top: 5px !important;
-    }
+    /* İOS Saat İkonu Düzeltmesi */
+    ::-webkit-calendar-picker-indicator { display: block !important; filter: invert(1) !important; opacity: 1 !important; font-size: 1.2rem !important; cursor: pointer !important; margin-left: 5px !important; }
 
     .view-box::-webkit-scrollbar { display: none; } 
 
@@ -302,6 +281,7 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     .support-content h3 { font-size: 1.1rem !important; margin: 0 !important; }
     .support-content p { display: none !important; }
     .cyber-coffee-btn { padding: 8px 15px !important; font-size: 11px !important; margin: 0 !important; border-radius: 20px !important; }
+
     #btn-fullscreen { display: none !important; }
 }
 
