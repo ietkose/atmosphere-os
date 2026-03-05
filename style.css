@@ -241,10 +241,12 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         margin-bottom: 5px !important; 
     } 
     
+    /* Timer kutusunun içindeki inputa tıklandığında yanacak ışık */
     .timer-input-group .input-wrapper:focus-within {
         border-color: #00ff88 !important; 
         box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 25px rgba(0, 255, 136, 0.4) !important;
         background: rgba(0, 0, 0, 0.6) !important;
+        outline: none !important; 
     }
 
     /* ==========================================
@@ -264,6 +266,8 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     #alarm-time-input {
         width: 100% !important; 
         flex-shrink: 0 !important;
+        text-align: center !important; 
+        padding: 0 !important;
     }
     
     #btn-set-alarm { 
@@ -281,7 +285,7 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         width: max-content !important; 
         min-width: 100px !important; 
         margin: 0 auto 15px auto !important; 
-        height: 45px !important;
+        height: 40px !important;
     }
     
     #birth-chart-view .input-wrapper:focus-within {
@@ -290,20 +294,22 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     }
 
     #birth-date, #birth-time { 
-        display: block !important; 
+        display: flex !important; 
         height: 100% !important;
         background: transparent !important; 
         border: none !important; color: white !important;
         font-size: 1.1rem !important; cursor: pointer !important; color-scheme: dark !important;
         -webkit-appearance: auto !important; appearance: auto !important; margin: 0 !important; padding: 0 !important;
+        align-items: center !important;  /* Hayali X-ekseninin tam üzerine oturtur */
+        line-height: 1 !important;
     }
     
     /* Doğum haritası için özel genişlikler */
-    #birth-date { width: 140px !important; }
-    #birth-time { width: 100px !important; }
+    #birth-date { width: 120px !important; }
+    #birth-time { width: 120px !important; }
 
     /* ==========================================
-       4. GENEL İOS SAAT İKONU (BEMBEYAZ)
+       4. GENEL İOS SAAT İKONU
     ========================================== */
     ::-webkit-calendar-picker-indicator { 
         display: block !important; 
@@ -319,7 +325,7 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     #mobile-vibe-hint { 
         position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center; 
         text-align: center; 
-        margin: 15px 0 0 0 !important; /* İŞTE DEĞİŞEN TEK YER BURASI (0 yerine 15px yazdık) */
+        margin: 20px 0 0 0 !important; /* Konumunu aşağı çekmek için */
         animation: fadeInOut 3s infinite ease-in-out; 
     }
     #mobile-vibe-hint p { font-size: 11px; color: #cdcccc; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
