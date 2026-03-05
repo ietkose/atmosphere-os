@@ -184,7 +184,7 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 
 
 /* ==========================================
-   MOBİL DİKEY (PORTRAIT)
+   MOBİL DİKEY (PORTRAIT) 
 ========================================== */
 @media (max-width: 768px) and (orientation: portrait) {
     body, html { height: 100dvh !important; overflow: hidden !important; }
@@ -227,32 +227,44 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     .view-box h2 { font-size: 1.5rem !important; margin: 5px 0 10px 0 !important; display: block !important; visibility: visible !important; color: white !important;} 
     .view-box h3, .view-box p { font-size: 0.95rem !important; }
 
-    #alarm-view .input-wrapper, #birth-chart-view .input-wrapper { 
-        display: flex !important; max-width: 90% !important; width: 100% !important;
-        box-sizing: border-box !important; margin: 0 auto 15px auto !important; 
-        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; 
-        height: 45px !important; justify-content: center !important; align-items: center !important;
+    #timer-input-hour, #timer-input-min, #timer-input-sec {
+        width: 40px !important; height: 35px !important; font-size: 18px !important;
+        padding: 0 !important; margin: 0 !important; text-align: center !important;
+        background: transparent !important; border: none !important; color: white !important;
+    }
+    .timer-input-group { transform: scale(0.85); margin-bottom: 5px !important; } 
+
+    #alarm-view .input-wrapper { 
+        display: flex !important; width: max-content !important; margin: 0 auto 15px auto !important; padding: 0 15px !important;
+        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; height: 40px !important; align-items: center !important;
+    }
+    #alarm-time-input { 
+        display: block !important; height: 35px !important; width: auto !important; font-size: 16px !important;
+        color: white !important; background: transparent !important; border: none !important; outline: none !important;
+        -webkit-appearance: auto !important; appearance: auto !important; color-scheme: dark !important; cursor: pointer !important;
+    }
+    /* Kaybolan Set Butonuna Zorla Görün Emri */
+    #btn-set-alarm { display: inline-block !important; visibility: visible !important; opacity: 1 !important; }
+
+    #birth-chart-view .input-wrapper { 
+        display: flex !important; width: max-content !important; padding: 0 10px !important;
+        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; height: 40px !important; align-items: center !important;
+    }
+    #birth-date, #birth-time { 
+        display: inline-block !important; height: 35px !important; width: auto !important; font-size: 16px !important;
+        color: white !important; background: transparent !important; border: none !important; outline: none !important;
+        -webkit-appearance: auto !important; appearance: auto !important; color-scheme: dark !important; cursor: pointer !important;
     }
 
-    #alarm-time-input, #birth-date, #birth-time { 
-        display: block !important; width: 100% !important; height: 100% !important;
-        cursor: pointer !important; visibility: visible !important; opacity: 1 !important;
-        color: white !important; background: transparent !important; font-size: 1.1rem !important;
-        border: none !important; outline: none !important; color-scheme: dark !important; 
-        -webkit-appearance: auto !important; /* IOS SAAT TEKERLEĞİNİ GERİ ÇAĞIRIR! */
-        appearance: auto !important;
-    }
-    
-    /* İşletim sistemi saat ikonunu beyaz yapar */
-    ::-webkit-calendar-picker-indicator { 
-        display: block !important; filter: invert(1) !important; opacity: 1 !important; font-size: 1.2rem !important; cursor: pointer !important;
-    }
+    ::-webkit-calendar-picker-indicator { display: block !important; filter: invert(1) !important; opacity: 1 !important; font-size: 1.2rem !important; cursor: pointer !important; }
 
     .view-box::-webkit-scrollbar { display: none; } 
 
-    #mobile-vibe-hint {
-        position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center;
-        text-align: center; margin: 0 !important; animation: fadeInOut 3s infinite ease-in-out;
+    #mobile-vibe-hint { 
+        position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center; 
+        text-align: center; 
+        margin: 15px 0 0 0 !important; /* İŞTE DEĞİŞEN TEK YER BURASI (0 yerine 15px yazdık) */
+        animation: fadeInOut 3s infinite ease-in-out; 
     }
     #mobile-vibe-hint p { font-size: 11px; color: #cdcccc; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
     #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
