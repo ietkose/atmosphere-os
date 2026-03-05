@@ -235,27 +235,34 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     .timer-input-group { transform: scale(0.85); margin-bottom: 5px !important; } 
 
     #alarm-view .input-wrapper { 
-        display: flex !important; width: max-content !important; margin: 0 auto 15px auto !important; padding: 0 15px !important;
-        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; height: 40px !important; align-items: center !important;
+        display: flex !important; width: auto !important; min-width: 140px !important; margin: 0 auto 15px auto !important; padding: 0 15px !important;
+        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; height: 45px !important; 
+        align-items: center !important; /* Dikey Ortalama */
+        justify-content: center !important; /* Yatay Ortalama */
     }
     #alarm-time-input { 
-        display: block !important; height: 35px !important; width: auto !important; font-size: 16px !important;
-        color: white !important; background: transparent !important; border: none !important; outline: none !important;
-        -webkit-appearance: auto !important; appearance: auto !important; color-scheme: dark !important; cursor: pointer !important;
+        display: inline-block !important; height: auto !important; 
+        min-width: 100px !important; 
+        font-size: 1.2rem !important; color: white !important; background: transparent !important; 
+        border: none !important; outline: none !important; color-scheme: dark !important; 
+        cursor: pointer !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important;
     }
-    /* Kaybolan Set Butonuna Zorla Görün Emri */
     #btn-set-alarm { display: inline-block !important; visibility: visible !important; opacity: 1 !important; }
 
     #birth-chart-view .input-wrapper { 
-        display: flex !important; width: max-content !important; padding: 0 10px !important;
-        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; height: 40px !important; align-items: center !important;
+        display: flex !important; width: auto !important; padding: 0 10px !important;
+        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; height: 45px !important; 
+        align-items: center !important; 
+        justify-content: center !important;
     }
     #birth-date, #birth-time { 
-        display: inline-block !important; height: 35px !important; width: auto !important; font-size: 16px !important;
+        display: inline-block !important; height: auto !important; font-size: 1rem !important;
         color: white !important; background: transparent !important; border: none !important; outline: none !important;
-        -webkit-appearance: auto !important; appearance: auto !important; color-scheme: dark !important; cursor: pointer !important;
+        color-scheme: dark !important; cursor: pointer !important; margin: 0 !important; padding: 0 !important; 
+        line-height: 1 !important; 
     }
-
+    
+    /* İOS Saat İkonu Düzeltmesi */
     ::-webkit-calendar-picker-indicator { display: block !important; filter: invert(1) !important; opacity: 1 !important; font-size: 1.2rem !important; cursor: pointer !important; }
 
     .view-box::-webkit-scrollbar { display: none; } 
