@@ -178,68 +178,86 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 .cyber-coffee-btn:hover { transform: translateY(-3px) scale(1.05); background-color: #ff003c; box-shadow: 0 0 25px rgba(0, 255, 102, 0.8); }
 
 /* ==========================================
-   MOBİL DİKEY (PORTRAIT)
+   📱 MOBİL DİKEY (PORTRAIT) - THE MATRIX BROKEN!
 ========================================== */
 @media (max-width: 768px) and (orientation: portrait) {
     body, html { height: 100dvh !important; overflow: hidden !important; }
     
     .app-container {
-        display: flex !important; flex-direction: column !important; justify-content: center !important; 
-        align-items: center !important; gap: 15px !important; padding-bottom: 80px !important; 
+        display: flex !important; flex-direction: column !important; 
+        justify-content: flex-start !important;
+        align-items: center !important; 
+        padding-top: 40px !important; 
+        gap: 20px !important; 
+        padding-bottom: 80px !important; 
         height: 100dvh !important; overflow-y: auto; overflow-x: hidden;
     }
 
-    /* 1. Üst Kutu */
+    /* 2. Atmosphere Kutusu */
     .sidebar {
         position: relative !important; width: 90% !important; max-width: 400px !important; 
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
-        flex: 0 0 237px !important; margin: 0 !important; padding: 15px; 
+        flex: 0 0 200px !important; margin: 0 !important; padding: 15px; 
         z-index: 10 !important; border-radius: 20px !important; box-sizing: border-box !important;
-        margin-top: -40px !important; transform: none !important;
     }
 
-    /* 2. Orta Kutu  */
+    /* 3. Saat/Alarm Kutu Kalkanı */
     .main-content {
         position: relative !important; width: 90% !important; max-width: 400px !important;
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
-        flex: 0 0 190px !important; margin: 0 !important; padding: 0 !important;
-        display: flex; justify-content: center; align-items: center; 
+        flex: 0 0 200px !important; margin: 0 !important; padding: 0 !important;
+        display: flex; justify-content: center; align-items: flex-start; 
         z-index: 20 !important; box-sizing: border-box !important;
-        margin-top: -10px !important; transform: none !important;
     }
     
     .view-box {
-        width: 100% !important; height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
+        width: 100% !important; height: 100% !important; 
         margin: 0 !important; padding: 15px 10px !important;
-        overflow-y: auto !important; overflow-x: hidden !important; border-radius: 20px !important; box-sizing: border-box !important; 
+        overflow-y: auto !important; overflow-x: hidden !important; 
+        border-radius: 20px !important; box-sizing: border-box !important; 
     }
 
+    /* 4. Yutulan Başlıklar Kurtarıldı */
     .view-box[style*="block"] {
-        display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important;
+        display: flex !important; flex-direction: column !important; 
+        justify-content: flex-start !important; 
+        align-items: center !important;
     }
 
-    /* Yazılar ve Timer Inputları */
-    .view-box h1, .timer-display { font-size: 2.2rem !important; text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important; font-variant-numeric: tabular-nums !important; }
-    .view-box h2 { font-size: 1.5rem !important; margin: 5px 0 10px 0 !important; } 
+    /* Yazılar ve H2 Başlıkları */
+    .view-box h1, .timer-display { font-size: 2.2rem !important; text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important; font-variant-numeric: tabular-nums !important; margin-top: 10px !important; }
+    .view-box h2 { font-size: 1.5rem !important; margin: 5px 0 10px 0 !important; display: block !important; visibility: visible !important; color: white !important;} 
     .view-box h3, .view-box p { font-size: 0.95rem !important; }
     .timer-input-group { transform: scale(0.85); margin-bottom: 5px !important; } 
 
-    /* Alarm İnputu */
-    #alarm-time-input { display: block !important; cursor: pointer !important; }
+    /* 6. Alarm Inputları */
+    #alarm-view .input-wrapper, 
+    #birth-chart-view .input-wrapper { 
+        display: flex !important; max-width: 90% !important; width: 100% !important;
+        box-sizing: border-box !important; margin: 0 auto 15px auto !important; 
+        background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(0, 255, 136, 0.4) !important; 
+        height: 40px !important; justify-content: center !important;
+    }
+    
+    #alarm-time-input, #birth-date, #birth-time { 
+        display: block !important; width: 100% !important; height: 100% !important;
+        cursor: pointer !important; visibility: visible !important; opacity: 1 !important;
+        color: white !important; background: transparent !important;
+        -webkit-appearance: none !important; appearance: none !important;
+    }
 
     .view-box::-webkit-scrollbar { display: none; } 
 
-    /* Fiyakalı Metin */
+    /* 7. Fiyakalı Metin */
     #mobile-vibe-hint {
         position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center;
         text-align: center; margin: 0 !important; animation: fadeInOut 3s infinite ease-in-out;
-        margin-top: -10px !important; transform: none !important;
     }
     #mobile-vibe-hint p { font-size: 11px; color: #cdcccc; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
     #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
     .pulse-icon { font-size: 18px; animation: pulse 2s infinite; }
 
-    /* Alt Kutu */
+    /* 8. Alt Kutu */
     .right-panel {
         position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important;
         height: auto !important; min-height: 70px !important; padding: 18px 25px 18px 25px !important; 
@@ -247,40 +265,6 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         display: flex !important; align-items: center !important; z-index: 9999 !important; border-radius: 0 !important;
         box-sizing: border-box !important;
     }
-    
-    /* World Clock Başlığı Görünmezlikten Çıkartıldı */
-    #world-clock-view h2 { 
-        display: block !important; 
-        visibility: visible !important;
-        opacity: 1 !important;
-        font-size: 1.5rem !important; 
-        margin: 5px 0 10px 0 !important; 
-    }
-
-    /* Alarm Kutusu Betonlandı */
-    #alarm-view { 
-        overflow-x: hidden !important; 
-    }
-
-    /* Alarm Input Çerçevesi */
-    #alarm-view .input-wrapper { 
-        display: flex !important; 
-        max-width: 90% !important; 
-        box-sizing: border-box !important; 
-        margin: 0 auto 15px auto !important; 
-        background: rgba(0,0,0,0.6) !important;
-        border: 1px solid rgba(0, 255, 136, 0.4) !important; 
-    }
-    
-    /* Alarm Saati Inputu */
-    #alarm-time-input { 
-        display: block !important; 
-        width: 100% !important; 
-        cursor: pointer !important; 
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-
     .support-panel-container { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
     .support-content { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; }
     .support-content h3 { font-size: 1.1rem !important; margin: 0 !important; }
