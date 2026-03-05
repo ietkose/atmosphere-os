@@ -195,7 +195,7 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
         flex: 0 0 237px !important; margin: 0 !important; padding: 15px; 
         z-index: 10 !important; border-radius: 20px !important; box-sizing: border-box !important;
-        margin-top: -30px !important; transform: none !important;
+        margin-top: -40px !important; transform: none !important;
     }
 
     /* 2. Orta Kutu  */
@@ -205,7 +205,7 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         flex: 0 0 190px !important; margin: 0 !important; padding: 0 !important;
         display: flex; justify-content: center; align-items: center; 
         z-index: 20 !important; box-sizing: border-box !important;
-        margin-top: -20px !important; transform: none !important;
+        margin-top: -10px !important; transform: none !important;
     }
     
     .view-box {
@@ -248,23 +248,37 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         box-sizing: border-box !important;
     }
     
-    /* Çalıştırıldığında World Clock başlığını zorla görünür yap */
+    /* World Clock Başlığı Görünmezlikten Çıkartıldı */
     #world-clock-view h2 { 
         display: block !important; 
+        visibility: visible !important;
+        opacity: 1 !important;
         font-size: 1.5rem !important; 
         margin: 5px 0 10px 0 !important; 
     }
 
-    /* Alarm kutusu sağa sola kaymasın */
+    /* Alarm Kutusu Betonlandı */
     #alarm-view { 
         overflow-x: hidden !important; 
     }
-    
-    /* Alarm içindeki inputun fazla uzayıp kutuyu esnetmesi engellendi */
+
+    /* Alarm Input Çerçevesi */
     #alarm-view .input-wrapper { 
+        display: flex !important; 
         max-width: 90% !important; 
         box-sizing: border-box !important; 
         margin: 0 auto 15px auto !important; 
+        background: rgba(0,0,0,0.6) !important;
+        border: 1px solid rgba(0, 255, 136, 0.4) !important; 
+    }
+    
+    /* Alarm Saati Inputu */
+    #alarm-time-input { 
+        display: block !important; 
+        width: 100% !important; 
+        cursor: pointer !important; 
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .support-panel-container { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
