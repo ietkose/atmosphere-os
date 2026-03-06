@@ -261,13 +261,14 @@ class TimerManager {
         
         document.getElementById('btn-timer-start')?.addEventListener('click', () => {
             // Mobilde ses kilidini kıran maymuncuk
-            if(this.audio) {
+            if(this.audio && !this.audio.dataset.unlocked) {
                 this.audio.muted = true; // Sesi tamamen kıs
                 this.audio.play().then(() => {
                     this.audio.pause(); // Anında durdur
                     this.audio.muted = false; // Sesi geri aç (zamanı gelince çalması için hazır)
                     this.audio.currentTime = 0; // Başa sar
-                }).catch(e => console.log("Siber Maymuncuk başarısız:", e));
+                    this.audio.dataset.unlocked = "true"; //Bir kez çalıştı mı ikincisi için kapıyı kapatır
+                }).catch(e => console.log("Maymuncuk başarısız:", e));
             }
 
             if (this.running) return;
@@ -375,16 +376,16 @@ class AlarmManager {
         if(document.getElementById('btn-dismiss')) document.getElementById('btn-dismiss').addEventListener('click', () => this.dismissAlarm());
     }
     
-    setAlarm() {
-        
+    setAlarm() {   
         // Mobilde ses kilidini kıran maymuncuk
-        if(this.audio) {
-            this.audio.muted = true;
+        if(this.audio && !this.audio.dataset.unlocked) {
+            this.audio.muted = true; // Sesi tamamen kıs
             this.audio.play().then(() => {
-                this.audio.pause();
-                this.audio.muted = false;
-                this.audio.currentTime = 0;
-            }).catch(e => console.log("Siber Maymuncuk başarısız:", e));
+                this.audio.pause(); // Anında durdur
+                this.audio.muted = false; // Sesi geri aç (zamanı gelince çalması için hazır)
+                this.audio.currentTime = 0; // Başa sar
+                this.audio.dataset.unlocked = "true"; //Bir kez çalıştı mı ikincisi için kapıyı kapatır
+            }).catch(e => console.log("Maymuncuk başarısız:", e));
         }
 
         if(!this.uiTimeInput.value) return alert("Please select a time!");
