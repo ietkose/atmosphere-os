@@ -72,12 +72,15 @@ class UIManager {
         });
 
         const toggleFullscreenClasses = () => {
+            // Global t sözlüğünü kullanıyoruz 
+            const t = translations[currentLang];
+
             if (document.fullscreenElement || document.webkitFullscreenElement) {
                 document.body.classList.add('fullscreen-mode'); 
-                fsBtn.innerText = "⛶ Minimize";
+                fsBtn.innerText = t.minimize; // İngilizce değil, sözlükten gelir
             } else {
                 document.body.classList.remove('fullscreen-mode'); 
-                fsBtn.innerText = "⛶ Fullscreen";
+                fsBtn.innerText = t.fullscreen; 
             }
         };
 
@@ -665,13 +668,17 @@ class AudioManager {
 
     updateSoundCreditText() {
         if (!this.uiSoundCredit) return;
+
+        const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+        const t = typeof translations !== 'undefined' ? translations[lang] : { playPauseAudio: "Play / Pause", soundPlaying: "Playing...", soundBy: "Sound by:", specialMix: "Special mix:", soundsActive: "active" };
         
         if (this.activeAmbiences.length === 0) {
             this.uiSoundCredit.innerText = t.playPauseAudio;
         } else if (this.activeAmbiences.length === 1) {
             const playingId = this.activeAmbiences[0];
-            let rawCredit = this.soundCredits[playingId] || t.soundPlaying;
-            // "Sound by:" kısmını yakalar ve sözlükteki "Ses:" ile değiştirir
+            // SoundCredits içinden orijinal metni al, yoksa "Ses Çalıyor" yaz
+            let rawCredit = String(this.soundCredits[playingId] || t.soundPlaying);
+            // "Sound by:" kısmını yakalar ve sözlükteki karşılığıyla (Ses:) değiştirir
             this.uiSoundCredit.innerText = rawCredit.replace("Sound by:", t.soundBy);
         } else {
             this.uiSoundCredit.innerText = `${t.specialMix} ${this.activeAmbiences.length} ${t.soundsActive} ⁉️`;
@@ -1008,6 +1015,15 @@ function applyTranslations() {
     timerAlarmCredits.forEach(el => {
         el.innerText = t.timerAlarmSound;
     });
+
+    // Başlangıçtaki Ses Kredisi Yazısını Dile Göre Sıfırla
+    const soundCreditEl = document.getElementById('sound-credit');
+    if (soundCreditEl) {
+        // Eğer hiçbir ses aktif değilse (yani başlangıç durumundaysa) sözlükteki çeviriyi bas
+        if (typeof audioManager !== 'undefined' && audioManager.activeAmbiences.length === 0) {
+            soundCreditEl.innerText = t.playPauseAudio;
+        }
+    }
 
     // Telefonun yerel saat/tarih aracına sitenin dilini bildirir (AM/PM ve Format için)
     document.documentElement.lang = currentLang;
