@@ -667,12 +667,14 @@ class AudioManager {
         if (!this.uiSoundCredit) return;
         
         if (this.activeAmbiences.length === 0) {
-            this.uiSoundCredit.innerText = "Play / Pause Active Audio";
+            this.uiSoundCredit.innerText = t.playPauseAudio;
         } else if (this.activeAmbiences.length === 1) {
             const playingId = this.activeAmbiences[0];
-            this.uiSoundCredit.innerText = this.soundCredits[playingId] || "Sound is Playing...";
+            let rawCredit = this.soundCredits[playingId] || t.soundPlaying;
+            // "Sound by:" kısmını yakalar ve sözlükteki "Ses:" ile değiştirir
+            this.uiSoundCredit.innerText = rawCredit.replace("Sound by:", t.soundBy);
         } else {
-            this.uiSoundCredit.innerText = `Special mix: ${this.activeAmbiences.length} sounds active ⁉️`;
+            this.uiSoundCredit.innerText = `${t.specialMix} ${this.activeAmbiences.length} ${t.soundsActive} ⁉️`;
         }
     }
 
@@ -745,13 +747,23 @@ class AudioManager {
         this.bgPlayer.src = src;
         this.bgPlayer.play()
             .then(() => {
+                // 1. Dil sözlüğünü buradan çağırıyoruz
+                const t = translations[currentLang]; 
+
                 if(this.uiPlayPauseBtn) this.uiPlayPauseBtn.innerHTML = '&#10074;&#10074;'; 
                 if(this.uiThemeName) this.uiThemeName.innerText = this.currentTheme.toUpperCase().replace('-', ' ');
-                if(this.uiTrackName) this.uiTrackName.innerText = `\Track ${this.currentTrackIndex}`;
+                
+                // 2. "Track" yerine sözlükteki "Parça" veya "Track" kelimesini koyar
+                if(this.uiTrackName) {
+                    this.uiTrackName.innerText = `${t.trackWord} ${this.currentTrackIndex}`;
+                }
                 
                 if(this.uiTrackCredit) {
                     let creditInfo = this.trackCredits[this.currentTheme] && this.trackCredits[this.currentTheme][this.currentTrackIndex];
-                    this.uiTrackCredit.innerText = creditInfo ? creditInfo : "Copyright Information Not Found";
+                    let rawMusicCredit = creditInfo ? creditInfo : t.noCopyright;
+                    
+                    // 3. "Music by:" yazısını yakalar ve "Müzik:" yapar
+                    this.uiTrackCredit.innerText = rawMusicCredit.replace("Music by:", t.musicBy);
                 }
             })
             .catch(err => console.log("Autoplay is Disabled:", err));
@@ -843,7 +855,14 @@ const translations = {
         atmosphere: "ATMOSPHERE", features: "FEATURES", visualThemes: "VISUAL THEMES", audios: "AUDIOS",
         sounds: "SOUNDS", musicThemes: "MUSIC THEMES",
         hr: "Hr", min: "Min", sec: "Sec",
-        localTime: "Local Time", cityIst: "Istanbul", cityNy: "New York", cityLon: "London", cityTok: "Tokyo"
+        localTime: "Local Time", cityIst: "Istanbul", cityNy: "New York", cityLon: "London", cityTok: "Tokyo",
+
+        awaitingAudio: "Awaiting audio...", 
+        timerAlarmSound: "Sound by: Nickpanekaiassets from Pixabay",
+        musicBy: "Music by:", soundBy: "Sound by:", 
+        playPauseAudio: "Play / Pause Active Audio", soundPlaying: "Sound is Playing...", 
+        specialMix: "Special mix:", soundsActive: "sounds active", 
+        trackWord: "Track", noCopyright: "Copyright Information Not Found"
     },
     'tr': {
         fullscreen: "⛶ Tam Ekran", minimize: "⛶ Küçült",
@@ -860,7 +879,14 @@ const translations = {
         atmosphere: "ATMOSFER", features: "ÖZELLİKLER", visualThemes: "GÖRSEL TEMALAR", audios: "SESLER",
         sounds: "DOĞA SESLERİ", musicThemes: "MÜZİK TEMALARI",
         hr: "Sa", min: "Dk", sec: "Sn",
-        localTime: "Yerel Saat", cityIst: "İstanbul", cityNy: "New York", cityLon: "Londra", cityTok: "Tokyo"
+        localTime: "Yerel Saat", cityIst: "İstanbul", cityNy: "New York", cityLon: "Londra", cityTok: "Tokyo",
+
+        awaitingAudio: "Ses bekleniyor...", 
+        timerAlarmSound: "Ses: Nickpanekaiassets (Pixabay)",
+        musicBy: "Müzik:", soundBy: "Ses:", 
+        playPauseAudio: "Aktif Sesi Oynat / Duraklat", soundPlaying: "Ses Çalıyor...", 
+        specialMix: "Özel Karışım:", soundsActive: "ses aktif", 
+        trackWord: "Parça", noCopyright: "Telif Hakkı Bilgisi Bulunamadı"
     }
 };
 
@@ -971,6 +997,17 @@ function applyTranslations() {
     if (document.getElementById('zodiac-result') && document.getElementById('zodiac-result').style.display === 'block' && typeof astro !== 'undefined') {
         astro.calculate();
     }
+
+    // Awaiting Audio çevirisi
+    if(document.getElementById('track-credit') && document.getElementById('track-credit').innerText === "Awaiting audio...") {
+        document.getElementById('track-credit').innerText = t.awaitingAudio;
+    }
+
+    // Timer ve Alarm kredi kutularındaki "Sound by" yazıları
+    const timerAlarmCredits = document.querySelectorAll('#timer-credit-box .credit-text, #alarm-credit-box .credit-text');
+    timerAlarmCredits.forEach(el => {
+        el.innerText = t.timerAlarmSound;
+    });
 
     // Telefonun yerel saat/tarih aracına sitenin dilini bildirir (AM/PM ve Format için)
     document.documentElement.lang = currentLang;
