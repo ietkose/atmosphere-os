@@ -247,8 +247,19 @@ class TimerManager {
     }
 
     initButtons() {
-        document.getElementById('btn-timer-start')?.addEventListener('click', () => {
+        // + / - butonları için neon yeşil ışıklandırma tetikleyici
+        document.querySelectorAll('.spin-btn').forEach(btn => {
+            // Parmağı basınca neon-active sınıfını ekle
+            btn.addEventListener('touchstart', () => btn.parentElement.classList.add('neon-active'), {passive: true});
+            btn.addEventListener('mousedown', () => btn.parentElement.classList.add('neon-active'));
             
+            // Parmağı çekince neon-active sınıfını sil
+            btn.addEventListener('touchend', () => btn.parentElement.classList.remove('neon-active'));
+            btn.addEventListener('mouseup', () => btn.parentElement.classList.remove('neon-active'));
+            btn.addEventListener('mouseleave', () => btn.parentElement.classList.remove('neon-active'));
+        });
+        
+        document.getElementById('btn-timer-start')?.addEventListener('click', () => {
             // Mobilde ses kilidini kıran maymuncuk
             if(this.audio) {
                 this.audio.muted = true; // Sesi tamamen kıs

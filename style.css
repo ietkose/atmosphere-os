@@ -249,8 +249,8 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         outline: none !important; 
     }
 
-    /* Artı ve eksi butonlarına tıklandığında dış kutuyu parlat */
-    .timer-input-group .input-wrapper:has(.spin-btn:active) {
+    /* JS yardımıyla + / - tuşlarına basıldığında neon parlar */
+    .timer-input-group .input-wrapper.neon-active {
         border-color: #00ff88 !important; 
         box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 25px rgba(0, 255, 136, 0.4) !important;
         background: rgba(0, 0, 0, 0.6) !important;
