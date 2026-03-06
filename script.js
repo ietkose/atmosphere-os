@@ -142,7 +142,8 @@ class ClockManager {
             if (this.timeDisplay) this.timeDisplay.innerText = `${hours}:${minutes}:${seconds}`;
 
             const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-            if (this.dateDisplay) this.dateDisplay.innerText = now.toLocaleDateString('en-GB', options);
+            const locale = currentLang === 'tr' ? 'tr-TR' : 'en-GB';
+            if (this.dateDisplay) this.dateDisplay.innerText = now.toLocaleDateString(locale, options);
         };
         setInterval(updateClock, 1000);
         updateClock();
@@ -837,7 +838,12 @@ const translations = {
         
         bcSun: "☀️ Sun Sign: ", bcElement: "🌿 Element: ", bcChinese: "🐉 Chinese Zodiac: ", bcLifePath: "🔢 Life Path Number: ", bcMoon: "🌕 Moon Phase: ",
         sndWinter: "Winter Wind", sndRain: "Rain", sndBirds: "Birds", sndBirdsRain: "Birds in the Rain", sndWaves: "Waves & Seagulls", sndFire: "Fireplace", sndCafe: "Cafe Ambience", sndTrain: "Train Journey", sndKoto: "Koto (Japanese Zither)",
-        quickNote: "<strong>Quick Note:</strong> High-fidelity audio in use. Wi-Fi connection is recommended to save your mobile data."
+        quickNote: "<strong>Quick Note:</strong> High-fidelity audio in use. Wi-Fi connection is recommended to save your mobile data.",
+
+        atmosphere: "ATMOSPHERE", features: "FEATURES", visualThemes: "VISUAL THEMES", audios: "AUDIOS",
+        sounds: "SOUNDS", musicThemes: "MUSIC THEMES",
+        hr: "Hr", min: "Min", sec: "Sec",
+        localTime: "Local Time", cityIst: "Istanbul", cityNy: "New York", cityLon: "London", cityTok: "Tokyo"
     },
     'tr': {
         fullscreen: "⛶ Tam Ekran", minimize: "⛶ Küçült",
@@ -849,7 +855,12 @@ const translations = {
         
         bcSun: "☀️ Güneş Burcu: ", bcElement: "🌿 Element: ", bcChinese: "🐉 Çin Burcu: ", bcLifePath: "🔢 Yaşam Yolu Sayısı: ", bcMoon: "🌕 Ay Evresi: ",
         sndWinter: "Kış Rüzgarı", sndRain: "Yağmur", sndBirds: "Kuşlar", sndBirdsRain: "Yağmurlu Orman", sndWaves: "Dalgalar ve Martılar", sndFire: "Şömine", sndCafe: "Kafe Ambiyansı", sndTrain: "Tren Yolculuğu", sndKoto: "Japon Kotosu",
-        quickNote: "<strong>Kısa Not:</strong> Yüksek kaliteli ses kullanılıyor. Mobil verinizi korumak için Wi-Fi bağlantısı önerilir."
+        quickNote: "<strong>Kısa Not:</strong> Yüksek kaliteli ses kullanılıyor. Mobil verinizi korumak için Wi-Fi bağlantısı önerilir.",
+
+        atmosphere: "ATMOSFER", features: "ÖZELLİKLER", visualThemes: "GÖRSEL TEMALAR", audios: "SESLER",
+        sounds: "DOĞA SESLERİ", musicThemes: "MÜZİK TEMALARI",
+        hr: "Sa", min: "Dk", sec: "Sn",
+        localTime: "Yerel Saat", cityIst: "İstanbul", cityNy: "New York", cityLon: "Londra", cityTok: "Tokyo"
     }
 };
 
@@ -918,6 +929,36 @@ function applyTranslations() {
     if(document.querySelector('.support-content p')) document.querySelector('.support-content p').innerText = t.supportText;
     if(document.querySelector('.cyber-coffee-btn span')) document.querySelector('.cyber-coffee-btn span').innerText = t.buyCoffee;
     if(document.querySelector('#mobile-vibe-hint p')) document.querySelector('#mobile-vibe-hint p').innerHTML = t.vibeHint;
+
+    // 1. Timer Input Kutularının İçindeki Silik Yazılar 
+    if(document.getElementById('timer-input-hour')) document.getElementById('timer-input-hour').placeholder = t.hr;
+    if(document.getElementById('timer-input-min')) document.getElementById('timer-input-min').placeholder = t.min;
+    if(document.getElementById('timer-input-sec')) document.getElementById('timer-input-sec').placeholder = t.sec;
+
+    // 2. Sol Menü (Sidebar) Başlıkları
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+        if(btn.innerHTML.includes('FEATURES') || btn.innerHTML.includes('ÖZELLİKLER')) btn.innerHTML = btn.innerHTML.replace(/FEATURES|ÖZELLİKLER/, t.features);
+        if(btn.innerHTML.includes('VISUAL THEMES') || btn.innerHTML.includes('GÖRSEL TEMALAR')) btn.innerHTML = btn.innerHTML.replace(/VISUAL THEMES|GÖRSEL TEMALAR/, t.visualThemes);
+        if(btn.innerHTML.includes('AUDIOS') || btn.innerHTML.includes('SESLER')) btn.innerHTML = btn.innerHTML.replace(/AUDIOS|SESLER/, t.audios);
+    });
+
+    document.querySelectorAll('.tab-link').forEach(tab => {
+        if(tab.innerText.includes('SOUNDS') || tab.innerText.includes('DOĞA SESLERİ')) tab.innerText = t.sounds;
+        if(tab.innerText.includes('MUSIC THEMES') || tab.innerText.includes('MÜZİK TEMALARI')) tab.innerText = t.musicThemes;
+    });
+
+    // 3. Ana Atmosphere Logosu 
+    const logoEl = document.querySelector('.sidebar h1, .sidebar h2, .logo');
+    if (logoEl && (logoEl.innerText.includes('ATMOSPHERE') || logoEl.innerText.includes('ATMOSFER'))) {
+        logoEl.innerText = t.atmosphere;
+    }
+
+    // 4. World Clock Şehir İsimleri
+    if(document.getElementById('wc-local') && document.getElementById('wc-local').previousElementSibling) document.getElementById('wc-local').previousElementSibling.innerText = t.localTime;
+    if(document.getElementById('wc-istanbul') && document.getElementById('wc-istanbul').previousElementSibling) document.getElementById('wc-istanbul').previousElementSibling.innerText = t.cityIst;
+    if(document.getElementById('wc-newyork') && document.getElementById('wc-newyork').previousElementSibling) document.getElementById('wc-newyork').previousElementSibling.innerText = t.cityNy;
+    if(document.getElementById('wc-london') && document.getElementById('wc-london').previousElementSibling) document.getElementById('wc-london').previousElementSibling.innerText = t.cityLon;
+    if(document.getElementById('wc-tokyo') && document.getElementById('wc-tokyo').previousElementSibling) document.getElementById('wc-tokyo').previousElementSibling.innerText = t.cityTok;
     
     const noteEl = document.querySelector('.sidebar div p');
     if (noteEl && (noteEl.innerHTML.includes("Quick Note") || noteEl.innerHTML.includes("Kısa Not"))) {
