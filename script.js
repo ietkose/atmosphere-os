@@ -867,19 +867,19 @@ document.addEventListener('keydown', (e) => {
 const translations = {
     'en': {
         fullscreen: "⛶ Fullscreen", minimize: "⛶ Minimize",
-        home: "Home", stopwatch: "Stopwatch", timer: "Timer", alarm: "Alarm Clock", worldclock: "World Clock", birthchart: "Birth Chart",
+        home: "Home", stopwatch: "Stopwatch", timer: "Timer", alarm: "Alarm", worldclock: "World Clock", birthchart: "Birth Chart",
         start: "Start", stop: "Stop", lap: "Lap", reset: "Reset", pause: "Pause / Stop", set: "Set", cancel: "Cancel",
         noAlarm: "No Alarm Set", snooze: "Snooze (5 min)", dismiss: "Dismiss", calc: "Calculate",
         timeIsUp: "Time is up!", alarmRinging: "Alarm Ringing!", alarmSet: "Alarm set",
-        supportTitle: "Support Me!", supportText: "This project is designed for 100% focus and zero ads. You can support the server costs by buying me a coffee.", buyCoffee: "Buy Me a Coffee",
+        supportTitle: "Support Me!", supportText: "This 'lo-fi & chill' style space is designed for 100% focus and zero ads. You can support the server costs by buying me a coffee.", buyCoffee: "Buy Me a Coffee",
         vibeHint: "Set your vibe, then <strong>rotate your device</strong> for the ultimate fullscreen experience.",
         
         bcSun: "☀️ Sun Sign: ", bcElement: "🌿 Element: ", bcChinese: "🐉 Chinese Zodiac: ", bcLifePath: "🔢 Life Path Number: ", bcMoon: "🌕 Moon Phase: ",
         sndWinter: "Winter Wind", sndRain: "Rain", sndBirds: "Birds", sndBirdsRain: "Birds in the Rain", sndWaves: "Waves & Seagulls", sndFire: "Fireplace", sndCafe: "Cafe Ambience", sndTrain: "Train Journey", sndKoto: "Koto (Japanese Zither)",
-        quickNote: "<strong>Quick Note:</strong> High-fidelity audio in use. Wi-Fi connection is recommended to save your mobile data.",
+        quickNote: "<strong>Quick Note:</strong> Ambient sounds & music themes use high-quality audio. Wi-Fi connection is recommended to save your mobile data.",
 
         atmosphere: "ATMOSPHERE", features: "FEATURES", visualThemes: "VISUAL THEMES", audios: "AUDIOS",
-        sounds: "SOUNDS", musicThemes: "MUSIC THEMES",
+        sounds: "AMBIENT SOUNDS", musicThemes: "MUSIC THEMES",
         hr: "Hr", min: "Min", sec: "Sec",
         localTime: "Local Time", cityIst: "Istanbul", cityNy: "New York", cityLon: "London", cityTok: "Tokyo",
 
@@ -892,19 +892,19 @@ const translations = {
     },
     'tr': {
         fullscreen: "⛶ Tam Ekran", minimize: "⛶ Küçült",
-        home: "Ana Sayfa", stopwatch: "Kronometre", timer: "Sayaç", alarm: "Çalar Saat", worldclock: "Dünya Saati", birthchart: "Doğum Haritası",
+        home: "Ana Sayfa", stopwatch: "Kronometre", timer: "Sayaç", alarm: "Alarm", worldclock: "Dünya Saati", birthchart: "Doğum Haritası",
         start: "Başlat", stop: "Durdur", lap: "Tur", reset: "Sıfırla", pause: "Duraklat / Bitir", set: "Kur", cancel: "İptal",
         noAlarm: "Alarm Kurulmadı", snooze: "Ertele (5 dk)", dismiss: "Kapat", calc: "Hesapla",
         timeIsUp: "Süre doldu!", alarmRinging: "Alarm Çalıyor!", alarmSet: "Alarm kuruldu",
-        supportTitle: "Destek Ol!", supportText: "Bu proje %100 odaklanma ve sıfır reklam için tasarlandı. Bana bir kahve ısmarlayarak sunucu masraflarına destek olabilirsiniz.", buyCoffee: "Kahve Ismarla",
+        supportTitle: "Destek Ol!", supportText: "Bu 'lo-fi & chill' tarzı mekan %100 odaklanma ve sıfır reklam için tasarlandı. Bana bir kahve ısmarlayarak sunucu masraflarına destek olabilirsiniz.", buyCoffee: "Kahve Ismarla",
         vibeHint: "Ambiyansınızı seçin, ardından tam ekran deneyimi için <strong>cihazınızı yan çevirin</strong>.",
         
         bcSun: "☀️ Güneş Burcu: ", bcElement: "🌿 Element: ", bcChinese: "🐉 Çin Burcu: ", bcLifePath: "🔢 Yaşam Yolu Sayısı: ", bcMoon: "🌕 Ay Evresi: ",
         sndWinter: "Kış Rüzgarı", sndRain: "Yağmur", sndBirds: "Kuşlar", sndBirdsRain: "Yağmurlu Orman", sndWaves: "Dalgalar ve Martılar", sndFire: "Şömine", sndCafe: "Kafe Ambiyansı", sndTrain: "Tren Yolculuğu", sndKoto: "Japon Kotosu",
-        quickNote: "<strong>Kısa Not:</strong> Yüksek kaliteli ses kullanılıyor. Mobil verinizi korumak için Wi-Fi bağlantısı önerilir.",
+        quickNote: "<strong>Kısa Not:</strong> Ambiyans sesleri ve müzik temaları yüksek kalitedir. Mobil verinizi korumak için Wi-Fi bağlantısı önerilir.",
 
         atmosphere: "ATMOSFER", features: "ÖZELLİKLER", visualThemes: "GÖRSEL TEMALAR", audios: "SESLER",
-        sounds: "DOĞA SESLERİ", musicThemes: "MÜZİK TEMALARI",
+        sounds: "AMBİYANS SESLERİ", musicThemes: "MÜZİK TEMALARI",
         hr: "Sa", min: "Dk", sec: "Sn",
         localTime: "Yerel Saat", cityIst: "İstanbul", cityNy: "New York", cityLon: "Londra", cityTok: "Tokyo",
 
@@ -995,8 +995,8 @@ function applyTranslations() {
         if(btn.innerHTML.includes('AUDIOS') || btn.innerHTML.includes('SESLER')) btn.innerHTML = btn.innerHTML.replace(/AUDIOS|SESLER/, t.audios);
         
         // Sounds ve Music Themes çevirisi
-        if(btn.innerHTML.match(/SOUNDS|DOĞA SESLERİ/i)) {
-            btn.innerHTML = btn.innerHTML.replace(/SOUNDS|DOĞA SESLERİ/i, t.sounds);
+        if(btn.innerHTML.match(/AMBIENT SOUNDS|AMBİYANS SESLERİ/i)) {
+            btn.innerHTML = btn.innerHTML.replace(/AMBIENT SOUNDS|SOUNDS|DOĞA SESLERİ|AMBİYANS SESLERİ/i, t.sounds);
         }
         if(btn.innerHTML.match(/MUSIC THEMES|MÜZİK TEMALARI/i)) {
             btn.innerHTML = btn.innerHTML.replace(/MUSIC THEMES|MÜZİK TEMALARI/i, t.musicThemes);

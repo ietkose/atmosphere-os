@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atmosphere OS - Focus, Relax & Vibe</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <title>Atmosphere OS - Focus, Relax & Vibe</title>
+    <link rel="icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <meta name="description" content="Atmosphere OS: Your 'lo-fi & chill' space for focus & relaxation. Odaklanma ve rahatlama mekanınız. Visual/music themes, timer & productivity tools.">
+    <meta name="keywords" content="focus, relax, audios, ambient sounds, music themes, visual themes, stopwatch, timer, alarm, world clock, birth chart, productivity, odaklanma, rahatlama, sesler, ambiyans sesleri, müzik temaları, görsel temalar, kronometre, sayaç, dünya saatleri, doğum haritası, üretkenlik">
+    <meta name="author" content="Atmosphere OS">
 </head>
 
 <body>
@@ -58,7 +64,7 @@
                 
                 <div class="accordion-content" style="padding-left: 10px; border-left: 2px solid rgba(255,255,255,0.1); margin-left: 5px;">
                     
-                    <button class="accordion-btn" style="font-size: 14px; color: #d9d7d7;"> &nbsp; SOUNDS <span class="arrow">▼</span></button>
+                    <button class="accordion-btn" style="font-size: 14px; color: #d9d7d7;"> &nbsp; AMBIENT SOUNDS <span class="arrow">▼</span></button>
                     <div class="accordion-content">
                         <ul style="list-style: none; padding: 0; margin: 5px 0 10px 0; display: flex; flex-direction: column; gap: 5px;">
                             <li id="btn-winter-wind" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('winter-wind')">&#x21A0; &nbsp; Winter Wind</li>
@@ -184,7 +190,7 @@
 
 
             <div id="alarm-view" class="view-box tab-content glass-panel" style="display: none;">
-                <h2>Alarm Clock</h2>
+                <h2>Alarm</h2>
     
                 <div class="input-wrapper" style="margin: 0 auto 15px auto; width: max-content; padding: 0 15px;">
                     <input type="time" id="alarm-time-input" class="time-date-input">
@@ -275,6 +281,18 @@
     <audio id="audio-alarm" src="assets/audios/alarm/alarm-ringtone.mp3" loop></audio>
 
     <script src="script.js"></script>
+
+    <div style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">
+        <a href="#stopwatch">Stopwatch</a>
+        <a href="#timer">Timer</a>
+        <a href="#alarm">Alarm</a>
+        <a href="#world-clock">World Clock</a>
+        <a href="#birth-chart">Birth Chart</a>
+        <a href="#visual-themes">Visual Themes</a>
+        <a href="#audios">Audios</a>
+        <a href="#ambient-sounds">Ambient Sounds</a>
+        <a href="#music-themes">Music Themes</a>
+    </div>
 </body>
 </html>
 
