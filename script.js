@@ -387,7 +387,6 @@ class AlarmManager {
     setAlarm() {   
         if(this.audio) { this.audio.load(); }
 
-        // Alert mesajını da dile bağladık
         const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
         const t = translations[lang];
 
