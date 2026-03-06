@@ -216,8 +216,13 @@ class StopwatchManager {
         
         document.getElementById('btn-lap')?.addEventListener('click', () => {
             if (!this.running) return;
+            
+            const t = translations[currentLang]; // Dil sözlüğünü çağır
             const lapItem = document.createElement('div');
-            lapItem.innerText = `Lap ${this.lapCounter}: ${this.formatTime(this.elapsedTime)}`;
+            
+            // "Lap" yerine t.lapWord (Tur) kullanıyoruz
+            lapItem.innerText = `${t.lapWord} ${this.lapCounter}: ${this.formatTime(this.elapsedTime)}`;
+            
             lapItem.style.cssText = "padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.2); color: #ccc;";
             this.lapsContainer.prepend(lapItem);
             this.lapCounter++;
@@ -297,6 +302,9 @@ class TimerManager {
                     this.running = false;
                     this.isPaused = false;
                     
+                    // Alert veya başlık kısmında "Time is up!" yazan yeri bulun
+                    const t = translations[currentLang];
+                    this.Display.innerText = t.timeIsUp;
                     this.display.innerText = "TIME IS UP!";
                     this.display.style.color = "#ff4444"; 
                     this.display.style.textShadow = "0 0 15px rgba(255, 68, 68, 0.8)";
@@ -399,29 +407,31 @@ class AlarmManager {
         
         this.uiSetBtn.style.display = 'none';
         this.uiCancelBtn.style.display = 'inline-block';
-        this.uiStatus.innerText = `Alarm Set: ${this.uiTimeInput.value}`;
+        const t = translations[currentLang]; // Dil sözlüğünü al
+        this.uiStatus.innerText = `${t.alarmSet}: ${this.uiTimeInput.value}`;
         this.uiStatus.style.color = '#00ff88';
     }
     
     cancelAlarm() {
         if(this.alarmTimeout) clearTimeout(this.alarmTimeout);
+        const t = translations[currentLang]; // Dil sözlüğünü al
+        
         this.uiSetBtn.style.display = 'inline-block';
         this.uiCancelBtn.style.display = 'none';
-        this.uiStatus.innerText = "No Alarm Set";
+        this.uiStatus.innerText = t.noAlarmSet; 
         this.uiStatus.style.color = '#b3b3b3';
-
-        if(this.uiCreditBox) this.uiCreditBox.style.display = 'none'; 
+        if(this.uiCreditBox) this.uiCreditBox.style.display = 'none';  
     }
     
     triggerAlarm() {
-        this.uiStatus.innerText = "ALARM RINGING!";
+        const t = translations[currentLang]; // Dil sözlüğünü al
+        this.uiStatus.innerText = t.alarmRinging;
         this.uiStatus.style.color = '#ff4444';
         this.uiControls.style.display = 'block';
         this.uiCancelBtn.style.display = 'none';
         if(this.audio) this.audio.play();
-
         if(this.uiCreditBox) this.uiCreditBox.style.display = 'block'; 
-    }
+    } 
     
     snoozeAlarm() {
         this.dismissAlarm();
@@ -852,6 +862,7 @@ const translations = {
         home: "Home", stopwatch: "Stopwatch", timer: "Timer", alarm: "Alarm Clock", worldclock: "World Clock", birthchart: "Birth Chart",
         start: "Start", stop: "Stop", lap: "Lap", reset: "Reset", pause: "Pause / Stop", set: "Set", cancel: "Cancel",
         noAlarm: "No Alarm Set", snooze: "Snooze (5 min)", dismiss: "Dismiss", calc: "Calculate",
+        timeIsUp: "Time is up!", alarmRinging: "Alarm Ringing!", alarmSet: "Alarm set",
         supportTitle: "Support Me!", supportText: "This project is designed for 100% focus and zero ads. You can support the server costs by buying me a coffee.", buyCoffee: "Buy Me a Coffee",
         vibeHint: "Set your vibe, then <strong>rotate your device</strong> for the ultimate fullscreen experience.",
         
@@ -876,6 +887,7 @@ const translations = {
         home: "Ana Sayfa", stopwatch: "Kronometre", timer: "Sayaç", alarm: "Çalar Saat", worldclock: "Dünya Saati", birthchart: "Doğum Haritası",
         start: "Başlat", stop: "Durdur", lap: "Tur", reset: "Sıfırla", pause: "Duraklat / Bitir", set: "Kur", cancel: "İptal",
         noAlarm: "Alarm Kurulmadı", snooze: "Ertele (5 dk)", dismiss: "Kapat", calc: "Hesapla",
+        timeIsUp: "Süre doldu!", alarmRinging: "Alarm Çalıyor!", alarmSet: "Alarm kuruldu",
         supportTitle: "Destek Ol!", supportText: "Bu proje %100 odaklanma ve sıfır reklam için tasarlandı. Bana bir kahve ısmarlayarak sunucu masraflarına destek olabilirsiniz.", buyCoffee: "Kahve Ismarla",
         vibeHint: "Ambiyansınızı seçin, ardından tam ekran deneyimi için <strong>cihazınızı yan çevirin</strong>.",
         
