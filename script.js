@@ -261,14 +261,8 @@ class TimerManager {
         
         document.getElementById('btn-timer-start')?.addEventListener('click', () => {
             // Mobilde ses kilidini kıran maymuncuk
-            if(this.audio && !this.audio.dataset.unlocked) {
-                this.audio.muted = true; // Sesi tamamen kıs
-                this.audio.play().then(() => {
-                    this.audio.pause(); // Anında durdur
-                    this.audio.muted = false; // Sesi geri aç (zamanı gelince çalması için hazır)
-                    this.audio.currentTime = 0; // Başa sar
-                    this.audio.dataset.unlocked = "true"; //Bir kez çalıştı mı ikincisi için kapıyı kapatır
-                }).catch(e => console.log("Maymuncuk başarısız:", e));
+            if(this.audio) {
+                this.audio.load(); 
             }
 
             if (this.running) return;
@@ -378,14 +372,8 @@ class AlarmManager {
     
     setAlarm() {   
         // Mobilde ses kilidini kıran maymuncuk
-        if(this.audio && !this.audio.dataset.unlocked) {
-            this.audio.muted = true; // Sesi tamamen kıs
-            this.audio.play().then(() => {
-                this.audio.pause(); // Anında durdur
-                this.audio.muted = false; // Sesi geri aç (zamanı gelince çalması için hazır)
-                this.audio.currentTime = 0; // Başa sar
-                this.audio.dataset.unlocked = "true"; //Bir kez çalıştı mı ikincisi için kapıyı kapatır
-            }).catch(e => console.log("Maymuncuk başarısız:", e));
+        if(this.audio) {
+        this.audio.load(); 
         }
 
         if(!this.uiTimeInput.value) return alert("Please select a time!");
