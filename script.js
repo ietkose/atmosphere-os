@@ -304,8 +304,7 @@ class TimerManager {
                     
                     // Alert veya başlık kısmında "Time is up!" yazan yeri bulun
                     const t = translations[currentLang];
-                    this.Display.innerText = t.timeIsUp;
-                    this.display.innerText = "TIME IS UP!";
+                    this.display.innerText = t.timeIsUp;
                     this.display.style.color = "#ff4444"; 
                     this.display.style.textShadow = "0 0 15px rgba(255, 68, 68, 0.8)";
 
@@ -386,12 +385,13 @@ class AlarmManager {
     }
     
     setAlarm() {   
-        // Mobilde ses kilidini kıran maymuncuk
-        if(this.audio) {
-        this.audio.load(); 
-        }
+        if(this.audio) { this.audio.load(); }
 
-        if(!this.uiTimeInput.value) return alert("Please select a time!");
+        // Alert mesajını da dile bağladık
+        const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+        const t = translations[lang];
+
+        if(!this.uiTimeInput.value) return alert(lang === 'tr' ? "Lütfen bir zaman seçin!" : "Please select a time!");
         
         const now = new Date();
         const [hours, minutes] = this.uiTimeInput.value.split(':');
@@ -407,25 +407,34 @@ class AlarmManager {
         
         this.uiSetBtn.style.display = 'none';
         this.uiCancelBtn.style.display = 'inline-block';
-        const t = translations[currentLang]; // Dil sözlüğünü al
+        
+        // Ekrana yazdırma
         this.uiStatus.innerText = `${t.alarmSet}: ${this.uiTimeInput.value}`;
         this.uiStatus.style.color = '#00ff88';
     }
     
     cancelAlarm() {
         if(this.alarmTimeout) clearTimeout(this.alarmTimeout);
-        const t = translations[currentLang]; // Dil sözlüğünü al
+        
+        // Undefined hatasını bitiren koruma satırı
+        const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+        const t = translations[lang]; 
         
         this.uiSetBtn.style.display = 'inline-block';
         this.uiCancelBtn.style.display = 'none';
-        this.uiStatus.innerText = t.noAlarmSet; 
+        
+        // Eğer t.noAlarmSet bir şekilde boş gelirse varsayılan metni yaz
+        this.uiStatus.innerText = t.noAlarmSet || (lang === 'tr' ? "Alarm kurulmadı" : "No alarm set"); 
+        
         this.uiStatus.style.color = '#b3b3b3';
         if(this.uiCreditBox) this.uiCreditBox.style.display = 'none';  
     }
     
     triggerAlarm() {
-        const t = translations[currentLang]; // Dil sözlüğünü al
-        this.uiStatus.innerText = t.alarmRinging;
+        const lang = typeof currentLang !== 'undefined' ? currentLang : 'en';
+        const t = translations[lang]; 
+
+        this.uiStatus.innerText = t.alarmRinging || (lang === 'tr' ? "Alarm Çalıyor!" : "Alarm Ringing!");
         this.uiStatus.style.color = '#ff4444';
         this.uiControls.style.display = 'block';
         this.uiCancelBtn.style.display = 'none';
