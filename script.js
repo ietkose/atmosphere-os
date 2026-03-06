@@ -935,16 +935,19 @@ function applyTranslations() {
     if(document.getElementById('timer-input-min')) document.getElementById('timer-input-min').placeholder = t.min;
     if(document.getElementById('timer-input-sec')) document.getElementById('timer-input-sec').placeholder = t.sec;
 
-    // 2. Sol Menü (Sidebar) Başlıkları
+    // 2. Sol Menü (Sidebar) Başlıkları ve Alt Başlıkları (.accordion-btn içindeler)
     document.querySelectorAll('.accordion-btn').forEach(btn => {
         if(btn.innerHTML.includes('FEATURES') || btn.innerHTML.includes('ÖZELLİKLER')) btn.innerHTML = btn.innerHTML.replace(/FEATURES|ÖZELLİKLER/, t.features);
         if(btn.innerHTML.includes('VISUAL THEMES') || btn.innerHTML.includes('GÖRSEL TEMALAR')) btn.innerHTML = btn.innerHTML.replace(/VISUAL THEMES|GÖRSEL TEMALAR/, t.visualThemes);
         if(btn.innerHTML.includes('AUDIOS') || btn.innerHTML.includes('SESLER')) btn.innerHTML = btn.innerHTML.replace(/AUDIOS|SESLER/, t.audios);
-    });
-
-    document.querySelectorAll('.tab-link').forEach(tab => {
-        if(tab.innerText.includes('SOUNDS') || tab.innerText.includes('DOĞA SESLERİ')) tab.innerText = t.sounds;
-        if(tab.innerText.includes('MUSIC THEMES') || tab.innerText.includes('MÜZİK TEMALARI')) tab.innerText = t.musicThemes;
+        
+        // Sounds ve Music Themes çevirisi
+        if(btn.innerHTML.match(/SOUNDS|DOĞA SESLERİ/i)) {
+            btn.innerHTML = btn.innerHTML.replace(/SOUNDS|DOĞA SESLERİ/i, t.sounds);
+        }
+        if(btn.innerHTML.match(/MUSIC THEMES|MÜZİK TEMALARI/i)) {
+            btn.innerHTML = btn.innerHTML.replace(/MUSIC THEMES|MÜZİK TEMALARI/i, t.musicThemes);
+        }
     });
 
     // 3. Ana Atmosphere Logosu 
@@ -953,12 +956,12 @@ function applyTranslations() {
         logoEl.innerText = t.atmosphere;
     }
 
-    // 4. World Clock Şehir İsimleri
-    if(document.getElementById('wc-local') && document.getElementById('wc-local').previousElementSibling) document.getElementById('wc-local').previousElementSibling.innerText = t.localTime;
-    if(document.getElementById('wc-istanbul') && document.getElementById('wc-istanbul').previousElementSibling) document.getElementById('wc-istanbul').previousElementSibling.innerText = t.cityIst;
-    if(document.getElementById('wc-newyork') && document.getElementById('wc-newyork').previousElementSibling) document.getElementById('wc-newyork').previousElementSibling.innerText = t.cityNy;
-    if(document.getElementById('wc-london') && document.getElementById('wc-london').previousElementSibling) document.getElementById('wc-london').previousElementSibling.innerText = t.cityLon;
-    if(document.getElementById('wc-tokyo') && document.getElementById('wc-tokyo').previousElementSibling) document.getElementById('wc-tokyo').previousElementSibling.innerText = t.cityTok;
+    // 4. World Clock Şehir İsimleri (HTML etiketini silmeden metni değiştiren Kusursuz Kod)
+    if(document.getElementById('wc-local') && document.getElementById('wc-local').previousSibling) document.getElementById('wc-local').previousSibling.nodeValue = t.localTime + " ";
+    if(document.getElementById('wc-istanbul') && document.getElementById('wc-istanbul').previousSibling) document.getElementById('wc-istanbul').previousSibling.nodeValue = t.cityIst + " ";
+    if(document.getElementById('wc-newyork') && document.getElementById('wc-newyork').previousSibling) document.getElementById('wc-newyork').previousSibling.nodeValue = t.cityNy + " ";
+    if(document.getElementById('wc-london') && document.getElementById('wc-london').previousSibling) document.getElementById('wc-london').previousSibling.nodeValue = t.cityLon + " ";
+    if(document.getElementById('wc-tokyo') && document.getElementById('wc-tokyo').previousSibling) document.getElementById('wc-tokyo').previousSibling.nodeValue = t.cityTok + " ";
     
     const noteEl = document.querySelector('.sidebar div p');
     if (noteEl && (noteEl.innerHTML.includes("Quick Note") || noteEl.innerHTML.includes("Kısa Not"))) {
