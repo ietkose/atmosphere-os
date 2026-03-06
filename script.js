@@ -2,6 +2,9 @@
 // ODAKLANMA UYGULAMASI - ANA MOTOR
 // ==========================================
 
+let userBrowserLang = navigator.language || navigator.userLanguage;
+let currentLang = userBrowserLang.toLowerCase().startsWith('tr') ? 'tr' : 'en';
+
 class UIManager {
     constructor() {
         this.menuItems = document.querySelectorAll('.sidebar li');
@@ -824,9 +827,6 @@ document.addEventListener('keydown', (e) => {
 // ==========================================
 // DİL MOTORU (TR / EN)
 // ==========================================
-let userBrowserLang = navigator.language || navigator.userLanguage;
-let currentLang = userBrowserLang.toLowerCase().startsWith('tr') ? 'tr' : 'en';
-
 const translations = {
     'en': {
         fullscreen: "⛶ Fullscreen", minimize: "⛶ Minimize",
