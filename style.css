@@ -520,7 +520,10 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     ------------------------------------------- */
     .brand-sign {
         position: fixed !important; top: 40px !important; left: 50% !important; transform: translateX(-50%) !important; 
-        width: 90% !important; max-width: 400px !important; height: 120px !important; padding: 15px 10px !important; margin: 0 !important; z-index: 9998 !important; 
+        width: 90% !important; 
+        max-width: 400px !important; 
+        padding: 15px 0 !important; 
+        box-sizing: border-box !important; margin: 0 !important; z-index: 9998 !important; 
         display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;
         overflow: visible !important;
         perspective: 1000px !important;
