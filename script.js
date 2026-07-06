@@ -1347,6 +1347,6 @@ window.addEventListener('resize', enforceLandscapeProtection);
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 if(mobileMenuBtn) {
     mobileMenuBtn.addEventListener('click', () => {
-        document.body.classList.toggle('mobile-menu-open'); // Sınıfı ekler veya söker
+        document.body.classList.toggle('mobile-menu-open'); // Sınıfı ekler veya siler
     });
 }
