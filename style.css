@@ -1,11 +1,17 @@
 /* ==========================================
-   ✨ GOOGLE FONTS (Modern ve İnce Tasarım)
+   GOOGLE FONTS
 ========================================== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-/* ==========================================
-   1. ANA İSKELET & BODY
-========================================== */
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    A. PC GÖRÜNÜMÜ (YATAY) 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* ------------------------------------------- 
+    1. BODY 
+------------------------------------------- */
 body {
     margin: 0; padding: 0; overflow: hidden; 
     font-family: 'Poppins', sans-serif;
@@ -20,71 +26,227 @@ body {
     background: rgba(0, 0, 0, 0.15); transition: all 0.5s ease; 
 }
 
-/* ==========================================
-   2. CAM EFEKTİ (GLASSMORPHISM)
-========================================== */
+/* Glassmorphism */
 .glass-panel {
-    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); 
+    background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(8px); 
     -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.25); 
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); 
 }
 h1, h2, h3, p, span, button { text-shadow: 1px 1px 5px rgba(0,0,0,0.6); }
 
-/* --- NEON KIRMIZI MARKA YAZISI --- */
+/* -------------------------------------------
+    2. ATMOSPHERE KUTUSU
+------------------------------------------- */
 .neon-title {
-    color: #ffffff !important; 
-    font-weight: 600 !important; 
-    letter-spacing: 4px !important;
-    text-shadow: 0 0 5px #ff003c, 0 0 10px #ff003c, 0 0 20px #ff003c, 0 0 40px #ff003c !important;
+    font-family: 'Lobster', cursive !important; 
+    font-size: 2.2rem !important; 
+    color: #fff !important; 
+    letter-spacing: 2px !important;
+    text-shadow: 2px 2px 0px #ff003c, 4px 4px 0px #00ff88, 6px 6px 0px rgba(0,0,0,0.5) !important; 
     margin: 10px 0 !important;
+    position: relative; 
+    display: inline-block;
+    transform-style: preserve-3d;
+    animation: spin3D 7s linear infinite; 
 }
 
-/* ==========================================
-   3. SOL VE SAĞ MENÜ (PANEL & AKORDEON)
-========================================== */
-.sidebar {
-    width: 280px; height: 100%; display: flex; flex-direction: column;
-    padding: 20px 20px 50px 20px; box-sizing: border-box; z-index: 10;
-    overflow-y: auto; overflow-x: hidden; 
+.neon-title::before,
+.neon-title::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+    box-shadow: 0 0 10px #fff, 0 0 15px #ff003c; 
+    animation: twinkleStar 1.5s infinite alternate;
+}
+
+.neon-title::before { top: -5px; left: -15px; }
+.neon-title::after { bottom: 5px; right: -10px; animation-delay: 0.5s; }
+
+/* Animasyonlar */
+@keyframes twinkleStar {
+    0% { transform: scale(0.5); opacity: 0.4; }
+    100% { transform: scale(1.3); opacity: 1; } 
+}
+
+@keyframes spin3D {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+.brand-sign {
+    background: rgba(10, 10, 10, 0.6) !important; 
+    backdrop-filter: blur(15px) !important; 
+    -webkit-backdrop-filter: blur(15px) !important; 
+    border: 1px solid rgba(0, 255, 102, 0.2) !important; 
+    border-radius: 16px !important; 
+    padding: 30px 25px !important; 
+    width: 300px !important; 
+    box-sizing: border-box !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important; 
+    position: absolute !important;
+    top: 30px !important;
+    left: 30px !important;
+    z-index: 50 !important;
+}
+
+/* -------------------------------------------
+    3. SOL VE SAĞ MENÜ (PANEL & AKORDEON) 
+------------------------------------------- */
+.side-wrapper {
+    position: relative;
+    width: 360px; 
+    height: 100vh;
+    flex-shrink: 0; 
+    z-index: 10;
     transition: transform 0.6s ease, opacity 0.6s ease;
-    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); border-right: 1px solid rgba(255, 255, 255, 0.25); 
-    box-shadow: 2px 0 15px rgba(0,0,0,0.2); scrollbar-width: none; 
-}
-.sidebar::-webkit-scrollbar { display: none; }
-
-.right-panel {
-    width: 250px; height: 100%; padding: 20px; box-sizing: border-box; z-index: 10; 
-    transition: transform 0.6s ease, opacity 0.6s ease;
-    background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); border-left: 1px solid rgba(255, 255, 255, 0.25); 
-    box-shadow: -2px 0 15px rgba(0,0,0,0.2);
 }
 
-.brand h2 { text-align: center; color: #fff; font-weight: 600; text-shadow: 0 0 15px rgba(255, 255, 255, 0.8); margin: 10px 0; letter-spacing: 2px; }
-.divider { border-color: rgba(255,255,255,0.1); margin: 15px 0; width: 100%; }
+.left-wrapper .sidebar{
+    position: absolute;
+    top: 200px;    
+    bottom: 30px; 
+    width: 300px;
+    margin: 0;
+    height: auto;
+    display: flex; flex-direction: column; padding: 20px; box-sizing: border-box;
+    overflow-y: auto; overflow-x: hidden; border-radius: 15px; scrollbar-width: none;
+}
+.right-wrapper .right-sidebar {
+    position: absolute;
+    top: 30px;    
+    bottom: 200px; 
+    width: 300px;
+    margin: 0;
+    height: auto;
+    display: flex; flex-direction: column; padding: 20px; box-sizing: border-box;
+    overflow-y: auto; overflow-x: hidden; border-radius: 15px; scrollbar-width: none;
+}
+.left-wrapper .sidebar { left: 30px; }
+.right-wrapper .right-sidebar { right: 30px; }
 
-/* Akordeon Sistemi */
+.panel-title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    padding: 5px 5px 15px 5px;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.static-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+}
+
+.static-menu-list li {
+    color: #ccc;
+    padding: 12px 15px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    font-weight: 300;
+    border-radius: 8px; 
+    border: 1px solid transparent;
+}
+
+.static-menu-list li:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    padding-left: 20px;
+}
+
+.static-menu-list li.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15); 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 400;
+}
+
+.theme-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px; 
+}
+
+.theme-menu-list li {
+    color: #ccc;
+    padding: 10px 15px; 
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    font-weight: 300;
+    border-radius: 8px; 
+    border: 1px solid transparent;
+}
+
+.theme-menu-list li:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    padding-left: 20px;
+}
+
+.theme-menu-list li.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15); 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 400;
+}
+
 .accordion-btn {
-    background: transparent; border: none; color: #fff; font-size: 15px; font-weight: 600; width: 100%;
-    text-align: left; cursor: pointer; padding: 10px 0; display: flex; justify-content: space-between; font-family: inherit;
+    background: transparent !important; 
+    border: none; 
+    color: #fff; 
+    font-size: 15px; 
+    font-weight: 600; 
+    width: 100%;
+    text-align: left; 
+    cursor: pointer; 
+    padding: 12px 5px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
-.accordion-content { display: none; animation: fadeIn 0.3s ease-in-out; }
-.accordion-content.show { display: block; }
-.accordion-btn .arrow { display: inline-block; transition: transform 0.3s ease; }
-.accordion-btn.open .arrow { transform: rotate(180deg); }
 
-.accordion-content ul { list-style: none; padding: 0; margin: 10px 0 0 0; display: flex; flex-direction: column; gap: 8px; }
-.accordion-content li {
-    padding: 10px 15px; border-radius: 8px; cursor: pointer; background: rgba(255,255,255,0.05); 
-    border: 1px solid transparent; transition: all 0.3s ease; font-weight: 400; font-size: 13px;
+.accordion-btn:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: translateX(5px);
 }
-.accordion-content li:hover { background: rgba(255,255,255,0.15); transform: translateX(5px); }
-.accordion-content li.active { background: rgba(255, 255, 255, 0.2); border: 1px solid #fff; }
 
-/* ==========================================
-   4. MÜZİK/SES ÇALAR YAPI TAŞLARI
-========================================== */
+.accordion-btn .arrow {
+    font-size: 12px;
+    opacity: 0.8;
+    transition: transform 0.3s ease;
+}
+
+.accordion-content {
+    display: none; 
+    overflow: hidden;
+    flex-direction: column;
+}
+.accordion-content.show {
+    display: flex;
+}
+
+/* Müzik / ses çalar yapı taşları */
 .sidebar-player {
     padding: 15px; border-radius: 10px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.15);
     text-align: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); height: auto; min-height: 80px; overflow: visible; 
@@ -99,9 +261,103 @@ h1, h2, h3, p, span, button { text-shadow: 1px 1px 5px rgba(0,0,0,0.6); }
 .credit-divider { margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.2); width: 100%; }
 .sidebar-player .credit-text { display: block; font-size: 12px; color: #00ff88; font-family: monospace; letter-spacing: 0.5px; text-shadow: 0 0 5px rgba(0, 255, 136, 0.3); }
 
-/* ==========================================
-   5. ORTA SAHNE & KUTULAR (VIEW BOX)
-========================================== */
+/* -------------------------------------------
+    5. COFFEE 
+------------------------------------------- */
+.brand-sign, .coffee-sign {
+    flex-shrink: 0; 
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar::-webkit-scrollbar, .right-sidebar::-webkit-scrollbar { display: none; }
+
+.brand h2 { text-align: center; color: #fff; font-weight: 600; text-shadow: 0 0 15px rgba(255, 255, 255, 0.8); margin: 10px 0; letter-spacing: 2px; }
+.divider { border-color: rgba(255,255,255,0.1); margin: 15px 0; width: 100%; }
+
+.coffee-sign {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 260px;
+    height: 100px;
+    margin: 0;
+}
+
+.support-panel-container {
+    background: rgba(10, 10, 10, 0.6); 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px); 
+    border: 1px solid rgba(0, 255, 102, 0.2); 
+    border-radius: 16px; 
+    padding: 30px 25px !important; 
+    text-align: center; color: #ffffff;
+    width: 300px !important; 
+    box-sizing: border-box !important; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); 
+    position: absolute !important;
+    bottom: 30px !important;
+    right: 30px !important; 
+    z-index: 50 !important;
+}
+
+/* Support Me yazısı */
+.support-content h3 { 
+    display: block !important;
+    visibility: visible !important;
+    
+    font-size: 1.35rem !important; 
+    font-weight: 800 !important;
+    margin-top: 0 !important; 
+    margin-bottom: 15px !important; 
+    
+    background: linear-gradient(90deg, #ff003c, #00ff88) !important; 
+    -webkit-background-clip: text !important; 
+    background-clip: text !important; 
+    -webkit-text-fill-color: transparent !important; 
+    color: transparent !important; 
+    
+    text-shadow: none !important;
+    filter: none !important;
+    -webkit-text-stroke: 0px transparent !important;
+    line-height: 1.2 !important;
+}
+
+.cyber-coffee-btn { 
+    display: inline-flex; 
+    align-items: center; 
+    background-color: #ff003c; 
+    color: #f9f8f8; 
+    padding: 10px 24px; 
+    border-radius: 50px; 
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: all 0.3s ease; 
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.4); 
+}
+
+.cyber-coffee-btn img { 
+    height: 22px; 
+    margin-right: 10px; 
+    filter: grayscale(100%) contrast(200%); 
+}
+
+.cyber-coffee-btn:hover { 
+    transform: translateY(-3px) scale(1.05); 
+    background-color: #ff003c; 
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.8); 
+}
+
+body.fullscreen-mode .left-wrapper { transform: translateX(-100%); opacity: 0; position: absolute; pointer-events: none; }
+body.fullscreen-mode .right-wrapper { transform: translateX(100%); opacity: 0; position: absolute; pointer-events: none; }
+
+/* -------------------------------------------
+    6. ORTA SAHNE & KUTULAR (VIEW BOX)
+------------------------------------------- */
 .main-content { flex-grow: 1; position: relative; display: flex; justify-content: center; align-items: center; z-index: 1; }
 .view-box {
     text-align: center; padding: 25px 40px; border-radius: 15px; min-width: 280px; animation: fadeIn 0.5s ease-in-out; transition: all 0.6s ease;
@@ -115,304 +371,512 @@ h1, h2, h3, p, span, button { text-shadow: 1px 1px 5px rgba(0,0,0,0.6); }
 .glass-btn:hover, .view-box button:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ==========================================
-   6. SİNEMATİK TAM EKRAN MODU
-========================================== */
-body.fullscreen-mode .sidebar { transform: translateX(-100%); opacity: 0; position: absolute; pointer-events: none; }
-body.fullscreen-mode .right-panel { transform: translateX(100%); opacity: 0; position: absolute; pointer-events: none; }
-body.fullscreen-mode .app-container { background: transparent; }
-body.fullscreen-mode .view-box { position: absolute; bottom: 8%; background: transparent; backdrop-filter: none; border: none; box-shadow: none; transform: scale(1.1); }
-
-/* ==========================================
-   7. İNPUT KUTULARI, SAYAÇ VE ALARM
-========================================== */
+/* -------------------------------------------
+    7. İNPUT KUTULARI, SAYAÇ VE ALARM
+------------------------------------------- */
 .input-wrapper {
     display: flex; align-items: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15); 
     border-radius: 8px; transition: all 0.3s ease; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); overflow: hidden; 
 }
+
 .input-wrapper:focus-within {
     border-color: #00ff88 !important; 
     box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 25px rgba(0, 255, 136, 0.4) !important;
     background: rgba(0, 0, 0, 0.6) !important;
 }
+
 .timer-input-group { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 20px; }
 
-#timer-input-hour,
-#timer-input-min, 
-#timer-input-sec {
+#timer-input-hour, #timer-input-min, #timer-input-sec {
     width: 40px !important; height: 35px !important; font-size: 18px !important; padding: 0 !important; margin: 0 !important;
     text-align: center !important; background: transparent !important; border: none !important; color: white !important;
     outline: none !important; box-shadow: none !important;
 }
+
 #alarm-time-input, #birth-date, #birth-time {
     height: 35px !important; font-size: 16px !important; padding: 0 10px !important; text-align: center !important;
     background: transparent !important; border: none !important; color: white !important; outline: none !important;
     box-shadow: none !important; cursor: pointer !important; color-scheme: dark !important; 
 }
-.spin-btn { background: transparent; border: none; color: #b3b3b3; font-size: 18px; cursor: pointer; padding: 5px 10px; transition: 0.3s; }
-.spin-btn:hover { color: #00ff88; transform: scale(1.2); }
 
-input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
-::-webkit-calendar-picker-indicator { filter: invert(1) !important; cursor: pointer !important; opacity: 0.7; transition: 0.3s; }
-::-webkit-calendar-picker-indicator:hover { opacity: 1 !important; }
-::selection { background: rgba(0, 255, 136, 0.4) !important; color: white !important; }
+/* -------------------------------------------
+    7. SİNEMATİK TAM EKRAN MODU
+------------------------------------------- */
+body.fullscreen-mode .left-wrapper { transform: translateX(-100%); opacity: 0; position: absolute; pointer-events: none; }
+body.fullscreen-mode .right-wrapper { transform: translateX(100%); opacity: 0; position: absolute; pointer-events: none; }
+body.fullscreen-mode .app-container { background: transparent; }
+body.fullscreen-mode .view-box { position: absolute; bottom: 8%; background: transparent; backdrop-filter: none; border: none; box-shadow: none; transform: scale(1.1); }
 
-/* ==========================================
-   8. DESTEK PANOSU
-========================================== */
-.right-panel {
-    background-image: url('assets/images/right-panel/uzay.jpg'); background-size: cover; background-position: center; 
-    display: flex; justify-content: center; align-items: center; border-radius: 0px; overflow: hidden; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); min-height: 400px;
-}
-.support-panel-container {
-    background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
-    border: 1px solid rgba(0, 255, 102, 0.2); border-radius: 16px; padding: 35px 25px; text-align: center; color: #ffffff;
-    width: 85%; max-width: 350px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6); 
-}
-.support-content h3 { margin-top: 0; font-size: 1.5rem; background: linear-gradient(90deg, #ff003c, #00ff66); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
-.support-content p { font-size: 0.85rem !important; opacity: 0.7 !important; margin-bottom: 30px !important; line-height: 1.5 !important; }
-.cyber-coffee-btn { display: inline-flex; align-items: center; background-color: #ff003c; color: #000000; padding: 10px 24px; border-radius: 50px; text-decoration: none; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(0, 255, 102, 0.4); }
-.cyber-coffee-btn img { height: 22px; margin-right: 10px; filter: grayscale(100%) contrast(200%); }
-.cyber-coffee-btn:hover { transform: translateY(-3px) scale(1.05); background-color: #ff003c; box-shadow: 0 0 25px rgba(0, 255, 102, 0.8); }
+/* PC modunda menüyü ve telefonu yan çevirme bildirimini gizler */
+@media (min-width: 769px) { #mobile-vibe-hint { display: none !important; } }
+@media (min-width: 769px) { #mobile-menu-btn { display: none !important; } }
 
-/* PC ve geniş ekranlarda mobil uyarı yazısını gizle */
-@media (min-width: 769px) {
-    #mobile-vibe-hint {
-        display: none !important;
-    }
-}
-
-/* Dikey / Yatay Sistem */
+/* */
 @keyframes fadeInOut { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } } 
 
+/* UX Güzelleştirici */
+.spin-btn { background: transparent; border: none; color: #b3b3b3; font-size: 18px; cursor: pointer; padding: 5px 10px; transition: 0.3s; }
+/* Sayaçtaki eksi (-) ve artı (+) butonlarının (spin-btn) ilk baştaki şeffaf, mat gri ve çıtır geçişli ana tasarımı */
 
-/* ==========================================
-   MOBİL DİKEY (PORTRAIT) 
-========================================== */
+.spin-btn:hover { color: #00ff88; transform: scale(1.2); }
+/* Fareyle eksi veya artı butonunun üzerine geldiğinde (hover), butonun siberpunk yeşiline dönmesini ve %20 büyümesini (scale) sağlar */
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+/* Chrome, Edge ve Safari tarayıcılarının input kutularının içine zorla gömdüğü o çirkin yukarı-aşağı ok simgelerini (spinner) tamamen yok eder */
+
+input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+/* Firefox tarayıcısının input kutularının içine gömdüğü o varsayılan ok simgelerini tamamen temizler */
+
+::-webkit-calendar-picker-indicator { filter: invert(1) !important; cursor: pointer !important; opacity: 0.7; transition: 0.3s; }
+/* Doğum haritası kısmındaki yerleşik takvim/saat ikonlarını (varsayılan siyah halinden) ters çevirerek beyaza (invert) boyar ve biraz matlaştırır */
+
+::-webkit-calendar-picker-indicator:hover { opacity: 1 !important; }
+/* Fareyle o takvim ikonunun üzerine gelindiğinde, ikonun opaklığını %100 yaparak parlamasını sağlar */
+
+::selection { background: rgba(0, 255, 136, 0.4) !important; color: white !important; }
+/* Sitedeki herhangi bir yazıyı fareyle basılı tutup seçtiğinde, arkada oluşan o klasik mavi renk yerine, şeffaf bir yeşil parlaması (`rgba(0, 255, 136, 0.4)`) patlatır */
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    B. MOBİL DİKEY (PORTRAIT) 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 @media (max-width: 768px) and (orientation: portrait) {
     body, html { height: 100dvh !important; overflow: hidden !important; }
     
     .app-container {
-        display: flex !important; flex-direction: column !important; 
-        justify-content: flex-start !important; align-items: center !important; 
-        padding-top: 40px !important; gap: 20px !important; padding-bottom: 80px !important; 
-        height: 100dvh !important; overflow-y: auto; overflow-x: hidden;
+        display: flex !important; 
+        flex-direction: column !important; 
+        justify-content: center !important; 
+        align-items: center !important; 
+        padding: 0 !important; 
+        height: 100dvh !important; 
+        box-sizing: border-box !important; 
+        overflow: hidden !important; 
     }
 
-    .sidebar {
-        position: relative !important; width: 90% !important; max-width: 400px !important; 
-        height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
-        flex: 0 0 200px !important; margin: 0 !important; padding: 15px; 
-        z-index: 10 !important; border-radius: 20px !important; box-sizing: border-box !important;
+    /* ------------------------------------------- 
+        1. ARROW MENU 
+    ------------------------------------------- */
+    #mobile-menu-btn {
+        display: flex !important; align-items: center !important; justify-content: center !important;
+        position: fixed !important; top: 48.30% !important; transform: translateY(-50%) !important; left: 0 !important;
+        z-index: 25000 !important; font-size: 16px !important; width: 30px !important; height: 60px !important; padding: 1 !important; 
+        background: rgba(10, 10, 10, 0.95) !important; backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important;
+        border: 2px solid rgba(0, 255, 102, 0.3) !important; border-left: 2px solid rgba(0, 255, 102, 0.3) !important; color: #00ff66 !important;
+        border-radius: 0 10px 10px 0 !important; cursor: pointer !important; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s, border-color 0.3s !important;
     }
 
+    #mobile-menu-btn { color: transparent !important; text-shadow: none !important; }
+    #mobile-menu-btn::before { content: "▶" !important; color: #00ff66 !important; display: block !important; font-size: 12px !important; line-height: 1 !important; }
+
+    body.mobile-menu-open #mobile-menu-btn { left: 315px !important; background: rgba(0, 255, 102, 0.15) !important; border-color: rgba(0, 255, 102, 0.4) !important; }
+    body.mobile-menu-open #mobile-menu-btn::before { content: "◀" !important; }
+
+    .side-wrapper, .left-wrapper, .right-wrapper { position: absolute !important; width: 0 !important; height: 0 !important; }
+
+    .left-wrapper .sidebar {
+        position: fixed !important; width: 320px !important; height: calc(49vhpx) !important; top: 0px !important;
+        background: rgba(10, 10, 10, 0.98) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(0, 255, 102, 0.2) !important; border-bottom: none !important; border-radius: 0 20px 0 0 !important; 
+        z-index: 20000 !important; overflow-y: auto !important; overflow-x: hidden !important; padding: 15px 12px !important; box-sizing: border-box !important;
+        left: -360px !important; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important; box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .right-wrapper .right-sidebar {
+        position: fixed !important; width: 320px !important; top: 49vh !important; height: calc(51vh - 69px) !important; 
+        background: rgba(10, 10, 10, 0.98) !important; backdrop-filter: blur(20px) !important; -webkit-backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(0, 255, 102, 0.2) !important; border-top: 1px dashed rgba(0, 255, 102, 0.3) !important; border-radius: 0 0 20px 0 !important; 
+        z-index: 20000 !important; overflow-y: auto !important; overflow-x: hidden !important; padding: 15px 12px !important; box-sizing: border-box !important;
+        left: -360px !important; right: auto !important; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important; box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .left-wrapper .sidebar::-webkit-scrollbar, .right-wrapper .right-sidebar::-webkit-scrollbar { display: none !important; }
+    body.mobile-menu-open .left-wrapper .sidebar, body.mobile-menu-open .right-wrapper .right-sidebar { left: 0 !important; }
+
+    .sidebar h2, .right-sidebar h2 { font-size: 0.9rem !important; font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 1px !important; color: rgba(255, 255, 255, 0.6) !important; margin-bottom: 12px !important; }
+    .static-menu-list li, .theme-menu-list li { padding: 8px 10px !important; font-size: 0.8rem !important; border-radius: 6px !important; }
+    .sidebar-player { width: 100% !important; box-sizing: border-box !important; padding: 8px !important; margin-top: 4px !important; margin-bottom: 4px !important; background: rgba(255, 255, 255, 0.03) !important; border-radius: 6px !important; }
+    .sidebar-player span, .audio-name { font-size: 0.75rem !important; }
+    .sidebar-player button { padding: 4px 8px !important; font-size: 0.75rem !important; }
+    .sidebar-player .controls { display: flex !important; gap: 5px !important; margin-top: 5px !important; }
+    .sidebar-player button i { margin: 0 !important; font-size: 0.7rem !important; }
+    .sidebar-player input[type="range"] { height: 3px !important; width: 60px !important; }
+    
+    .static-menu-list li *, .theme-menu-list li *, .static-menu-list a, .theme-menu-list a { font-size: 0.8rem !important; line-height: 1.2 !important; }
+    .static-menu-list, .theme-menu-list { margin: 0 !important; padding: 0 !important; display: flex !important; flex-direction: column !important; gap: 6px !important; }
+    .sidebar i, .right-sidebar i { font-size: 0.85rem !important; width: 16px !important; text-align: center !important; margin-right: 6px !important; }
+    .menu-group { margin-bottom: 7px !important; }
+
+    .accordion-header, .accordion-btn, [class*="accordion-trigger"], [class*="menu-header"] { padding: 6px 10px !important; margin: 2px 0 !important; min-height: auto !important; height: 32px !important; display: flex !important; align-items: center !important; }
+    .accordion-header h3, .accordion-btn span, [class*="accordion"] h2, [class*="accordion"] h3 { font-size: 0.8rem !important; font-weight: 500 !important; margin: 0 !important; }
+    .accordion-content, .accordion-body, [class*="accordion-panel"], [class*="collapse-box"] { padding: 6px 4px !important; margin: 0 !important; background: rgba(0, 0, 0, 0.2) !important; border-radius: 4px !important; }
+    .accordion-content ul, .accordion-body li, [class*="content-list"] { gap: 4px !important; margin-top: 4px !important; }
+    .accordion-header i, .accordion-btn::after, [class*="accordion"] .icon { font-size: 0.75rem !important; }
+
+    /* -------------------------------------------
+        2. DİKEY ÜST ATMOSPHERE KUTUSU
+    ------------------------------------------- */
+    .brand-sign {
+        position: fixed !important; top: 40px !important; left: 50% !important; transform: translateX(-50%) !important; 
+        width: 90% !important; max-width: 400px !important; height: 120px !important; padding: 15px 10px !important; margin: 0 !important; z-index: 9998 !important; 
+        display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important;
+    }
+
+    .neon-title { font-size: 1.8rem !important; margin: 0 !important; animation: spin3D 7s linear infinite !important; }
+
+    /* -------------------------------------------
+        3. ORTA KUTU
+    ------------------------------------------- */
     .main-content {
-        position: relative !important; width: 90% !important; max-width: 400px !important;
-        height: 200px !important; min-height: 200px !important; max-height: 200px !important; 
-        flex: 0 0 200px !important; margin: 10px auto 0 auto !important;; padding: 0 !important;
-        display: flex; justify-content: center; align-items: flex-start; 
+        position: relative !important; width: 90% !important; max-width: 400px !important; margin-top: 75px !important; margin-left: auto !important; margin-right: auto !important; 
+        height: auto !important; max-height: 320px !important; min-height: 320px !important; display: flex !important; justify-content: center !important; align-items: flex-start !important; 
         z-index: 20 !important; box-sizing: border-box !important;
     }
-    
-    .view-box {
-        width: 100% !important; height: 100% !important; margin: 0 !important; padding: 15px 10px !important;
-        overflow-y: auto !important; overflow-x: hidden !important; 
-        border-radius: 20px !important; box-sizing: border-box !important; 
-    }
 
+    body.mobile-menu-open .main-content { z-index: 1 !important; }
+    .main-content .view-box::-webkit-scrollbar { display: none !important; }
+
+    .view-box { width: 100% !important; height: 100% !important; margin: 0 !important; padding: 15px 10px !important; overflow-y: auto !important; overflow-x: hidden !important; border-radius: 20px !important; box-sizing: border-box !important; }
+    
     .view-box[style*="block"] {
-        display: flex !important; flex-direction: column !important; 
-        justify-content: flex-start !important; align-items: center !important;
-    }
-    #clock-view.view-box[style*="block"] { justify-content: center !important; }
-
-    .view-box h1, .timer-display { font-size: 2.2rem !important; text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important; font-variant-numeric: tabular-nums !important; margin-top: 10px !important; }
-    .view-box h2 { font-size: 1.5rem !important; margin: 5px 0 10px 0 !important; display: block !important; visibility: visible !important; color: white !important;} 
-    .view-box h3, .view-box p { font-size: 0.95rem !important; }
-
-    /* ==========================================
-       1. TIMER KUTULARI VE NEONLARI
-    ========================================== */
-    #timer-input-hour, #timer-input-min, #timer-input-sec {
-        width: 40px !important; height: 35px !important; font-size: 18px !important;
-        padding: 0 !important; margin: 0 !important; text-align: center !important;
-        background: transparent !important; border: none !important; color: white !important;
-    }
-    
-    .timer-input-group { 
-        transform: scale(0.9); 
-        margin-bottom: 5px !important; 
-    } 
-    
-    /* Timer kutusunun içindeki inputa tıklandığında yanacak ışık */
-    .timer-input-group .input-wrapper:focus-within {
-        border-color: #00ff88 !important; 
-        box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 25px rgba(0, 255, 136, 0.4) !important;
-        background: rgba(0, 0, 0, 0.6) !important;
-        outline: none !important; 
-    }
-
-    /* JS yardımıyla + / - tuşlarına basıldığında neon parlar */
-    .timer-input-group .input-wrapper.neon-active {
-        border-color: #00ff88 !important; 
-        box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 25px rgba(0, 255, 136, 0.4) !important;
-        background: rgba(0, 0, 0, 0.6) !important;
-    }
-
-    /* ==========================================
-       2. ALARM KUTUSU, INPUTU VE BUTONU
-    ========================================== */
-    #alarm-view .input-wrapper {
-        width: 100px !important; 
-        min-width: 100px !important; 
-        flex-shrink: 0 !important;
-    } 
-    
-    #alarm-view .input-wrapper:focus-within {
-        border-color: #00ff88 !important; 
-        box-shadow: 0 0 10px rgba(0, 255, 136, 0.8) !important;
-    }
-
-    #alarm-time-input {
-        width: 100% !important; 
-        flex-shrink: 0 !important;
-        text-align: center !important; 
-        padding: 0 !important;
-    }
-    
-    #btn-set-alarm { 
-        display: inline-block !important; 
-        visibility: visible !important; 
-        opacity: 1 !important; 
-        margin-top: 10px !important; 
-    }
-
-    /* ==========================================
-       3. BIRTH CHART KUTULARI VE INPUTLARI
-    ========================================== */
-    #birth-chart-view .input-wrapper { 
         display: flex !important; 
-        width: max-content !important; 
-        min-width: 100px !important; 
-        margin: 0 auto 15px auto !important; 
-        height: 40px !important;
-    }
-    
-    #birth-chart-view .input-wrapper:focus-within {
-        border-color: #00ff88 !important; 
-        box-shadow: 0 0 10px rgba(0, 255, 136, 0.8) !important;
+        flex-direction: column !important; 
+        justify-content: flex-end !important; 
+        align-items: center !important; 
+        gap: 20px !important; 
     }
 
-    #birth-date, #birth-time { 
-        display: flex !important; 
-        height: 100% !important;
-        background: transparent !important; 
-        border: none !important; color: white !important;
-        font-size: 1.1rem !important; cursor: pointer !important; color-scheme: dark !important;
-        -webkit-appearance: auto !important; appearance: auto !important; margin: 0 !important; padding: 0 !important;
-        align-items: center !important;  /* Hayali X-ekseninin tam üzerine oturtur */
-        line-height: 1 !important;
+    /* Home tab kutusunun iç dizaynı */
+    #clock-view.view-box[style*="block"] { justify-content: center !important; padding-top: 0 !important; padding-bottom: 0 !important; gap: 0 !important; }
+    /* Timer tab kutusunun iç dizaynı */
+    #timer-view.view-box[style*="block"] { padding-top: 25px !important; padding-bottom: 35px !important; }
+    /* World clock tab kutusunun iç dizaynı */
+    #world-clock-view.view-box[style*="block"] { padding-top: 20px !important; padding-bottom: 45px !important; justify-content: flex-start !important; }
+
+    /* Stopwatch tab kutusunun iç dizaynı */
+    #stopwatch-view.view-box[style*="block"] {
+        display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important;
+        height: 320px !important; min-height: 320px !important; max-height: 320px !important; overflow: hidden !important; padding: 15px 12px !important; box-sizing: border-box !important;
     }
+    #stopwatch-view.view-box[style*="block"] h2, #stopwatch-view.view-box[style*="block"] h1, #stopwatch-view.view-box[style*="block"] .stopwatch-controls { flex-shrink: 0 !important; }
+    #laps-container { width: 100% !important; max-height: 140px !important; flex-shrink: 1 !important; overflow-y: auto !important; overflow-x: hidden !important; scrollbar-width: none !important; margin-top: 10px !important; padding-right: 5px !important; }
+    #laps-container::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+
+    /* Alarm tab kutusunun iç dizaynı */
+    #alarm-view.view-box[style*="block"] {
+        display: flex !important; flex-direction: column !important; justify-content: flex-start !important; align-items: center !important;
+        height: 320px !important; min-height: 320px !important; max-height: 320px !important; overflow-y: auto !important; overflow-x: hidden !important;
+        scrollbar-width: none !important; flex-shrink: 0 !important; padding-top: 40px !important; padding-bottom: 10px !important; padding-left: 7px !important; padding-right: 7px !important; box-sizing: border-box !important;
+    }
+    #alarm-view.view-box[style*="block"]::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+
+    /* Birth Chart tab kutusunun iç dizaynı */
+    #birth-chart-view.view-box[style*="block"] {
+        display: flex !important; flex-direction: column !important; justify-content: flex-start !important; align-items: center !important;
+        height: 320px !important; min-height: 320px !important; max-height: 320px !important; overflow-y: auto !important; overflow-x: hidden !important;
+        scrollbar-width: none !important; flex-shrink: 0 !important; padding-top: 50px !important; padding-bottom: 10px !important; box-sizing: border-box !important;
+    }
+    #birth-chart-view.view-box[style*="block"]::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+
+    .timer-input-group, .stopwatch-controls, .timer-input-group + .stopwatch-controls, #stopwatch-view div[class*="controls"], #timer-view div[class*="controls"] { 
+        display: flex !important; flex-direction: row !important; justify-content: center !important; align-items: center !important; flex-wrap: nowrap !important; gap: 10px !important; width: 100% !important; 
+    }
+
+    .view-box h1, .timer-display { font-size: 2.2rem !important; text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important; font-variant-numeric: tabular-nums !important; margin: 0 !important; }
     
-    /* Doğum haritası için özel genişlikler */
+    .view-box h2 { font-size: 1.5rem !important; margin: 0 !important; display: block !important; visibility: visible !important; color: white !important;} 
+
+    .view-box h3, .view-box p { font-size: 0.95rem !important; margin: 0 !important; }
+
+    #timer-input-hour, #timer-input-min, #timer-input-sec { width: 40px !important; height: 35px !important; font-size: 18px !important; padding: 0 !important; margin: 0 !important; text-align: center !important; background: transparent !important; border: none !important; color: white !important; }
+    
+    .timer-input-group { transform: scale(0.9); margin-bottom: 5px !important; } 
+
+    .timer-input-group .input-wrapper:focus-within { border-color: #00ff88 !important; box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 25px rgba(0, 255, 136, 0.4) !important; background: rgba(0, 0, 0, 0.6) !important; outline: none !important; }
+
+    .timer-input-group .input-wrapper.neon-active { border-color: #00ff88 !important; box-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 25px rgba(0, 255, 136, 0.4) !important; background: rgba(0, 0, 0, 0.6) !important; }
+
+    #alarm-view .input-wrapper { width: 100px !important; min-width: 100px !important; flex-shrink: 0 !important; } 
+
+    #alarm-view .input-wrapper:focus-within { border-color: #00ff88 !important; box-shadow: 0 0 10px rgba(0, 255, 136, 0.8) !important; }
+
+    #alarm-time-input { width: 100% !important; flex-shrink: 0 !important; text-align: center !important; padding: 0 !important; }
+
+    #btn-set-alarm { display: inline-block !important; visibility: visible !important; opacity: 1 !important; margin-top: 10px !important; }
+
+    #birth-chart-view .input-wrapper { display: flex !important; width: max-content !important; min-width: 100px !important; margin: 0 auto 15px auto !important; height: 40px !important; }
+
+    #birth-chart-view .input-wrapper:focus-within { border-color: #00ff88 !important; box-shadow: 0 0 10px rgba(0, 255, 136, 0.8) !important; }
+    
+    #birth-date, #birth-time { display: flex !important; height: 100% !important; background: transparent !important; border: none !important; color: white !important; font-size: 1.1rem !important; cursor: pointer !important; color-scheme: dark !important; -webkit-appearance: auto !important; appearance: auto !important; margin: 0 !important; padding: 0 !important; align-items: center !important; line-height: 1 !important; }
+
     #birth-date { width: 120px !important; }
+    
     #birth-time { width: 120px !important; }
 
-    /* ==========================================
-       4. GENEL İOS SAAT İKONU
-    ========================================== */
-    ::-webkit-calendar-picker-indicator { 
-        display: block !important; 
-        filter: invert(1) !important; 
-        opacity: 1 !important; 
-        font-size: 1.2rem !important; 
-        cursor: pointer !important; 
-        margin-left: 5px !important; 
-    }
+    ::-webkit-calendar-picker-indicator { display: block !important; filter: invert(1) !important; opacity: 1 !important; font-size: 1.2rem !important; cursor: pointer !important; margin-left: 5px !important; }
+    
+    .view-box::-webkit-scrollbar { display: none; }
 
-    .view-box::-webkit-scrollbar { display: none; } 
-
-    #mobile-vibe-hint { 
-        position: static !important; display: flex; flex-direction: column; align-items: center; justify-content: center; 
-        text-align: center; 
-        margin: 25px 0 0 0 !important; /* Konumunu aşağı çekmek için */
-        animation: fadeInOut 3s infinite ease-in-out; 
-    }
+    #mobile-vibe-hint { position: relative !important; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; top: 10px !important; margin: 25px 0 0 0 !important; animation: fadeInOut 3s infinite ease-in-out; }
+    
     #mobile-vibe-hint p { font-size: 12px; color: #cdcccc; margin: 5px 0 0 0; max-width: 250px; line-height: 1.4; }
+    
     #mobile-vibe-hint strong { color: #00ff88; text-shadow: 0 0 5px rgba(0, 255, 136, 0.4); }
+
     .pulse-icon { font-size: 18px; animation: pulse 2s infinite; }
-
-    .right-panel {
-        position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important;
-        height: auto !important; min-height: 70px !important; padding: 18px 25px 18px 25px !important; 
-        background: rgba(5, 5, 5, 0.95) !important; 
-        
-        /* Üstteki yeşil çerçeve kaldı */
+    
+    /* -------------------------------------------
+        4. MOBİL DİKEY COFFEE KUTUSU
+    ------------------------------------------- */
+    .support-panel-container, .right-panel { 
+        position: fixed !important; 
+        bottom: 0 !important; 
+        left: 0 !important; 
+        right: 0 !important; 
+        top: auto !important; 
+        width: 100vw !important; 
+        height: 70px !important; 
+        min-height: 70px !important; 
+        padding: 0 25px !important; 
+        margin: 0 !important;
+        background: rgba(10, 10, 10, 0.95) !important; 
+        backdrop-filter: blur(15px) !important; 
+        -webkit-backdrop-filter: blur(15px) !important;
+        border: none !important; 
         border-top: 2px solid rgba(0, 255, 102, 0.3) !important; 
+        border-radius: 0 !important; 
+        z-index: 10005 !important; 
+        box-sizing: border-box !important; 
+        transform: none !important; 
         
-        /* Çerçeveleri yok ettik */
-        border-left: none !important;
-        border-right: none !important;
-        border-bottom: none !important;
-        
-        display: flex !important; align-items: center !important; z-index: 9999 !important; border-radius: 0 !important;
-        box-sizing: border-box !important;
+        display: flex !important; 
+        flex-direction: row !important; 
+        align-items: center !important; 
+        justify-content: center !important; 
     }
-    .support-panel-container { background: transparent !important; border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; }
-    .support-content { display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: space-between !important; width: 100% !important; }
-    .support-content h3 { font-size: 1.1rem !important; margin: 0 !important; }
-    .support-content p { display: none !important; }
-    .cyber-coffee-btn { padding: 8px 15px !important; font-size: 11px !important; margin: 0 !important; border-radius: 20px !important; }
 
-    #btn-fullscreen { display: none !important; }
+    .support-content { 
+        display: flex !important; 
+        flex-direction: row !important; 
+        align-items: center !important; 
+        
+        /* Başlık ve buton ekranın zıt köşelerine kaçmak yerine merkezde buluşur */
+        justify-content: center !important; 
+        width: 100% !important; 
+        
+        /* Başlık ile kahve butonu arasındaki mesafeyi bu gap değeriyle milimetrik olarak ayarlarız */
+        gap: 80px !important; 
+    }
+
+    /* Support Me başlığının support-content'inin HTML'deki tüm üst sınıflarını zincirleme dizerek tarayıcıya bu kuralın en öncelikli kural olduğunu söylüyoruz */
+    html body .app-container .side-wrapper.right-wrapper .support-panel-container .support-content h3 { 
+        display: block !important;
+        visibility: visible !important;
+        
+        margin-top: 0 !important; 
+        margin-bottom: 0 !important;
+        font-size: 1.3rem !important; 
+        
+        background: linear-gradient(90deg, #ff003c, #00ff66) !important; 
+        -webkit-background-clip: text !important; 
+        background-clip: text !important; 
+        -webkit-text-fill-color: transparent !important; 
+        color: transparent !important; 
+        
+        text-shadow: none !important;
+        filter: none !important;
+        -webkit-text-stroke: 0px transparent !important;
+        line-height: 1.2 !important;
+    }
+
+    .support-content p, #btn-fullscreen { 
+        display: none !important; 
+    } 
+
+    .cyber-coffee-btn { 
+        margin: 0 !important; 
+        padding: 8px 15px !important; 
+        font-size: 12px !important; 
+        border-radius: 20px !important; 
+        background-color: #ff003c !important;
+        color: white !important;
+        font-weight: bold !important;
+        text-decoration: none !important;
+        display: inline-flex !important;
+        align-items: center !important;
+    }
+
+    /* -------------------------------------------
+        5. KRONOMETRE VE SAYAÇ İÇİN DİKEYDE MİKRO ÖLÇEKLENDİRME 
+    ------------------------------------------- */
+    #stopwatch-view .glass-btn {
+        padding: 6px 10px !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.5px !important;
+        white-space: nowrap !important; 
+        border-radius: 7px !important; 
+    }
+
+    #timer-view .spin-btn {
+        width: 25px !important;    
+        height: 100% !important;   
+        padding: 0 !important;    
+        margin: 0 !important;      
+        font-size: 14px !important;
+        font-weight: bold !important;
+        line-height: 32px !important; 
+        text-align: center !important; 
+        background: transparent !important;
+        color: #b3b3b3 !important;
+        cursor: pointer !important;
+        flex-shrink: 0 !important; 
+    }
+
+    #timer-view .input-wrapper input[type="number"] {
+        width: 45px !important;    
+        height: 100% !important;
+        font-size: 15px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        text-align: center !important;
+        background: transparent !important;
+        border: none !important;
+        color: white !important;
+        flex-shrink: 0 !important;
+        
+        appearance: none !important;
+        -moz-appearance: textfield !important;
+    }
+
+    #timer-view .input-wrapper input[type="number"]::-webkit-outer-spin-button,
+    #timer-view .input-wrapper input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+        margin: 0 !important;
+    }
+
+    .timer-input-group {
+        gap: 4px !important; 
+        transform: scale(0.9) !important; 
+    }
 }
 
-/* ==========================================
-    MOBİL YATAY (LANDSCAPE)
-========================================== */
-@media (max-width: 950px) and (orientation: landscape) {
-    .sidebar, .right-panel, #mobile-vibe-hint, #btn-fullscreen { display: none !important; }
-    #world-clock-view, #birth-chart-view { display: none !important; }
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    C. MOBİL YATAY (LANDSCAPE)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+@media (max-width: 950px) and (orientation: landscape) {
+    .sidebar, .right-panel, #mobile-vibe-hint, #btn-fullscreen, #mobile-menu-btn, .brand-sign, .support-panel-container { 
+        display: none !important; 
+    }
+
+    /* -------------------------------------------
+        1. MOBİL YATAY FEATURES KUTUSU
+    ------------------------------------------- */
     body, html { height: 100dvh !important; width: 100vw !important; overflow: hidden !important; background-size: cover !important; background-position: center center !important; }
     .app-container { background: transparent !important; display: flex !important; height: 100dvh !important; width: 100vw !important; }
     .main-content { margin: 0 !important; padding: 0 !important; height: 100dvh !important; width: 100vw !important; position: relative !important; display: block !important; transform: none !important; }
 
-    .view-box {
-        background: rgba(0, 0, 0, 0.15) !important; border: 1px solid rgba(0, 255, 136, 0.35) !important; 
-        box-shadow: 0 0 20px rgba(0, 255, 136, 0.15) !important; backdrop-filter: blur(10px) !important; 
-        border-radius: 20px !important; padding: 10px 25px !important;
-        
-        width: max-content !important; min-width: 300px !important; max-width: 95vw !important; 
-        height: 60px !important; min-height: 60px !important; max-height: 60px !important;
-        overflow: hidden !important; 
-        
-        position: absolute !important; bottom: 30px !important; left: 50% !important; transform: translateX(-50%) !important; 
+    /* .view-box yerine body:not(.fullscreen-mode) .view-box yazarsak buradaki kurallar PC'deki tam ekran kurallarını ezemez */
+    body:not(.fullscreen-mode) .view-box {
+        background: transparent !important; 
+        border: none !important; 
+        box-shadow: none !important; 
+        backdrop-filter: none !important; 
+        -webkit-backdrop-filter: none !important;
+        padding: 0 !important; 
+        border-radius: 0 !important;
+        width: max-content !important; 
+        min-width: 300px !important; 
+        max-width: 95vw !important; 
+        height: auto !important; 
+        min-height: auto !important; 
+        max-height: auto !important;
+        overflow: visible !important; 
+        position: absolute !important; 
+        bottom: 8% !important; 
+        left: 50% !important; 
+        transform: translateX(-50%) scale(1.1) !important; 
         box-sizing: border-box !important;
     }
 
-    .view-box[style*="block"] {
-        display: flex !important; flex-direction: row !important; 
+    /* Sadece dikey modda devreye giren dikey yığılmayı (flex-direction: column) yatay modda tamamen iptal edip row düzenini garantiliyoruz */
+    .view-box[style*="block"], #clock-view[style*="block"], #alarm-view[style*="block"] {
+        display: flex !important; 
+        flex-direction: row !important; 
         align-items: center !important; 
-        align-content: center !important;
         justify-content: center !important; 
-        flex-wrap: nowrap !important; gap: 15px !important;
-    }
-
+        flex-wrap: nowrap !important; 
+        gap: 20px !important; 
+    } 
     .view-box * { margin-top: 0 !important; margin-bottom: 0 !important; }
 
-    .view-box h1, .timer-display, #sw-display { font-size: 1.4rem !important; text-shadow: 0 0 15px rgba(0, 255, 136, 0.8) !important; margin: 0 !important; font-variant-numeric: tabular-nums !important; line-height: 1 !important;}
-    .view-box h2 { font-size: 1.1rem !important; margin: 0 !important; display: block !important; line-height: 1 !important; color: #ddd !important; font-weight: 400 !important; white-space: nowrap !important;}
+    .view-box h1, .timer-display, #sw-display { 
+        font-size: 1.8rem !important; text-shadow: 0 0 15px rgba(0, 255, 136, 0.6) !important; font-variant-numeric: tabular-nums !important; line-height: 1 !important;
+    }
+    
+    .view-box h2 { 
+        font-size: 1.3rem !important; display: block !important; line-height: 1 !important; color: rgba(255, 255, 255, 0.8) !important; font-weight: 400 !important; white-space: nowrap !important;
+    }
+
     .view-box h3, .view-box p { font-size: 0.7rem !important; opacity: 0.8 !important; margin: 0 !important; line-height: 1 !important;}
 
-    .timer-controls, .timer-input-group, .stopwatch-controls, 
-    #btn-set-alarm, #btn-cancel-alarm, #alarm-controls, #alarm-time-input, 
-    #btn-calculate-zodiac, .input-wrapper, #alarm-status, #zodiac-result, #laps-container,
-    #timer-credit-box, #alarm-credit-box {
+    /* Mobil yatay görünümde gizlenilecekler */
+    #alarm-view .input-wrapper,
+    #alarm-view .input-wrapper *,
+    #alarm-time-input,
+    .timer-controls, 
+    .timer-input-group, 
+    #timer-credit-box,
+    .stopwatch-controls,
+    #btn-calculate-zodiac, 
+    #zodiac-result, 
+    #laps-container, 
+    .view-box button,
+    .view-box .glass-btn,
+    .time-date-input,
+    #btn-set-alarm,
+    #btn-cancel-alarm,
+    #alarm-controls,
+    #alarm-controls button,
+    #alarm-credit-box {
         display: none !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        pointer-events: none !important;
+    }
+
+    #birth-chart-view .input-wrapper,
+    #birth-chart-view .input-wrapper *,
+    #birth-date, 
+    #birth-time {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Ana alarm görünüm kutusunu sadece başlık ve durum yazısı olarak yan yana hizala */
+    #alarm-view[style*="block"] {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        width: max-content !important;
+    }
+
+    #alarm-status,
+    #date-display {
+        font-size: 1.1rem !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: inline-block !important;
+        width: auto !important;
+        color: white !important;
+        text-shadow: 0 0 15px rgba(0, 255, 136, 0.6) !important;
     }
 }
-

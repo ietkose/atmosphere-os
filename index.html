@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Atmosphere OS - Focus, Relax & Vibe</title>
+    <title>Atmosphere - Focus, Relax & Vibe</title>
     <meta name="google-site-verification" content="IHjCJJ4IDxa6epoXpQLy9RDhUSym5mTkWTMq412_aLg" />
 
     <link rel="stylesheet" href="style.css">
@@ -12,25 +12,30 @@
     <link rel="icon" type="image/png" href="/favicon.png?v=2">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 
-    <meta name="description" content="Atmosphere OS: Your 'lo-fi & chill' space for focus & relaxation. Odaklanma ve rahatlama mekanınız. Visual/music themes, timer & productivity tools.">
+    <meta name="description" content="Atmosphere: Your 'lo-fi & chill' space for focus & relaxation. Odaklanma ve rahatlama mekanınız. Visual/music themes, timer & productivity tools.">
     <meta name="keywords" content="focus, relax, audios, ambient sounds, music themes, visual themes, stopwatch, timer, alarm, world clock, birth chart, productivity, odaklanma, rahatlama, sesler, ambiyans sesleri, müzik temaları, görsel temalar, kronometre, sayaç, dünya saatleri, doğum haritası, üretkenlik">
-    <meta name="author" content="Atmosphere OS">
+    <meta name="author" content="Atmosphere">
 </head>
 
 <body>
+    <!-- Sayfanın içerisindeki her şey -->
     <div class="app-container">
-        
-        <nav class="sidebar glass-panel">
-            <div class="brand">
-                <h2 class="neon-title">ATMOSPHERE</h2>
-            </div>
-            
-            <hr class="divider">
 
-            <div class="menu-group">
-                <button class="accordion-btn"> &nbsp; FEATURES<span class="arrow">▼</span></button>
-                <div class="accordion-content">
-                    <ul id="features-list">
+        <!-- Sayfada sol alan yarattık -->
+        <div class="side-wrapper left-wrapper">
+
+            <!-- ATMOSPHERE KUTUSU -->
+            <div class="brand-sign glass-panel">
+                <h2 class="neon-title">ATMOSPHERE</h2>
+                <p style="color: #00ff88; margin: 0; font-size: 13px; letter-spacing: 2px; font-weight: 300;">Focus, Relax & Vibe</p>
+            </div>
+
+            <!-- SOL PANEL KUTUSU -->
+            <nav class="sidebar glass-panel">
+                <div class="menu-group">
+                    <h3 class="panel-title accordion-btn">FEATURES</h3>
+        
+                    <ul id="features-list" class="static-menu-list">
                         <li class="active tab-link" onclick="openTab(event, 'clock-view')">&#x21A0; &nbsp; Home</li>
                         <li class="tab-link" onclick="openTab(event, 'stopwatch-view')">&#x21A0; &nbsp; Stopwatch</li>
                         <li class="tab-link" onclick="openTab(event, 'timer-view')">&#x21A0; &nbsp; Timer</li>
@@ -39,110 +44,25 @@
                         <li class="tab-link" onclick="openTab(event, 'birth-chart-view')">&#x21A0; &nbsp; Birth Chart</li>
                     </ul>
                 </div>
-            </div>
-
-            <hr class="divider">
-
-            <div class="menu-group">
-                <button class="accordion-btn">
-                    <span style="margin-left: 10px;"> VISUAL THEMES</span>
-                    <span class="arrow">▼</span>
-                </button>
-                <div class="accordion-content">
-                    <ul id="themes-list" style="list-style: none; padding: 0; margin: 10px 0 0 0; display: flex; flex-direction: column; gap: 8px;">
-                        <li onclick="changeTheme('cowboy-era')">&#x21A0; &nbsp; Cowboy Era</li>
-                        <li onclick="changeTheme('cyber-world')">&#x21A0; &nbsp; Cyber World</li>
-                        <li onclick="changeTheme('dark-fantasy')">&#x21A0; &nbsp; Dark Fantasy</li>
-                        <li onclick="changeTheme('light-fantasy')">&#x21A0; &nbsp; Light Fantasy</li>
-                        <li onclick="changeTheme('jazz-romance')">&#x21A0; &nbsp; Jazz & Romance</li>
-                        <li onclick="changeTheme('rock-n-roll')">&#x21A0; &nbsp; Rock n' Roll</li>
-                    </ul>
-                </div>
-            </div>
-
-            <hr class="divider">
-
-            <div class="menu-group" style="margin-top: 10px;">
-                <button class="accordion-btn"> &nbsp; AUDIOS <span class="arrow">▼</span></button>
-                
-                <div class="accordion-content" style="padding-left: 10px; border-left: 2px solid rgba(255,255,255,0.1); margin-left: 5px;">
-                    
-                    <button class="accordion-btn" style="font-size: 14px; color: #d9d7d7;"> &nbsp; AMBIENT SOUNDS <span class="arrow">▼</span></button>
-                    <div class="accordion-content">
-                        <ul style="list-style: none; padding: 0; margin: 5px 0 10px 0; display: flex; flex-direction: column; gap: 5px;">
-                            <li id="btn-winter-wind" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('winter-wind')">&#x21A0; &nbsp; Winter Wind</li>
-                            <li id="btn-rain" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('rain')">&#x21A0; &nbsp; Rain</li>
-                            <li id="btn-birds" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('birds')">&#x21A0; &nbsp; Birds</li>
-                            <li id="btn-birds-rain" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('birds-rain')">&#x21A0; &nbsp; Birds in the Rain</li>
-                            <li id="btn-waves-seagulls" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('waves-seagulls')">&#x21A0; &nbsp; Waves & Seagulls</li>
-                            <li id="btn-fire" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('fire')">&#x21A0; &nbsp; Fireplace</li>
-                            <li id="btn-cafe-noise" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('cafe-noise')">&#x21A0; &nbsp; Cafe Ambience</li>
-                            <li id="btn-train" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('train')">&#x21A0; &nbsp; Train Journey</li>
-                            <li id="btn-koto-japanese-zither" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('koto-japanese-zither')">&#x21A0; &nbsp; Koto (Japanese Zither)</li>
-                        </ul>
-
-                        <div class="sidebar-player glass-panel" style="margin-top: 10px;">
-                            <div class="player-controls">
-                                <button id="btn-sounds-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
-                            </div>
-    
-                            <div class="credit-divider"></div>
-    
-                            <div class="track-info-mini">
-                                <span id="sound-credit" class="credit-text" style="color: #00ff88; text-shadow: none;">Play / Pause Active Audio</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="accordion-btn" style="font-size: 14px; color: #d9d7d7;"> &nbsp; MUSIC THEMES <span class="arrow">▼</span></button>
-                    <div class="accordion-content">
-                        <ul id="music-themes-list" style="margin-bottom: 15px; list-style: none; padding: 0; gap: 5px; display: flex; flex-direction: column;">
-                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('cowboy-era')">&#x21A0; &nbsp; Cowboy Era</li>
-                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('cyber-world')">&#x21A0; &nbsp; Cyber World</li>
-                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('dark-fantasy')">&#x21A0; &nbsp; Dark Fantasy</li>
-                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('light-fantasy')">&#x21A0; &nbsp; Light Fantasy</li>
-                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('jazz-romance')">&#x21A0; &nbsp; Jazz & Romance</li>
-                            <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('rock-n-roll')">&#x21A0; &nbsp; Rock n' Roll</li>
-                        </ul>
-
-                        <div class="sidebar-player glass-panel">
-                            <div class="player-controls">
-                                <button id="btn-prev" class="control-btn">&#9668;&#9668;</button>
-                                <button id="btn-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
-                                <button id="btn-next" class="control-btn">&#9658;&#9658;</button>
-                            </div>
-    
-                            <div class="credit-divider"></div>
-    
-                            <div class="track-info-mini">
-                                <span id="track-credit" class="credit-text">Awaiting audio...</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="divider" style="margin-top: 25px;">
-            <div style="background: rgba(255, 68, 68, 0.1); border: 1px solid rgba(255, 68, 68, 0.3); padding: 12px; border-radius: 8px; text-align: center;">
-                <p style="font-size: 12px; color: #ffcccc; margin: 0; line-height: 1.4;">
-                    <strong>Quick Note:</strong> High-fidelity audio in use. Wi-Fi connection is recommended to save your mobile data.
-                </p>
-            </div>
-        </nav>
-
+            </nav>
+        </div>
+        <!-- Sayfada orta alan yarattık-->
         <main class="main-content">
-            <button id="btn-fullscreen" class="glass-btn" style="position: absolute; top: 20px; right: 20px; z-index: 100;">⛶ Fullscreen</button>
 
+            <!-- FULLSCREEN KUTUCUĞU -->
+            <button id="btn-fullscreen" class="glass-btn" style="position: absolute; top: 28px; right: 15px; z-index: 100;">⛶ Fullscreen</button>
+
+            <!-- ORTA KUTU (FEATURES KUTUSU) -->
+             <!-- HOME KUTUCUĞU -->
             <div id="clock-view" class="view-box tab-content glass-panel" style="display: block;">
                 <h1 id="time-display">00:00:00</h1>
                 <h3 id="date-display">Date</h3>
             </div>
 
-
+            <!-- STOPWATCH KUTUCUĞU -->
             <div id="stopwatch-view" class="view-box tab-content glass-panel" style="display: none;">
                 <h2>Stopwatch</h2>
                 <h1 id="sw-display">00:00:00</h1>
-    
                 <div class="stopwatch-controls">
                     <button id="btn-start" class="glass-btn">Start</button>
                     <button id="btn-stop" class="glass-btn">Stop</button>
@@ -152,28 +72,23 @@
                 <div id="laps-container"></div>
             </div>
 
-
+            <!-- TIMER KUTUCUĞU -->
             <div id="timer-view" class="view-box tab-content glass-panel" style="display: none;">
                 <h2>Timer</h2>
                 <h1 id="timer-display">00:00:00</h1>
-
                 <div class="timer-input-group" style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
                     <div class="input-wrapper" style="display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; height: 35px; overflow: hidden;">
                         <button class="spin-btn" onclick="document.getElementById('timer-input-hour').stepDown()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
                         <input type="number" id="timer-input-hour" placeholder="Hr" min="0" max="99" style="width: 35px; height: 100%; text-align: center; background: transparent; border: none; color: white; outline: none; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
                         <button class="spin-btn" onclick="document.getElementById('timer-input-hour').stepUp()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
                     </div>
-
                     <span style="font-size: 20px; font-weight: bold; color: rgba(255,255,255,0.5);">:</span>
-
                     <div class="input-wrapper" style="display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; height: 35px; overflow: hidden;">
                         <button class="spin-btn" onclick="document.getElementById('timer-input-min').stepDown()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
                         <input type="number" id="timer-input-min" placeholder="Min" min="0" max="59" style="width: 35px; height: 100%; text-align: center; background: transparent; border: none; color: white; outline: none; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
                         <button class="spin-btn" onclick="document.getElementById('timer-input-min').stepUp()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">+</button>
                     </div>
-
                     <span style="font-size: 20px; font-weight: bold; color: rgba(255,255,255,0.5);">:</span>
-
                     <div class="input-wrapper" style="display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; height: 35px; overflow: hidden;">
                         <button class="spin-btn" onclick="document.getElementById('timer-input-sec').stepDown()" style="background: transparent; border: none; color: #b3b3b3; font-size: 16px; cursor: pointer; padding: 0 8px;">-</button>
                         <input type="number" id="timer-input-sec" placeholder="Sec" min="0" max="59" style="width: 35px; height: 100%; text-align: center; background: transparent; border: none; color: white; outline: none; padding: 0; font-size: 16px; font-family: 'Poppins', sans-serif;">
@@ -181,32 +96,29 @@
                     </div>
                 </div>
 
+                <!-- Class tasarrufu -->
                 <div class="stopwatch-controls">
                     <button id="btn-timer-start" class="glass-btn">Start</button>
                     <button id="btn-timer-pause" class="glass-btn">Pause / Stop</button> <button id="btn-timer-reset" class="glass-btn">Reset</button>
                 </div>
-
-                <div id="timer-credit-box" style="display: none; margin-top: 20px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%;">
-                    <span class="credit-text" style="color: rgba(255, 255, 255, 0.5); font-size: 11px;">Sound by: Nickpanekaiassets from Pixabay</span>
-                </div>
             </div>
 
-
-            <div id="alarm-view" class="view-box tab-content glass-panel" style="display: none;">
+            <!-- ALARM KUTUCUĞU -->
+           <div id="alarm-view" class="view-box tab-content glass-panel" style="display: none;">
                 <h2>Alarm</h2>
     
                 <div class="input-wrapper" style="margin: 0 auto 15px auto; width: max-content; padding: 0 15px;">
                     <input type="time" id="alarm-time-input" class="time-date-input">
                 </div>
     
-                <button id="btn-set-alarm" class="glass-btn">Set</button>
-                <button id="btn-cancel-alarm" class="glass-btn" style="display: none;">Cancel</button>
+                <button id="btn-set-alarm" class="glass-btn" onclick="if(window.alarm) window.alarm.setAlarm()">Set</button>
+                <button id="btn-cancel-alarm" class="glass-btn" style="display: none;" onclick="if(window.alarm) window.alarm.cancelAlarm()">Cancel</button>
 
                 <h3 id="alarm-status" style="margin-top: 15px; color: #b3b3b3;">No Alarm Set</h3>
 
                 <div id="alarm-controls" style="display: none; margin-top: 15px;">
-                    <button id="btn-snooze" class="glass-btn" style="background: rgba(136, 255, 0);">Snooze (5 min)</button>
-                    <button id="btn-dismiss" class="glass-btn" style="background: rgba(255, 0, 0);">Dismiss</button>
+                    <button id="btn-snooze" class="glass-btn" style="background: rgba(136, 255, 0);" onclick="if(window.alarm) window.alarm.snoozeAlarm()">Snooze (5 min)</button>
+                    <button id="btn-dismiss" class="glass-btn" style="background: rgba(255, 0, 0);" onclick="if(window.alarm) window.alarm.dismissAlarm()">Dismiss</button>
                 </div>
 
                 <div id="alarm-credit-box" style="display: none; margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -214,7 +126,7 @@
                 </div>
             </div>
 
-
+            <!-- WC KUTUCUĞU -->
             <div id="world-clock-view" class="view-box tab-content glass-panel" style="display: none;">
                 <h2>World Clock</h2>
                 <p>Local: <span id="wc-local"></span></p>
@@ -224,21 +136,14 @@
                 <p>Tokyo: <span id="wc-tokyo"></span></p>
             </div>
 
-
+            <!-- BC KUTUCUĞU -->
             <div id="birth-chart-view" class="view-box tab-content glass-panel" style="display: none;">
                 <h2>Birth Chart</h2>
-    
                 <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
-                    <div class="input-wrapper" style="padding: 0 15px;">
-                        <input type="date" id="birth-date" class="time-date-input">
-                    </div>
-                    <div class="input-wrapper" style="padding: 0 15px;">
-                        <input type="time" id="birth-time" class="time-date-input">
-                    </div>
+                    <div class="input-wrapper" style="padding: 0 15px;"><input type="date" id="birth-date" class="time-date-input"></div>
+                    <div class="input-wrapper" style="padding: 0 15px;"><input type="time" id="birth-time" class="time-date-input"></div>
                 </div>
-    
                 <button id="btn-calculate-zodiac" class="glass-btn">Calculate</button>
-    
                 <div id="zodiac-result" style="display: none; margin-top: 15px; border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 5px; text-align: left; font-size: 14px;">
                     <p>☀️ Sun Sign: <span id="res-sun" style="color: #00ff88;"></span></p>
                     <p>🌿 Element: <span id="res-element" style="color: #00ff88;"></span></p>
@@ -249,27 +154,125 @@
             </div>
         </main>
 
-        <div id="mobile-vibe-hint">
-            <span class="pulse-icon">✨</span>
-            <p>Set your vibe, then <strong>rotate your device</strong> for the ultimate fullscreen experience.</p>
-        </div>
+        <!-- Sayfada sağ alan yarattık -->
+        <div class="side-wrapper right-wrapper">
 
-        <aside class="right-panel glass-panel">
+            <!-- SAĞ PANEL KUTUSU -->
+            <nav class="sidebar right-sidebar glass-panel">
+
+                <!-- Kutu içerisinde ayrı bir menü kutucuğu olarak tanımladık -->
+                <div class="menu-group">
+
+                    <!-- VISUAL THEMES KUTUCUĞU -->
+                    <button class="accordion-btn"> &nbsp; VISUAL THEMES <span class="arrow">▼</span></button>
+                    <div class="accordion-content">
+                        <ul id="themes-list" class="theme-menu-list">
+                            <li onclick="changeTheme('cowboy-era')">&#x21A0; &nbsp; Cowboy Era</li>
+                            <li onclick="changeTheme('cyber-world')">&#x21A0; &nbsp; Cyber World</li>
+                            <li onclick="changeTheme('dark-fantasy')">&#x21A0; &nbsp; Dark Fantasy</li>
+                            <li onclick="changeTheme('light-fantasy')">&#x21A0; &nbsp; Light Fantasy</li>
+                            <li onclick="changeTheme('jazz-romance')">&#x21A0; &nbsp; Jazz & Romance</li>
+                            <li onclick="changeTheme('rock-n-roll')">&#x21A0; &nbsp; Rock n' Roll</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Kutu içerisinde ayrı bir menü kutucuğu olarak tanımladık -->
+                <div class="menu-group" style="margin-top: 10px;">
+
+                    <!-- AUDIOS KUTUCUĞU -->
+                    <!-- AUDIOS (.accordion-btn) butonuna basınca, onun nextElementSibling dış kutusu (.accordion-content) aktifleşiyor -->
+                    <!-- Dış kutu açılınca bu sefer AMBIENT SOUNDS isimli ikinci bir .accordion-btn çıkıyor. -->
+                    <!-- Ona da basınca, onun altındaki iç kutu (.accordion-content) tetikleniyor accordion sistemi sona eriyor (bu sistemin kodları js'de) -->
+                    <button class="accordion-btn"> &nbsp; AUDIOS <span class="arrow">▼</span></button>
+                    <div class="accordion-content" style="padding-left: 10px; border-left: 2px solid rgba(255,255,255,0.1); margin-left: 5px;">
+                        
+                        <!-- AMBIENT SOUNDS KUTUCUĞU -->
+                        <button class="accordion-btn" style="font-size: 14px; color: #d9d7d7;"> &nbsp; AMBIENT SOUNDS <span class="arrow">▼</span></button>
+                        <div class="accordion-content">
+                            <ul class="theme-menu-list">
+                                <li id="btn-winter-wind" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('winter-wind')">&#x21A0; &nbsp; Winter Wind</li>
+                                <li id="btn-rain" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('rain')">&#x21A0; &nbsp; Rain</li>
+                                <li id="btn-birds" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('birds')">&#x21A0; &nbsp; Birds</li>
+                                <li id="btn-birds-rain" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('birds-rain')">&#x21A0; &nbsp; Birds in the Rain</li>
+                                <li id="btn-waves-seagulls" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('waves-seagulls')">&#x21A0; &nbsp; Waves & Seagulls</li>
+                                <li id="btn-fire" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('fire')">&#x21A0; &nbsp; Fireplace</li>
+                                <li id="btn-cafe-noise" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('cafe-noise')">&#x21A0; &nbsp; Cafe Ambience</li>
+                                <li id="btn-train" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('train')">&#x21A0; &nbsp; Train Journey</li>
+                                <li id="btn-koto-japanese-zither" class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="toggleAmbience('koto-japanese-zither')">&#x21A0; &nbsp; Koto (Japanese Zither)</li>
+                            </ul>
+                            <div class="sidebar-player glass-panel" style="margin-top: 10px;">
+                                <div class="player-controls">
+                                    <button id="btn-sounds-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
+                                </div>
+                                <div class="credit-divider"></div>
+                                <div class="track-info-mini">
+                                    <span id="sound-credit" class="credit-text" style="color: #00ff88; text-shadow: none;">Play / Pause Active Audio</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AMBIENT SOUNDS KUTUCUĞU -->
+                        <button class="accordion-btn"> &nbsp; MUSIC THEMES <span class="arrow">▼</span></button>
+                        <div class="accordion-content">
+                            <ul id="music-themes-list" class="theme-menu-list">
+                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('cowboy-era')">&#x21A0; &nbsp; Cowboy Era</li>
+                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('cyber-world')">&#x21A0; &nbsp; Cyber World</li>
+                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('dark-fantasy')">&#x21A0; &nbsp; Dark Fantasy</li>
+                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('light-fantasy')">&#x21A0; &nbsp; Light Fantasy</li>
+                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('jazz-romance')">&#x21A0; &nbsp; Jazz & Romance</li>
+                                <li class="tab-link" style="border-radius: 5px; padding: 8px; font-size: 13px;" onclick="playTheme('rock-n-roll')">&#x21A0; &nbsp; Rock n' Roll</li>
+                            </ul>
+                            <div class="sidebar-player glass-panel">
+                                <div class="player-controls">
+                                    <button id="btn-prev" class="control-btn">&#9668;&#9668;</button>
+                                    <button id="btn-play-pause" class="control-btn play-btn">&#10074;&#10074;</button>
+                                    <button id="btn-next" class="control-btn">&#9658;&#9658;</button>
+                                </div>
+                                <div class="credit-divider"></div>
+                                <div class="track-info-mini">
+                                    <span id="track-credit" class="credit-text">Awaiting audio...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="divider" style="margin-top: 25px;">
+                <div style="background: rgba(255, 68, 68, 0.1); border: 1px solid rgba(255, 68, 68, 0.3); padding: 12px; border-radius: 8px; text-align: center;">
+                    <p style="font-size: 12px; color: #ffcccc; margin: 0; line-height: 1.4;">
+                        <strong>Quick Note:</strong> High data usage. Wi-Fi recommended.
+                    </p>
+                </div>
+            </nav>
+
+            <!-- BUY ME A COFFEE KUTUSU -->
             <div class="support-panel-container">
                 <div class="support-content">
                     <h3>Support Me!</h3>
-                    <p>This project is designed for 100% focus and zero ads. You can support the server costs by buying me a coffee.</p>
-
+        
                     <a href="https://buymeacoffee.com/ietkose" target="_blank" class="cyber-coffee-btn">
                         <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a coffee">
                         <span>Buy Me a Coffee</span>
                     </a>
                 </div>
             </div>
-        </aside>
+        </div>
 
+        <!-- Mobilde bulunan ekran döndürme yazısı -->
+        <div id="mobile-vibe-hint">
+            <span class="pulse-icon">✨</span>
+                <p>Set your vibe, then <strong>rotate your device</strong> for the ultimate fullscreen experience.</p>
+        </div>
+
+        <!-- Mobilde bulunan menü butonu -->
+        <button id="mobile-menu-btn" class="glass-btn arrow-btn">
+        </button>
     </div>
 
+    <!-- Ambiyans seslerini loop olarak çağır -->
     <audio id="bg-player"></audio>
     <audio id="audio-winter-wind" src="assets/audios/sounds/winter-wind.mp3" loop></audio>
     <audio id="audio-rain" src="assets/audios/sounds/rain.mp3" loop></audio>
@@ -283,8 +286,6 @@
 
     <audio id="audio-alarm" src="assets/audios/alarm/alarm-ringtone.mp3" loop></audio>
 
-    <script src="script.js"></script>
-
     <div style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">
         <a href="#stopwatch">Stopwatch</a>
         <a href="#timer">Timer</a>
@@ -296,6 +297,9 @@
         <a href="#ambient-sounds">Ambient Sounds</a>
         <a href="#music-themes">Music Themes</a>
     </div>
+
+    <!-- HTML'i JS'e bağla ki HTML içerisinde yatan JS mekanizması çalışsın -->
+    <script src="script.js"></script>
+    
 </body>
 </html>
-
