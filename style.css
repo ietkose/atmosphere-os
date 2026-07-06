@@ -1,6 +1,6 @@
-/* -------------------------------------------
+/* ==========================================
    GOOGLE FONTS
-------------------------------------------- */
+========================================== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
@@ -437,7 +437,6 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 ::selection { background: rgba(0, 255, 136, 0.4) !important; color: white !important; }
 /* Sitedeki herhangi bir yazıyı fareyle basılı tutup seçtiğinde, arkada oluşan o klasik mavi renk yerine, şeffaf bir yeşil parlaması (`rgba(0, 255, 136, 0.4)`) patlatır */
 
-
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     B. MOBİL DİKEY (PORTRAIT) 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -469,10 +468,10 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     }
 
     #mobile-menu-btn { color: transparent !important; text-shadow: none !important; }
-    #mobile-menu-btn::before { content: "›" !important; color: #00ff66 !important; display: block !important; font-size: 24px !important; line-height: 1 !important; font-weight: 300 !important; font-family: monospace !important; }
+    #mobile-menu-btn::before { content: "›\FE0E" !important; color: #00ff66 !important; display: block !important; font-size: 24px !important; line-height: 1 !important; font-weight: 300 !important; font-family: monospace !important; }
 
     body.mobile-menu-open #mobile-menu-btn { left: 315px !important; background: rgba(0, 255, 102, 0.15) !important; border-color: rgba(0, 255, 102, 0.4) !important; }
-    body.mobile-menu-open #mobile-menu-btn::before { content: "‹" !important; }
+    body.mobile-menu-open #mobile-menu-btn::before { content: "‹\FE0E" !important; }
 
 
     .side-wrapper, .left-wrapper, .right-wrapper { position: absolute !important; width: 0 !important; height: 0 !important; }
@@ -527,7 +526,10 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         perspective: 1000px !important;
     }
     /* Dönme animasyonu */
-    .neon-title { font-size: 1.6rem !important; margin: 0 !important; animation: spin3D 7s linear infinite !important; white-space: nowrap !important; overflow: visible !important; }
+    .neon-title { 
+        font-size: 1.6rem !important; margin: 0 !important; animation: spin3D 7s linear infinite !important; white-space: nowrap !important; overflow: visible !important;
+        transform-style: preserve-3d !important; -webkit-transform-style: preserve-3d !important; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; 
+    }
 
     /* -------------------------------------------
         3. ORTA KUTU
@@ -765,7 +767,6 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
         transform: scale(0.9) !important; 
     }
 }
-
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     C. MOBİL YATAY (LANDSCAPE)
