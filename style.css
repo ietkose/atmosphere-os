@@ -527,8 +527,17 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
     }
     /* Dönme animasyonu */
     .neon-title { 
-        font-size: 1.6rem !important; margin: 0 !important; animation: spin3D 7s linear infinite !important; white-space: nowrap !important; overflow: visible !important;
-        transform-style: preserve-3d !important; -webkit-transform-style: preserve-3d !important; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; 
+        font-size: 1.6rem !important; 
+        margin: 0 !important; 
+        white-space: nowrap !important; 
+        overflow: visible !important;
+        animation: mobileNeonPulse 2s infinite alternate !important; /* 3D spin yerine siber parlama */
+    }
+
+    /* Sadece mobilde çalışacak tatlı siber punk parlama motoru */
+    @keyframes mobileNeonPulse {
+        0% { text-shadow: 2px 2px 0px #ff003c, 4px 4px 0px #00ff88, 0 0 10px rgba(0, 255, 136, 0.5) !important; transform: scale(0.98); }
+        100% { text-shadow: 2px 2px 0px #ff003c, 4px 4px 0px #00ff88, 0 0 20px #00ff88, 0 0 30px #ff003c !important; transform: scale(1.02); }
     }
 
     /* -------------------------------------------
