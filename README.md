@@ -55,7 +55,7 @@ Bu proje; her birinde birden fazla dosya bulunan görsel temalar, bu temaların 
 ---
 
 ### 🥨 Kullanılan Teknolojiler
-* **Saf JavaScript (ES6+)**: Dış kütüphane bağımlılığı olmadan dinamik tema değişimi, zaman araçları mantığı ve ses kontrol yönetimi.
+* **JavaScript (ES6+)**: Dış kütüphane bağımlılığı olmadan dinamik tema değişimi, zaman araçları mantığı ve ses kontrol yönetimi.
 * **HTML5 & CSS3**: Esnek (responsive) tasarım, özel CSS animasyonları, akıcı görsel geçişleri ve cam efekti (glassmorphism) arayüz tasarımı.
 * **Web Audio & Medya Yönetimi**: Çoklu ambiyans seslerini karıştırma ve senkronize arka plan müzik kontrolü.
 
