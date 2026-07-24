@@ -68,3 +68,6 @@ npm install
 
 # Projeyi başlatın
 npm start
+```
+
+<img width="1919" height="940" alt="Ekran görüntüsü 2026-07-24 093505" src="https://github.com/user-attachments/assets/23f2bd99-c0ea-4262-8f98-ab24943b245f" />
