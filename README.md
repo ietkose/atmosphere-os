@@ -1,6 +1,11 @@
 # Atmosphere — Focus, Relax & Vibe
  **[Visit Live Site / Canlı Site ➜ atmosphere-os.com](https://atmosphere-os.com)**
 
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Web Audio API](https://img.shields.io/badge/Web_Audio_API-000000?style=for-the-badge&logo=soundCloud&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
+
 ═════════════════════════════════════════════════════════════════════════════════════════
 
 ## 🇬🇧 ENGLISH
@@ -14,7 +19,9 @@ This project consists of visual themes (each containing multiple media files), c
 ---
 
 ### 🥨 Tech Stack
-* **Frontend:** HTML5 & CSS3 & JavaScript
+* **Vanilla JavaScript (ES6+)**: Dynamic theme switching, state management for timers/clocks, and audio mix control without heavy external framework overhead.
+* **HTML5 & CSS3**: Responsive UI layout, custom CSS animations, dynamic visual theme transitions, and glassmorphism styling.
+* **Web Audio & Media Handling**: Multi-track ambient sound blending and synchronized background music management.
 
 ---
 
@@ -48,7 +55,9 @@ Bu proje; her birinde birden fazla dosya bulunan görsel temalar, bu temaların 
 ---
 
 ### 🥨 Kullanılan Teknolojiler
-* **Frontend:** HTML5 & CSS3 & JavaScript
+* **Saf JavaScript (ES6+)**: Dış kütüphane bağımlılığı olmadan dinamik tema değişimi, zaman araçları mantığı ve ses kontrol yönetimi.
+* **HTML5 & CSS3**: Esnek (responsive) tasarım, özel CSS animasyonları, akıcı görsel geçişleri ve cam efekti (glassmorphism) arayüz tasarımı.
+* **Web Audio & Medya Yönetimi**: Çoklu ambiyans seslerini karıştırma ve senkronize arka plan müzik kontrolü.
 
 ---
 
